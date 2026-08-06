@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Comment créer un coin lecture cocooning chez soi",
+    "category": "Coin lecture",
+    "description": "Fauteuil, lumière, plaid et détails : aménagez un refuge confortable, même dans un petit espace.",
+    "url": "articles/coin-lecture-cocooning.html",
+    "image": "assets/coin-lecture.jpg"
+  },
+  {
+    "title": "Comment choisir un fauteuil vraiment agréable pour lire",
+    "category": "Coin lecture",
+    "description": "Soutien du dos, profondeur, accoudoirs et matière : les critères qui comptent vraiment.",
+    "url": "articles/fauteuils-lecture.html",
+    "image": "assets/coin-lecture.jpg"
+  },
+  {
+    "title": "Les lampes qui rendent une pièce instantanément chaleureuse",
+    "category": "Décoration",
+    "description": "Température, hauteur et emplacement : les principes simples d’une lumière douce.",
+    "url": "articles/lampes-chaleureuses.html",
+    "image": "assets/decoration.jpg"
+  },
+  {
+    "title": "Comment décorer une bibliothèque sans la surcharger",
+    "category": "Décoration",
+    "description": "Livres, objets et espaces libres : composez une bibliothèque équilibrée.",
+    "url": "articles/decorer-bibliotheque.html",
+    "image": "assets/decoration.jpg"
+  },
+  {
+    "title": "Le rituel du dimanche pour commencer la semaine en douceur",
+    "category": "Slow living",
+    "description": "Une parenthèse simple avec thé, lecture et rangement léger.",
+    "url": "articles/rituel-dimanche.html",
+    "image": "assets/slow-living.jpg"
+  },
+  {
+    "title": "Des idées cadeaux utiles pour les amoureux des livres",
+    "category": "Guides",
+    "description": "Des cadeaux doux et pratiques pour enrichir le rituel de lecture.",
+    "url": "articles/cadeaux-lecteurs.html",
+    "image": "assets/guides-achat.jpg"
+  },
+  {
+    "title": "15 romans parfaits pour accompagner les soirées d’automne",
+    "category": "Lecture",
+    "description": "Une sélection d’ambiances romanesques pour les journées plus fraîches.",
+    "url": "articles/romans-automne.html",
+    "image": "assets/hero-accueil.jpg"
+  },
+  {
+    "title": "7 erreurs qui empêchent un salon de paraître chaleureux",
+    "category": "Décoration",
+    "description": "Lumière, proportions et matières : les erreurs les plus fréquentes.",
+    "url": "articles/salon-chaleureux-erreurs.html",
+    "image": "assets/hero-accueil.jpg"
+  },
+  {
+    "title": "Comment choisir un plaid vraiment cocooning",
+    "category": "Guides",
+    "description": "Matière, poids, taille et entretien : choisir un plaid beau et agréable.",
+    "url": "articles/plaids-cocooning.html",
+    "image": "assets/coin-lecture.jpg"
+  },
+  {
+    "title": "Une journée slow living à la maison, sans programme compliqué",
+    "category": "Slow living",
+    "description": "Une journée apaisante construite autour de gestes simples et accessibles.",
+    "url": "articles/journee-slow-living.html",
+    "image": "assets/slow-living.jpg"
+  }
+]

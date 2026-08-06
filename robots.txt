@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://magazine.lespagesausoleil.workers.dev/sitemap.xml
