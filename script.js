@@ -93,3 +93,36 @@ if ('IntersectionObserver' in window) {
 } else {
   revealItems.forEach(item => item.classList.add('visible'));
 }
+
+
+// Sprint 1 — progression de lecture et partage
+const progressBar = document.querySelector('#reading-progress-bar');
+if (progressBar) {
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+}
+
+document.querySelectorAll('.copy-link').forEach(button => {
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      const original = button.textContent;
+      button.textContent = '✓ Lien copié';
+      setTimeout(() => button.textContent = original, 1800);
+    } catch {
+      window.prompt('Copiez ce lien :', window.location.href);
+    }
+  });
+});
+
+document.querySelectorAll('.pinterest-share').forEach(link => {
+  const pageUrl = encodeURIComponent(window.location.href);
+  const description = encodeURIComponent(document.title);
+  link.href = `https://www.pinterest.com/pin/create/button/?url=${pageUrl}&description=${description}`;
+});

@@ -852,3 +852,105 @@ body{
   .compact-hero{padding-left:5vw;padding-right:5vw}
   .compact-hero-copy h1{font-size:clamp(2.5rem,12vw,3.6rem)}
 }
+
+
+/* Sprint 1 — expérience de lecture premium */
+.reading-progress{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  z-index:999;
+  background:rgba(255,255,255,.4);
+}
+.reading-progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--gold);
+  transition:width .08s linear;
+}
+.article-share{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+.share-btn{
+  border:1px solid var(--line);
+  background:white;
+  color:var(--brown);
+  padding:11px 15px;
+  border-radius:999px;
+  font:inherit;
+  font-weight:600;
+  cursor:pointer;
+}
+.share-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(70,50,35,.08);
+}
+.editorial-tip{
+  margin:48px 0;
+  padding:30px;
+  border-left:5px solid var(--gold);
+  border-radius:0 20px 20px 0;
+  background:var(--cream);
+}
+.editorial-tip h3{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+.article-newsletter{
+  margin:40px 7vw 90px;
+  padding:48px;
+  border-radius:28px;
+  background:linear-gradient(135deg,var(--brown),#5d402f);
+  color:white;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:36px;
+  align-items:center;
+}
+.article-newsletter h2{
+  font-size:clamp(2rem,4vw,3.4rem);
+}
+.article-newsletter-form{
+  display:grid;
+  gap:12px;
+}
+.article-newsletter-form input{
+  padding:15px 17px;
+  border:0;
+  border-radius:999px;
+  font:inherit;
+}
+.article-newsletter-form small{
+  color:rgba(255,255,255,.78);
+}
+.article-toc a{
+  transition:color .2s ease, transform .2s ease;
+}
+.article-toc a:hover{
+  color:var(--brown);
+  transform:translateX(4px);
+}
+.article-body p{
+  max-width:72ch;
+}
+.article-section p{
+  font-size:1.08rem;
+}
+@media(max-width:800px){
+  .article-newsletter{
+    grid-template-columns:1fr;
+    margin-left:5vw;
+    margin-right:5vw;
+    padding:32px 24px;
+  }
+  .article-meta{
+    flex-direction:column;
+    gap:6px;
+  }
+}
