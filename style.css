@@ -1015,3 +1015,37 @@ body{
     grid-template-columns:1fr;
   }
 }
+
+
+/* Correctif définitif — titre du bloc « Le choix de la rédaction » */
+.editorial-spotlight{
+  grid-template-columns:minmax(0,48%) minmax(0,52%);
+  gap:42px;
+}
+
+.spotlight-copy h2{
+  font-size:clamp(2.15rem,3.05vw,3.75rem);
+  line-height:1.04;
+  letter-spacing:-0.025em;
+  max-width:720px;
+  text-wrap:balance;
+}
+
+.spotlight-copy>p:not(.kicker){
+  max-width:650px;
+}
+
+@media(max-width:1100px){
+  .spotlight-copy h2{
+    font-size:clamp(2rem,3.5vw,3.2rem);
+  }
+}
+
+@media(max-width:800px){
+  .editorial-spotlight{
+    grid-template-columns:1fr;
+  }
+  .spotlight-copy h2{
+    max-width:680px;
+  }
+}
