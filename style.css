@@ -974,3 +974,44 @@ body{
     padding-right:5vw;
   }
 }
+
+
+/* Correctif final — proportions du bloc « Le choix de la rédaction » */
+.editorial-spotlight{
+  grid-template-columns:minmax(0,45%) minmax(0,55%);
+  gap:48px;
+}
+
+.spotlight-copy{
+  max-width:none;
+}
+
+.spotlight-copy h2{
+  font-size:clamp(2.4rem,3.6vw,4.5rem);
+  line-height:1.02;
+  max-width:680px;
+}
+
+.spotlight-copy>p:not(.kicker){
+  max-width:620px;
+}
+
+.spotlight-image{
+  min-height:390px;
+}
+
+@media(max-width:980px){
+  .editorial-spotlight{
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+  }
+  .spotlight-copy h2{
+    font-size:clamp(2.2rem,4vw,3.6rem);
+  }
+}
+
+@media(max-width:800px){
+  .editorial-spotlight{
+    grid-template-columns:1fr;
+  }
+}
