@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-labelledby="title">
+<title id="title">Les Pages au Soleil</title>
+<g fill="none" stroke="#D7AA4D" stroke-width="4" stroke-linecap="round">
+  <circle cx="48" cy="50" r="19" fill="#D7AA4D" stroke="none"/>
+  <path d="M48 10v12M48 78v12M8 50h12M76 50h12M20 22l9 9M67 69l9 9M76 22l-9 9M29 69l-9 9"/>
+</g>
+<text x="105" y="47" font-family="Georgia, 'Times New Roman', serif" font-size="31" font-weight="700" fill="#2C2824">Les Pages</text>
+<text x="105" y="77" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-style="italic" fill="#6F4F39">au Soleil</text>
+</svg>
