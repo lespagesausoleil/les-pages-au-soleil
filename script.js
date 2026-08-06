@@ -126,3 +126,23 @@ document.querySelectorAll('.pinterest-share').forEach(link => {
   const description = encodeURIComponent(document.title);
   link.href = `https://www.pinterest.com/pin/create/button/?url=${pageUrl}&description=${description}`;
 });
+
+
+// magazine-v2-reveal
+const editorialReveal = document.querySelectorAll('.editorial-selection, .manifesto-strip, .pinterest-showcase');
+if ('IntersectionObserver' in window) {
+  const editorialObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        editorialObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  editorialReveal.forEach(el => {
+    el.classList.add('soft-reveal');
+    editorialObserver.observe(el);
+  });
+} else {
+  editorialReveal.forEach(el => el.classList.add('visible'));
+}

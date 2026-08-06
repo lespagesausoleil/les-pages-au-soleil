@@ -1,17 +1,16 @@
-# Les Pages au Soleil — Sprint 1
+# Les Pages au Soleil — Magazine V2
 
 ## Nouveautés
-- barre de progression de lecture ;
-- date, auteur et temps de lecture ;
-- bouton Pinterest ;
-- bouton copier le lien ;
-- encadré Conseil de la rédaction ;
-- newsletter en fin d’article ;
-- sommaire amélioré ;
-- meilleure lecture sur mobile.
+- accueil éditorial enrichi ;
+- sélection de la rédaction ;
+- citation-manifeste ;
+- grande section Pinterest ;
+- animations douces ;
+- pages d’articles premium conservées ;
+- publication automatique via GitHub + Cloudflare.
 
-## Déploiement via GitHub
+## Mise en ligne
 1. Décompresser le ZIP.
-2. Remplacer les fichiers du dépôt GitHub par ceux-ci.
+2. Envoyer tous les fichiers dans le dépôt GitHub.
 3. Commit sur la branche main.
 4. Cloudflare déploiera automatiquement.
