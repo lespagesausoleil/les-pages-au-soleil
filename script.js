@@ -95,54 +95,13 @@ if ('IntersectionObserver' in window) {
 }
 
 
-// Sprint 1 — progression de lecture et partage
-const progressBar = document.querySelector('#reading-progress-bar');
-if (progressBar) {
-  const updateProgress = () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
-  };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
-}
-
-document.querySelectorAll('.copy-link').forEach(button => {
-  button.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      const original = button.textContent;
-      button.textContent = '✓ Lien copié';
-      setTimeout(() => button.textContent = original, 1800);
-    } catch {
-      window.prompt('Copiez ce lien :', window.location.href);
+// Patch éditorial V3 — défilement doux vers la newsletter
+document.querySelectorAll('a[href="#newsletter"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const target = document.querySelector('#newsletter');
+    if (target) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
-
-document.querySelectorAll('.pinterest-share').forEach(link => {
-  const pageUrl = encodeURIComponent(window.location.href);
-  const description = encodeURIComponent(document.title);
-  link.href = `https://www.pinterest.com/pin/create/button/?url=${pageUrl}&description=${description}`;
-});
-
-
-// magazine-v2-reveal
-const editorialReveal = document.querySelectorAll('.editorial-selection, .manifesto-strip, .pinterest-showcase');
-if ('IntersectionObserver' in window) {
-  const editorialObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        editorialObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  editorialReveal.forEach(el => {
-    el.classList.add('soft-reveal');
-    editorialObserver.observe(el);
-  });
-} else {
-  editorialReveal.forEach(el => el.classList.add('visible'));
-}
