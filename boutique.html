@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Boutique des Pages au Soleil : sélections lecture, coin lecture, décoration et slow living réunies au même endroit.">
+  <title>La Boutique — Les Pages au Soleil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="editorial-topbar">
+  <span>☀</span>
+  <p>Des objets et des lectures choisis pour ralentir, lire et habiter plus doucement.</p>
+  <a href="index.html#newsletter">Newsletter</a>
+</div>
+
+<header class="site-header">
+  <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
+  <button class="menu-btn" aria-label="Ouvrir le menu">☰</button>
+  <nav class="main-nav">
+    <a href="rubrique-lecture.html">Lecture</a>
+    <a href="rubrique-coin-lecture.html">Coin lecture</a>
+    <a href="rubrique-decoration.html">Décoration</a>
+    <a href="rubrique-slow-living.html">Slow living</a>
+    <a href="coups-de-coeur.html">Coups de cœur</a>
+    <a href="articles.html">Tous les articles</a>
+    <a class="shop-nav-link is-active" href="boutique.html">Boutique</a>
+    <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
+    <a href="index.html#apropos">À propos</a>
+    <a class="social-nav" href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
+    <a class="social-nav" href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</header>
+
+<div class="search-overlay" id="search-overlay" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <button class="search-close" type="button" aria-label="Fermer">×</button>
+    <p class="kicker">Recherche</p>
+    <h2 id="search-title">Que souhaitez-vous découvrir ?</h2>
+    <input id="site-search" type="search" placeholder="Ex. fauteuil, lampe, plaid, livre…">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<main class="shop-page">
+  <section class="shop-hero">
+    <div class="shop-hero-copy">
+      <p class="kicker">La sélection des Pages au Soleil</p>
+      <h1>La Boutique</h1>
+      <p>Retrouvez au même endroit nos sélections pour lire, aménager un coin lecture, décorer avec douceur et ralentir au quotidien.</p>
+      <a class="btn primary" href="#selections">Découvrir les sélections</a>
+    </div>
+    <div class="shop-hero-image">
+      <img src="assets/guides-achat.jpg" alt="Sélection chaleureuse de cadeaux, livres et accessoires">
+      <span>Choisi avec soin, jamais au hasard.</span>
+    </div>
+  </section>
+
+  <section class="shop-intro" id="selections">
+    <div>
+      <p class="kicker">Tout retrouver facilement</p>
+      <h2>Nos sélections</h2>
+    </div>
+    <p>Un produit peut être découvert dans un article et être retrouvé ici ensuite. La boutique devient le raccourci vers toutes nos recommandations.</p>
+  </section>
+
+  <div class="shop-filters" aria-label="Filtrer les sélections">
+    <button class="shop-filter is-active" data-shop-filter="all">Tout</button>
+    <button class="shop-filter" data-shop-filter="lecture">Lecture</button>
+    <button class="shop-filter" data-shop-filter="coin-lecture">Coin lecture</button>
+    <button class="shop-filter" data-shop-filter="decoration">Décoration</button>
+    <button class="shop-filter" data-shop-filter="slow-living">Slow living</button>
+    <button class="shop-filter" data-shop-filter="cadeaux">Cadeaux</button>
+  </div>
+
+  <section class="shop-grid">
+    <article class="shop-card" data-shop-category="coin-lecture">
+      <a href="articles/fauteuils-lecture.html" class="shop-card-image"><img src="assets/coin-lecture.jpg" alt="Fauteuil de lecture confortable"></a>
+      <div class="shop-card-copy">
+        <p class="shop-label">Coin lecture</p>
+        <h3>Fauteuils pour lire longtemps</h3>
+        <p>Les modèles et critères à regarder pour créer une assise réellement confortable.</p>
+        <a href="articles/fauteuils-lecture.html" class="shop-link">Voir la sélection →</a>
+      </div>
+    </article>
+
+    <article class="shop-card" data-shop-category="decoration coin-lecture">
+      <a href="articles/lampes-chaleureuses.html" class="shop-card-image"><img src="assets/decoration.jpg" alt="Lampe chaleureuse et décoration douce"></a>
+      <div class="shop-card-copy">
+        <p class="shop-label">Éclairage</p>
+        <h3>Lampes à lumière chaleureuse</h3>
+        <p>Des idées pour obtenir une lumière plus douce le soir et mieux accompagner la lecture.</p>
+        <a href="articles/lampes-chaleureuses.html" class="shop-link">Voir la sélection →</a>
+      </div>
+    </article>
+
+    <article class="shop-card" data-shop-category="slow-living coin-lecture">
+      <a href="articles/plaids-cocooning.html" class="shop-card-image"><img src="assets/slow-living.jpg" alt="Plaid cocooning dans une ambiance calme"></a>
+      <div class="shop-card-copy">
+        <p class="shop-label">Slow living</p>
+        <h3>Plaids et matières cocooning</h3>
+        <p>Les textures qui réchauffent une pièce sans la surcharger.</p>
+        <a href="articles/plaids-cocooning.html" class="shop-link">Voir la sélection →</a>
+      </div>
+    </article>
+
+    <article class="shop-card" data-shop-category="lecture">
+      <a href="articles/romans-automne.html" class="shop-card-image"><img src="assets/hero-accueil.jpg" alt="Romans dans un coin lecture chaleureux"></a>
+      <div class="shop-card-copy">
+        <p class="shop-label">Lecture</p>
+        <h3>Romans à garder près du fauteuil</h3>
+        <p>Des lectures choisies pour les journées lentes et les soirées à la maison.</p>
+        <a href="articles/romans-automne.html" class="shop-link">Voir les lectures →</a>
+      </div>
+    </article>
+
+    <article class="shop-card" data-shop-category="decoration">
+      <a href="articles/decorer-bibliotheque.html" class="shop-card-image"><img src="assets/decoration.jpg" alt="Bibliothèque décorée avec sobriété"></a>
+      <div class="shop-card-copy">
+        <p class="shop-label">Décoration</p>
+        <h3>Objets pour une bibliothèque élégante</h3>
+        <p>Vases, cadres, paniers et détails qui donnent du rythme aux étagères.</p>
+        <a href="articles/decorer-bibliotheque.html" class="shop-link">Découvrir les idées →</a>
+      </div>
+    </article>
+
+    <article class="shop-card shop-card-featured" data-shop-category="cadeaux lecture slow-living">
+      <a href="articles/cadeaux-lecteurs.html" class="shop-card-image"><img src="assets/guides-achat.jpg" alt="Coffret cadeau pour lecteur"></a>
+      <div class="shop-card-copy">
+        <p class="shop-label">Cadeaux</p>
+        <h3>Idées cadeaux pour lecteurs</h3>
+        <p>Une sélection douce et utile pour celles et ceux qui aiment lire et ralentir.</p>
+        <a href="articles/cadeaux-lecteurs.html" class="shop-link">Voir les idées cadeaux →</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="shop-note">
+    <div>
+      <p class="kicker">Notre ligne</p>
+      <h2>Moins, mais mieux.</h2>
+    </div>
+    <p>La boutique n’a pas vocation à devenir un catalogue infini. Elle rassemble les sélections réellement cohérentes avec l’univers du magazine. Les liens marchands et prix pourront être ajoutés progressivement, sans perdre cette logique éditoriale.</p>
+  </section>
+
+  <section class="shop-cta">
+    <div>
+      <p class="kicker">Les coups de cœur</p>
+      <h2>Vous cherchez simplement nos préférés ?</h2>
+      <p>Retrouvez une sélection encore plus courte dans la rubrique Coups de cœur.</p>
+    </div>
+    <a class="btn secondary" href="coups-de-coeur.html">Voir les coups de cœur ♡</a>
+  </section>
+</main>
+
+<footer class="premium-footer">
+  <div class="footer-brand">
+    <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
+    <p>Magazine indépendant autour de la lecture, de la décoration chaleureuse et du slow living.</p>
+  </div>
+  <div class="footer-column">
+    <h3>Explorer</h3>
+    <a href="rubrique-lecture.html">Lecture</a>
+    <a href="rubrique-decoration.html">Décoration</a>
+    <a href="rubrique-slow-living.html">Slow living</a>
+    <a href="articles.html">Tous les articles</a>
+    <a href="boutique.html">Boutique</a>
+  </div>
+  <div class="footer-column">
+    <h3>Suivre</h3>
+    <a href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
+    <a href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <div class="footer-column">
+    <h3>Informations</h3>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="confidentialite.html">Confidentialité</a>
+  </div>
+  <p class="copyright">© 2026 Les Pages au Soleil</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

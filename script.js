@@ -146,3 +146,37 @@ if ('IntersectionObserver' in window) {
 } else {
   editorialReveal.forEach(el => el.classList.add('visible'));
 }
+
+
+// Boutique — ajoute l’onglet à la navigation sur toutes les pages
+(() => {
+  const navs = document.querySelectorAll('.main-nav');
+  navs.forEach(nav => {
+    if (nav.querySelector('.shop-nav-link')) return;
+
+    const isArticle = window.location.pathname.includes('/articles/');
+    const href = isArticle ? '../boutique.html' : 'boutique.html';
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = 'Boutique';
+    link.className = 'shop-nav-link';
+
+    const searchButton = nav.querySelector('.search-open');
+    if (searchButton) nav.insertBefore(link, searchButton);
+    else nav.appendChild(link);
+  });
+})();
+
+// Boutique — filtres de catégories
+document.querySelectorAll('.shop-filter').forEach(button => {
+  button.addEventListener('click', () => {
+    const filter = button.dataset.shopFilter;
+    document.querySelectorAll('.shop-filter').forEach(btn => btn.classList.remove('is-active'));
+    button.classList.add('is-active');
+
+    document.querySelectorAll('.shop-card').forEach(card => {
+      const categories = (card.dataset.shopCategory || '').split(/\s+/);
+      card.hidden = filter !== 'all' && !categories.includes(filter);
+    });
+  });
+});
