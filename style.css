@@ -1412,3 +1412,15 @@ body{
     align-items:flex-start;
   }
 }
+
+/* Boutique V3 — onglets simples */
+.shop-hero-simple{display:block;padding:72px 6vw 44px;background:linear-gradient(135deg,var(--cream),#fffdf9)}
+.shop-hero-simple .shop-hero-copy{max-width:900px}
+.shop-tabs{position:sticky;top:76px;z-index:20;padding:16px 6vw;margin:0;background:rgba(255,253,249,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.shop-tabs::-webkit-scrollbar{display:none}
+.shop-tabs .shop-filter{flex:0 0 auto;background:transparent;border:0;border-radius:0;padding:9px 4px;margin-right:22px;border-bottom:2px solid transparent;white-space:nowrap}
+.shop-tabs .shop-filter:hover,.shop-tabs .shop-filter.is-active{background:transparent;color:var(--brown);border-color:var(--brown)}
+.shop-grid{padding-top:38px}
+.shop-card-text-only{min-height:300px;display:flex;flex-direction:column;justify-content:center}
+.shop-coming{display:inline-block;align-self:flex-start;margin-top:12px;padding:8px 12px;border-radius:999px;background:var(--cream);color:var(--brown);font-size:.82rem;font-weight:600}
+@media(max-width:760px){.shop-hero-simple{padding:48px 5vw 32px}.shop-tabs{top:68px;padding-left:5vw;padding-right:5vw}.shop-tabs .shop-filter{margin-right:18px}}
