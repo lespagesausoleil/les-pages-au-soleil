@@ -77,13 +77,31 @@
   <p class="shop-search-count" id="shop-search-count" aria-live="polite"></p>
 </div>
 
-  <section class="shop-grid shop-grid-empty" id="shop-products">
-    <div class="shop-empty-state">
-      <p class="kicker">La boutique se prépare</p>
-      <h2>Les produits arrivent bientôt.</h2>
-      <p>Les prochaines sélections apparaîtront ici directement, sans grande carte intermédiaire.</p>
+  <section class="shop-grid" id="shop-products">
+  <article class="shop-card shop-product-card" data-shop-category="lampes" data-shop-search="bande beige deluxe homeart lampe éclairage lumière led">
+    <div class="shop-product-placeholder" aria-hidden="true"><span>✦</span></div>
+    <div class="shop-card-copy">
+      <p class="shop-label">Lampes et éclairage</p>
+      <h3>Bande Beige</h3>
+      <p>Une lumière décorative aux tons naturels pour apporter une ambiance douce et chaleureuse à la maison.</p>
+      <p class="shop-merchant">Deluxe Homeart</p>
+      <a class="btn primary shop-buy" href="https://deluxehomeartshop.fr/products/bande-beige?source=aw&utm_source=awin&utm_id=3008783_&utm_campaign=affiliate&awc=120407_1786257693_93d29bb29ffc2f93d1939c51e6b7e1f5" target="_blank" rel="sponsored noopener">Voir le produit →</a>
     </div>
-  </section>
+  </article>
+
+  <article class="shop-card shop-product-card" data-shop-category="lampes" data-shop-search="ligne deco étoiles 1m deluxe homeart lampe éclairage lumière led guirlande">
+    <div class="shop-product-placeholder" aria-hidden="true"><span>✦</span></div>
+    <div class="shop-card-copy">
+      <p class="shop-label">Lampes et éclairage</p>
+      <h3>Ligne déco avec étoiles — 1 m</h3>
+      <p>Une ligne lumineuse décorative ponctuée d’étoiles, pensée pour créer une atmosphère délicate et chaleureuse.</p>
+      <p class="shop-merchant">Deluxe Homeart</p>
+      <a class="btn primary shop-buy" href="https://deluxehomeartshop.fr/products/ligne-deco-avec-les-etoiles-1m?source=aw&utm_source=awin&utm_id=3008783_&utm_campaign=affiliate&awc=120407_1786257759_8d0f0d60b53a0ca3b172f8e9e0bdaa9e" target="_blank" rel="sponsored noopener">Voir le produit →</a>
+    </div>
+  </article>
+</section>
+
+<p class="affiliate-disclosure">Certains liens de la boutique sont des liens affiliés. Si vous effectuez un achat après avoir cliqué, Les Pages au Soleil peut recevoir une commission, sans coût supplémentaire pour vous.</p>
 
   <section class="shop-note">
     <div>
@@ -156,7 +174,8 @@
     cards.forEach(card => {
       const categories = (card.dataset.shopCategory || '').split(/\\s+/);
       const categoryMatch = activeFilter === 'all' || categories.includes(activeFilter);
-      const textMatch = !query || normalize(card.textContent).includes(query);
+      const searchable = normalize((card.dataset.shopSearch || '') + ' ' + card.textContent);
+      const textMatch = !query || searchable.includes(query);
       const show = categoryMatch && textMatch;
       card.hidden = !show;
       if (show) visible++;

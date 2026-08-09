@@ -1537,3 +1537,29 @@ body{
     padding:38px 12px;
   }
 }
+
+/* Boutique V7 — premières fiches produits */
+.shop-product-card{display:flex;flex-direction:column}
+.shop-product-placeholder{
+  height:260px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#f3eadf,#e8d6c4);
+  color:var(--brown);
+  font-family:"Playfair Display",serif;
+  font-size:3rem;
+}
+.shop-merchant{font-size:.88rem;font-weight:600;color:var(--brown)!important;margin-top:18px}
+.shop-buy{margin-top:8px;display:inline-flex}
+.affiliate-disclosure{
+  margin:0 6vw 64px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.6;
+}
+@media(max-width:760px){
+  .shop-product-placeholder{height:210px}
+  .affiliate-disclosure{margin-left:5vw;margin-right:5vw}
+}
