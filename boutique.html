@@ -63,10 +63,21 @@
   <button class="shop-filter" data-shop-filter="decoration">Décoration</button>
   <button class="shop-filter" data-shop-filter="petits">Le coin des petits</button>
   <button class="shop-filter" data-shop-filter="coups">Nos coups de cœur</button>
+  <button class="shop-search-toggle" type="button" aria-expanded="false" aria-controls="shop-search-box">⌕ <span>Rechercher</span></button>
 </nav>
 
+<div class="shop-search-box" id="shop-search-box" hidden>
+  <label for="shop-search-input">Rechercher dans la boutique</label>
+  <div class="shop-search-field">
+    <span aria-hidden="true">⌕</span>
+    <input id="shop-search-input" type="search" placeholder="Ex. lampe, tapis, fauteuil, livre…">
+    <button id="shop-search-clear" type="button" aria-label="Effacer la recherche">×</button>
+  </div>
+  <p class="shop-search-count" id="shop-search-count" aria-live="polite"></p>
+</div>
+
   <section class="shop-grid">
-    <article class="shop-card" data-shop-category="livres plaids petits coups">
+    <article class="shop-card" data-shop-category="petits">
       <a href="articles/fauteuils-lecture.html" class="shop-card-image"><img src="assets/coin-lecture.jpg" alt="Fauteuil de lecture confortable"></a>
       <div class="shop-card-copy">
         <p class="shop-label">Fauteuils et mobilier</p>
@@ -191,5 +202,76 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+(() => {
+  const filters = [...document.querySelectorAll('.shop-filter')];
+  const cards = [...document.querySelectorAll('.shop-card')];
+  const toggle = document.querySelector('.shop-search-toggle');
+  const box = document.getElementById('shop-search-box');
+  const input = document.getElementById('shop-search-input');
+  const clear = document.getElementById('shop-search-clear');
+  const count = document.getElementById('shop-search-count');
+  let activeFilter = 'all';
+
+  const normalize = value => (value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\\u0300-\\u036f]/g, '');
+
+  function applyShopFilters() {
+    const query = normalize(input ? input.value.trim() : '');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const categories = (card.dataset.shopCategory || '').split(/\\s+/);
+      const categoryMatch = activeFilter === 'all' || categories.includes(activeFilter);
+      const textMatch = !query || normalize(card.textContent).includes(query);
+      const show = categoryMatch && textMatch;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    if (count) {
+      if (!query) count.textContent = '';
+      else count.textContent = visible === 0
+        ? 'Aucun résultat pour cette recherche.'
+        : `${visible} résultat${visible > 1 ? 's' : ''}`;
+    }
+  }
+
+  filters.forEach(button => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.shopFilter || 'all';
+      filters.forEach(btn => btn.classList.toggle('is-active', btn === button));
+      applyShopFilters();
+    });
+  });
+
+  if (toggle && box && input) {
+    toggle.addEventListener('click', () => {
+      const opening = box.hasAttribute('hidden');
+      if (opening) {
+        box.removeAttribute('hidden');
+        toggle.setAttribute('aria-expanded', 'true');
+        setTimeout(() => input.focus(), 0);
+      } else {
+        box.setAttribute('hidden', '');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    input.addEventListener('input', applyShopFilters);
+    clear?.addEventListener('click', () => {
+      input.value = '';
+      applyShopFilters();
+      input.focus();
+    });
+  }
+
+  applyShopFilters();
+})();
+</script>
+
 </body>
 </html>

@@ -1424,3 +1424,86 @@ body{
 .shop-card-text-only{min-height:300px;display:flex;flex-direction:column;justify-content:center}
 .shop-coming{display:inline-block;align-self:flex-start;margin-top:12px;padding:8px 12px;border-radius:999px;background:var(--cream);color:var(--brown);font-size:.82rem;font-weight:600}
 @media(max-width:760px){.shop-hero-simple{padding:48px 5vw 32px}.shop-tabs{top:68px;padding-left:5vw;padding-right:5vw}.shop-tabs .shop-filter{margin-right:18px}}
+
+
+/* Boutique V4 — recherche + filtres propres */
+.shop-tabs{
+  position:static !important;
+  top:auto !important;
+}
+.shop-search-toggle{
+  flex:0 0 auto;
+  border:0;
+  background:transparent;
+  color:var(--deep);
+  font:inherit;
+  padding:9px 4px;
+  margin-left:auto;
+  border-bottom:2px solid transparent;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.shop-search-toggle:hover,
+.shop-search-toggle[aria-expanded="true"]{
+  color:var(--brown);
+  border-color:var(--brown);
+}
+.shop-search-box{
+  margin:18px 6vw 4px;
+  padding:20px 22px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+}
+.shop-search-box[hidden]{display:none}
+.shop-search-box label{
+  display:block;
+  margin-bottom:8px;
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--brown);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.shop-search-field{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:0 14px;
+  background:#fffdf9;
+}
+.shop-search-field input{
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  padding:13px 4px;
+  font:inherit;
+  color:var(--deep);
+}
+.shop-search-field button{
+  border:0;
+  background:transparent;
+  font-size:1.35rem;
+  color:var(--muted);
+  cursor:pointer;
+}
+.shop-search-count{
+  margin:10px 2px 0;
+  color:var(--muted);
+  font-size:.9rem;
+}
+@media(max-width:760px){
+  .shop-search-toggle span{display:none}
+  .shop-search-toggle{
+    margin-left:0;
+    font-size:1.25rem;
+  }
+  .shop-search-box{
+    margin-left:5vw;
+    margin-right:5vw;
+  }
+}
