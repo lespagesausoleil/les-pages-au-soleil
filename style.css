@@ -1507,3 +1507,33 @@ body{
     margin-right:5vw;
   }
 }
+
+
+/* Boutique V6 — suppression des grandes cartes intermédiaires */
+.shop-grid-empty{
+  display:block;
+  padding-top:42px;
+  padding-bottom:70px;
+}
+.shop-empty-state{
+  max-width:760px;
+  margin:0 auto;
+  padding:54px 34px;
+  text-align:center;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.shop-empty-state h2{
+  font-size:clamp(2rem,4vw,3.4rem);
+  margin:8px 0 14px;
+}
+.shop-empty-state>p:not(.kicker){
+  color:var(--muted);
+  margin:0 auto;
+  max-width:620px;
+}
+@media(max-width:760px){
+  .shop-empty-state{
+    padding:38px 12px;
+  }
+}

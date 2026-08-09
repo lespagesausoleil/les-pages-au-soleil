@@ -77,92 +77,12 @@
   <p class="shop-search-count" id="shop-search-count" aria-live="polite"></p>
 </div>
 
-  <section class="shop-grid">
-    <article class="shop-card" data-shop-category="petits">
-      <a href="articles/fauteuils-lecture.html" class="shop-card-image"><img src="assets/coin-lecture.jpg" alt="Fauteuil de lecture confortable"></a>
-      <div class="shop-card-copy">
-        <p class="shop-label">Fauteuils et mobilier</p>
-        <h3>Fauteuils pour lire longtemps</h3>
-        <p>Les modèles et critères à regarder pour créer une assise réellement confortable.</p>
-        <a href="articles/fauteuils-lecture.html" class="shop-link">Voir la sélection →</a>
-      </div>
-    </article>
-
-    <article class="shop-card" data-shop-category="eclairage coups-coeur">
-      <a href="articles/lampes-chaleureuses.html" class="shop-card-image"><img src="assets/decoration.jpg" alt="Lampe chaleureuse et décoration douce"></a>
-      <div class="shop-card-copy">
-        <p class="shop-label">Lampes et éclairage</p>
-        <h3>Lampes à lumière chaleureuse</h3>
-        <p>Des idées pour obtenir une lumière plus douce le soir et mieux accompagner la lecture.</p>
-        <a href="articles/lampes-chaleureuses.html" class="shop-link">Voir la sélection →</a>
-      </div>
-    </article>
-
-    <article class="shop-card" data-shop-category="plaids coups-coeur">
-      <a href="articles/plaids-cocooning.html" class="shop-card-image"><img src="assets/slow-living.jpg" alt="Plaid cocooning dans une ambiance calme"></a>
-      <div class="shop-card-copy">
-        <p class="shop-label">Plaids et accessoires</p>
-        <h3>Plaids et matières cocooning</h3>
-        <p>Les textures qui réchauffent une pièce sans la surcharger.</p>
-        <a href="articles/plaids-cocooning.html" class="shop-link">Voir la sélection →</a>
-      </div>
-    </article>
-
-    <article class="shop-card" data-shop-category="livres coups-coeur">
-      <a href="articles/romans-automne.html" class="shop-card-image"><img src="assets/hero-accueil.jpg" alt="Romans dans un coin lecture chaleureux"></a>
-      <div class="shop-card-copy">
-        <p class="shop-label">Livres et lectures</p>
-        <h3>Romans à garder près du fauteuil</h3>
-        <p>Des lectures choisies pour les journées lentes et les soirées à la maison.</p>
-        <a href="articles/romans-automne.html" class="shop-link">Voir les lectures →</a>
-      </div>
-    </article>
-
-    <article class="shop-card" data-shop-category="decoration">
-      <a href="articles/decorer-bibliotheque.html" class="shop-card-image"><img src="assets/decoration.jpg" alt="Bibliothèque décorée avec sobriété"></a>
-      <div class="shop-card-copy">
-        <p class="shop-label">Décoration</p>
-        <h3>Objets pour une bibliothèque élégante</h3>
-        <p>Vases, cadres, paniers et détails qui donnent du rythme aux étagères.</p>
-        <a href="articles/decorer-bibliotheque.html" class="shop-link">Découvrir les idées →</a>
-      </div>
-    </article>
-
-    <article class="shop-card shop-card-featured" data-shop-category="coups-coeur livres plaids">
-      <a href="articles/cadeaux-lecteurs.html" class="shop-card-image"><img src="assets/guides-achat.jpg" alt="Coffret cadeau pour lecteur"></a>
-      <div class="shop-card-copy">
-        <p class="shop-label">Nos coups de cœur</p>
-        <h3>Idées cadeaux pour lecteurs</h3>
-        <p>Une sélection douce et utile pour celles et ceux qui aiment lire et ralentir.</p>
-        <a href="articles/cadeaux-lecteurs.html" class="shop-link">Voir les idées cadeaux →</a>
-      </div>
-    </article>
-  
-    <article class="shop-card" data-shop-category="tapis decoration coups">
-      <div class="shop-card-copy shop-card-text-only">
-        <p class="shop-label">Tapis</p>
-        <h3>Notre sélection de tapis</h3>
-        <p>Des tapis chaleureux pour structurer un coin lecture, un salon ou une chambre sans alourdir l’espace.</p>
-        <span class="shop-coming">Sélection à venir</span>
-      </div>
-    </article>
-    <article class="shop-card" data-shop-category="papeterie">
-      <div class="shop-card-copy shop-card-text-only">
-        <p class="shop-label">Papeterie</p>
-        <h3>Jolie papeterie du quotidien</h3>
-        <p>Carnets, marque-pages, cartes et petits objets de papier choisis dans l’esprit des Pages au Soleil.</p>
-        <span class="shop-coming">Sélection à venir</span>
-      </div>
-    </article>
-    <article class="shop-card" data-shop-category="petits livres decoration">
-      <div class="shop-card-copy shop-card-text-only">
-        <p class="shop-label">Le coin des petits</p>
-        <h3>Pour leurs petits univers</h3>
-        <p>Livres jeunesse, mobilier, lumière douce et décoration pour créer des espaces accueillants à hauteur d’enfant.</p>
-        <span class="shop-coming">Sélection à venir</span>
-      </div>
-    </article>
-
+  <section class="shop-grid shop-grid-empty" id="shop-products">
+    <div class="shop-empty-state">
+      <p class="kicker">La boutique se prépare</p>
+      <h2>Les produits arrivent bientôt.</h2>
+      <p>Les prochaines sélections apparaîtront ici directement, sans grande carte intermédiaire.</p>
+    </div>
   </section>
 
   <section class="shop-note">
@@ -216,6 +136,7 @@
 (() => {
   const filters = [...document.querySelectorAll('.shop-filter')];
   const cards = [...document.querySelectorAll('.shop-card')];
+  const emptyState = document.querySelector('.shop-empty-state');
   const toggle = document.querySelector('.shop-search-toggle');
   const box = document.getElementById('shop-search-box');
   const input = document.getElementById('shop-search-input');
@@ -240,6 +161,8 @@
       card.hidden = !show;
       if (show) visible++;
     });
+
+    if (emptyState) emptyState.hidden = cards.length > 0 && visible > 0;
 
     if (count) {
       if (!query) count.textContent = '';
