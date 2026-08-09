@@ -1697,3 +1697,25 @@ body{
   .product-detail-image{min-height:380px}
   .product-detail-copy{padding-top:0}
 }
+
+/* Boutique V9 — nom du produit sur les cartes */
+.compact-product-meta{
+  display:block;
+}
+.compact-product-name{
+  margin:0 0 5px;
+  font-family:"Playfair Display",serif;
+  font-size:1.08rem;
+  line-height:1.2;
+  font-weight:600;
+  color:var(--deep);
+}
+.compact-product-price{
+  margin:0 0 11px;
+}
+.compact-product-button{
+  width:100%;
+}
+@media(max-width:760px){
+  .compact-product-name{font-size:.98rem}
+}
