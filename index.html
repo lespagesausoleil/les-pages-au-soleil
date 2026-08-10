@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="editorial-topbar">
+  <span>☀</span>
+  <p>Magazine d’inspiration pour un quotidien plus doux et des intérieurs qui racontent une histoire.</p>
+  <a href="#newsletter">Newsletter</a>
+</div>
 <header class="site-header">
   <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
   <button class="menu-btn" aria-label="Ouvrir le menu">☰</button>
@@ -39,198 +44,102 @@
 </div>
 
 
+
 <main>
-  <section class="hero">
-    <div class="hero-copy">
+  <section class="compact-hero">
+    <div class="compact-hero-copy">
       <p class="kicker">Magazine d’inspiration</p>
       <h1>Un intérieur doux.<br>Des lectures qui restent.</h1>
-      <p>Un magazine indépendant pour aménager des espaces chaleureux, retrouver le plaisir de lire et ralentir sans culpabiliser.</p>
-      <p class="hero-trust">Inspiration sincère • Sélections choisies • Conseils pratiques</p>
+      <p>Des idées, des conseils et des inspirations pour créer des espaces chaleureux, retrouver le plaisir de lire et ralentir sans culpabiliser.</p>
       <div class="actions">
-        <a class="btn primary" href="#articles">Découvrir les articles</a>
-        <a class="btn secondary" href="#newsletter">Recevoir la lettre</a>
+        <a class="btn primary" href="articles.html">Découvrir les articles</a>
+        <a class="btn secondary" href="coups-de-coeur.html">Nos coups de cœur ♡</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="assets/hero-accueil.jpg" alt="Coin lecture lumineux avec fauteuil, bibliothèque et lumière dorée">
-      <div class="photo-caption">Un refuge pour lire, rêver et ralentir.</div>
+    <div class="compact-hero-photo">
+      <img src="assets/hero-accueil.jpg" alt="Coin lecture chaleureux avec fauteuil, bibliothèque et lumière dorée">
+      <span>☀ Un refuge pour lire, rêver et ralentir.</span>
     </div>
   </section>
 
-  <section class="signature">
-    <p>Un magazine indépendant consacré à la lecture, à la décoration douce et au slow living.</p>
-  </section>
+<section class="editorial-spotlight">
+  <div class="spotlight-copy">
+    <p class="kicker">Le choix de la rédaction</p>
+    <h2>Créer un coin lecture où l’on oublie naturellement l’heure.</h2>
+    <p>Une sélection de gestes simples, de belles matières et de lumières douces pour transformer un petit espace en véritable refuge.</p>
+    <a class="btn primary" href="articles/coin-lecture-cocooning.html">Lire le dossier</a>
+  </div>
+  <div class="spotlight-image">
+    <img src="assets/coin-lecture.jpg" alt="Fauteuil de lecture chaleureux avec plaid et lampe">
+    <span>8 min de lecture</span>
+  </div>
+</section>
 
 
-  <section class="featured-section reveal">
-    <div class="section-head split-head">
-      <div>
-        <p class="kicker">À la une</p>
-        <h2>Les histoires à découvrir maintenant</h2>
-      </div>
-      <a class="text-link" href="articles.html">Tout voir →</a>
+  <section class="homepage-section">
+    <div class="homepage-heading">
+      <h2>À la une</h2>
+      <a href="articles.html">Voir tous les articles →</a>
     </div>
-    <div class="featured-grid">
-      <a class="feature-card feature-main" href="articles/coin-lecture-cocooning.html">
-        <img src="assets/coin-lecture.jpg" alt="Coin lecture chaleureux">
-        <div class="feature-overlay">
-          <p class="tag">Coin lecture</p>
-          <h3>Créer un refuge où l’on a vraiment envie de lire</h3>
-        </div>
+    <div class="headline-grid">
+      <a class="headline-card" href="articles/coin-lecture-cocooning.html">
+        <img src="assets/coin-lecture.jpg" alt="">
+        <div><small>Coin lecture</small><h3>Comment créer un coin lecture cosy chez soi</h3><p>◷ 8 min de lecture</p></div>
       </a>
-      <a class="feature-card" href="articles/decorer-bibliotheque.html">
-        <img src="assets/decoration.jpg" alt="Bibliothèque décorée avec douceur">
-        <div class="feature-overlay">
-          <p class="tag">Décoration</p>
-          <h3>Une bibliothèque belle sans être surchargée</h3>
-        </div>
+      <a class="headline-card" href="articles/rituel-dimanche.html">
+        <img src="assets/slow-living.jpg" alt="">
+        <div><small>Slow living</small><h3>Le rituel du dimanche qui change tout</h3><p>◷ 6 min de lecture</p></div>
       </a>
-      <a class="feature-card" href="articles/rituel-dimanche.html">
-        <img src="assets/slow-living.jpg" alt="Moment slow living avec thé">
-        <div class="feature-overlay">
-          <p class="tag">Slow living</p>
-          <h3>Le rituel du dimanche qui change le début de semaine</h3>
-        </div>
+      <a class="headline-card" href="articles/decorer-bibliotheque.html">
+        <img src="assets/decoration.jpg" alt="">
+        <div><small>Décoration</small><h3>Décorer sa bibliothèque avec élégance</h3><p>◷ 7 min de lecture</p></div>
+      </a>
+      <a class="headline-card" href="coups-de-coeur.html">
+        <img src="assets/guides-achat.jpg" alt="">
+        <div><small>Coups de cœur</small><h3>Nos sélections préférées pour lire et ralentir</h3><p>◷ 5 min de lecture</p></div>
+      </a>
+      <a class="headline-card" href="articles/romans-automne.html">
+        <img src="assets/hero-accueil.jpg" alt="">
+        <div><small>Lecture</small><h3>15 romans parfaits pour l’automne</h3><p>◷ 9 min de lecture</p></div>
       </a>
     </div>
   </section>
 
-  <section class="categories reveal">
-    <a id="lecture" class="category-card image-card" href="articles/coin-lecture-cocooning.html">
-      <img src="assets/coin-lecture.jpg" alt="Fauteuil confortable dans un coin lecture chaleureux">
-      <div><span>📚</span><h2>Lecture</h2><p>Livres, rituels et inspirations pour lecteurs.</p></div>
-    </a>
-    <a id="coin-lecture" class="category-card image-card" href="articles/coin-lecture-cocooning.html">
-      <img src="assets/coin-lecture.jpg" alt="Coin lecture avec lampe, plaid et tasse">
-      <div><span>🪑</span><h2>Coin lecture</h2><p>Fauteuils, lampes, bibliothèques et ambiance cosy.</p></div>
-    </a>
-    <a id="decoration" class="category-card image-card" href="articles/decorer-bibliotheque.html">
-      <img src="assets/decoration.jpg" alt="Étagère décorée avec livres, vase et plante">
-      <div><span>🏡</span><h2>Décoration</h2><p>Des intérieurs naturels, doux et accueillants.</p></div>
-    </a>
-    <a id="slow-living" class="category-card image-card" href="articles/rituel-dimanche.html">
-      <img src="assets/slow-living.jpg" alt="Tasse de thé, carnet et bougie près d'une fenêtre">
-      <div><span>☕</span><h2>Slow living</h2><p>Ralentir, respirer et savourer les petits moments.</p></div>
-    </a>
-  </section>
-
-  <section id="articles" class="section" reveal">
-    <div class="section-head">
-      <p class="kicker">À lire maintenant</p>
-      <h2>Nos dernières inspirations</h2>
-      <a class="text-link" href="articles.html">Voir tous les articles →</a>
+  <section class="homepage-section">
+    <div class="homepage-heading">
+      <h2>Explorer par thématique</h2>
+      <a href="articles.html">Toutes les thématiques →</a>
     </div>
-    <div class="articles-grid">
-      <article class="article-card large">
-        <div class="thumb photo-thumb"><img src="assets/coin-lecture.jpg" alt="Coin lecture chaleureux"><span>Coin lecture</span></div>
-        <div class="content">
-          <p class="tag">Coin lecture</p>
-          <h3>Comment créer un coin lecture cocooning chez soi</h3>
-          <p>Un guide concret pour choisir le fauteuil, la lumière et les accessoires qui transforment un simple recoin en refuge.</p>
-          <a href="articles/coin-lecture-cocooning.html">Lire l’article →</a>
-        </div>
-      </article>
-      <article class="article-card">
-        <div class="thumb photo-thumb"><img src="assets/decoration.jpg" alt="Décoration chaleureuse et lumière douce"><span>Lumière</span></div>
-        <div class="content">
-          <p class="tag">Décoration</p>
-          <h3>Les lampes qui rendent une pièce instantanément chaleureuse</h3>
-          <p>Température de lumière, hauteur et emplacement : les détails qui changent tout.</p>
-          <a href="articles/lampes-chaleureuses.html">Lire l’article →</a>
-        </div>
-      </article>
-      <article class="article-card">
-        <div class="thumb photo-thumb"><img src="assets/slow-living.jpg" alt="Moment slow living avec thé et carnet"><span>Dimanche</span></div>
-        <div class="content">
-          <p class="tag">Slow living</p>
-          <h3>Le rituel du dimanche pour commencer la semaine en douceur</h3>
-          <p>Une parenthèse simple faite de thé, de rangement léger et de lecture.</p>
-          <a href="articles/rituel-dimanche.html">Lire l’article →</a>
-        </div>
-      </article>
+    <div class="theme-grid">
+      <a href="rubrique-lecture.html" class="theme-card"><img src="assets/hero-accueil.jpg" alt=""><span>📖<strong>Lecture</strong><small>Articles</small></span></a>
+      <a href="rubrique-coin-lecture.html" class="theme-card"><img src="assets/coin-lecture.jpg" alt=""><span>🪑<strong>Coin lecture</strong><small>Articles</small></span></a>
+      <a href="rubrique-decoration.html" class="theme-card"><img src="assets/decoration.jpg" alt=""><span>🌿<strong>Décoration</strong><small>Articles</small></span></a>
+      <a href="rubrique-slow-living.html" class="theme-card"><img src="assets/slow-living.jpg" alt=""><span>🍃<strong>Slow living</strong><small>Articles</small></span></a>
+      <a href="coups-de-coeur.html" class="theme-card"><img src="assets/guides-achat.jpg" alt=""><span>♡<strong>Coups de cœur</strong><small>Guides & sélections</small></span></a>
     </div>
   </section>
 
-  <section class="monthly-pick" reveal">
-    <div>
-      <p class="kicker">La signature du magazine</p>
-      <h2>Le coin lecture du mois</h2>
-      <p>Une ambiance complète, une palette, une sélection de meubles et quelques détails pour recréer le décor chez soi.</p>
-      <a class="btn primary" href="articles/coin-lecture-cocooning.html">Découvrir la sélection</a>
+  <section id="newsletter" class="mail-strip">
+    <div class="mail-icon">✉</div>
+    <div class="mail-copy">
+      <h2>Une pause inspirante dans votre boîte mail</h2>
+      <p>Recevez chaque semaine des idées, des lectures et des conseils pour un quotidien plus doux.</p>
     </div>
-    <div class="pick-card">
-      <div class="monthly-photo">
-        <img src="assets/guides-achat.jpg" alt="Coffret cadeau chaleureux pour amoureux de la lecture">
-      </div>
-      <ul>
-        <li>Fauteuil enveloppant</li>
-        <li>Lampe à lumière chaude</li>
-        <li>Plaid texturé</li>
-        <li>Petite table d’appoint</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="guides" class="guides section" reveal">
-    <div class="section-head">
-      <p class="kicker">Sélections utiles</p>
-      <h2>Guides d’achat</h2>
-    </div>
-    <div class="guide-grid">
-      <a href="articles/fauteuils-lecture.html">Fauteuils pour lire</a>
-      <a href="articles/lampes-chaleureuses.html">Lampes de lecture</a>
-      <a href="articles/decorer-bibliotheque.html">Bibliothèques & rangement</a>
-      <a href="articles/cadeaux-lecteurs.html">Cadeaux pour lecteurs</a>
-    </div>
-  </section>
-
-
-  <section class="social-feature pinterest-feature" reveal">
-    <div class="social-feature-copy">
-      <p class="kicker">Nos inspirations</p>
-      <h2>Retrouvez Les Pages au Soleil sur Pinterest</h2>
-      <p>Coins lecture, bibliothèques, ambiances douces et idées décoration à enregistrer pour plus tard.</p>
-      <a class="btn primary" href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Suivre sur Pinterest</a>
-    </div>
-    <div class="pin-grid" aria-label="Aperçu des inspirations Pinterest">
-      <div class="pin-card pin-one"><span>Coin lecture</span></div>
-      <div class="pin-card pin-two"><span>Décoration</span></div>
-      <div class="pin-card pin-three"><span>Slow living</span></div>
-    </div>
-  </section>
-
-  <section id="apropos" class="about section" reveal">
-    <div class="about-copy">
-      <p class="kicker">Notre histoire</p>
-      <h2>Un peu de soleil dans chaque page.</h2>
-      <p>Les Pages au Soleil est né d’une envie simple : réunir dans un même endroit la lecture, la maison et l’art de ralentir.</p>
-      <p>Nous partageons des idées, des conseils et des sélections choisies avec soin, sans jamais perdre de vue l’essentiel : créer un univers inspirant et sincère.</p>
-    </div>
-    <blockquote>« Une maison où l’on lit est déjà un peu au soleil. »</blockquote>
-  </section>
-
-
-  <section class="instagram-strip" reveal">
-    <div>
-      <p class="kicker">Dans les coulisses</p>
-      <h2>Suivez-nous aussi sur Instagram</h2>
-    </div>
-    <a class="btn secondary-light" href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Voir Instagram</a>
-  </section>
-
-  <section id="newsletter" class="newsletter" reveal">
-    <div>
-      <p class="kicker">La lettre du dimanche</p>
-      <h2>Une dose d’inspiration, sans bruit.</h2>
-      <p>Lecture, décoration et slow living directement dans votre boîte mail.</p>
-    </div>
-    <form id="newsletter-form">
-      <input type="email" placeholder="votre@email.fr" required aria-label="Adresse email">
-      <button class="btn gold" type="submit">Je m’inscris</button>
-      <small id="newsletter-msg" hidden>Merci, votre inscription est enregistrée.</small>
-    </form>
+    <div class="brevo-newsletter">
+  <iframe
+    width="540"
+    height="410"
+    src="https://89b5b955.sibforms.com/v2/serve/MUIFAK397L3KyNOrK2d0EhH-vnCLs3fjp1UHEiQSvzAohqjuc8cmhhxNzs96j3-FOM25ohlyPLNkuCNeVPYZy3yd_IMANqgRqlPLp_m_BVijN3MkRyX6A-S9kx4w_B1f1Y7IJm9XuGqEZrz0NZuSnFdo0r5UpW4x4vhamlQ4Ha4TiWTz6z8HRk2aKCrhLwg9UZ7w5qfwnmIuQVZrTQ=="
+    frameborder="0"
+    scrolling="auto"
+    allowfullscreen
+    title="Inscription à la newsletter Les Pages au Soleil"
+    style="display:block;margin:0 auto;width:100%;max-width:540px;border:0;">
+  </iframe>
+</div> 
   </section>
 </main>
+
 
 
 <footer class="premium-footer">
