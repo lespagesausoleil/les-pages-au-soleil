@@ -9,6 +9,41 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+<style>
+.shop-toolbar{
+  max-width:1180px;margin:.45rem auto 1.05rem;padding:0 1rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.shop-visible-count{margin:0;color:#777;font-size:.84rem;letter-spacing:.01em}
+.shop-sort-wrap{position:relative;margin-left:auto}
+.shop-sort-toggle{
+  border:1px solid rgba(40,40,40,.16);background:#fff;color:#555;
+  border-radius:999px;padding:.46rem .78rem;font:500 .78rem "DM Sans",sans-serif;
+  cursor:pointer;display:flex;align-items:center;gap:.35rem;
+}
+.shop-sort-toggle:hover,.shop-sort-toggle[aria-expanded="true"]{border-color:rgba(40,40,40,.34);color:#222}
+.shop-sort-panel{
+  position:absolute;right:0;top:calc(100% + .5rem);z-index:30;width:min(280px,82vw);
+  background:#fff;border:1px solid rgba(40,40,40,.12);border-radius:14px;
+  padding:1rem;box-shadow:0 12px 32px rgba(0,0,0,.10);
+}
+.shop-sort-panel label{display:block;font:600 .76rem "DM Sans",sans-serif;color:#555;margin:.15rem 0 .38rem}
+.shop-sort-panel select{
+  width:100%;padding:.62rem .7rem;margin:0 0 .85rem;border:1px solid rgba(40,40,40,.16);
+  border-radius:9px;background:#fff;font:400 .82rem "DM Sans",sans-serif;color:#333;
+}
+.shop-reset-filters{
+  width:100%;border:0;background:#f4f1ec;color:#555;border-radius:9px;
+  padding:.58rem .7rem;font:500 .78rem "DM Sans",sans-serif;cursor:pointer;
+}
+.shop-reset-filters:hover{background:#ece7df}
+@media(max-width:640px){
+  .shop-toolbar{padding:0 .75rem}
+  .shop-sort-panel{right:0}
+}
+</style>
+
 </head>
 <body>
 <div class="editorial-topbar">
@@ -67,6 +102,39 @@
   <button class="shop-search-toggle" type="button" aria-expanded="false" aria-controls="shop-search-box">⌕ <span>Rechercher</span></button>
 </nav>
 
+<div class="shop-toolbar" aria-label="Options de la boutique">
+  <p class="shop-visible-count" id="shop-visible-count" aria-live="polite"></p>
+  <div class="shop-sort-wrap">
+    <button class="shop-sort-toggle" id="shop-sort-toggle" type="button" aria-expanded="false" aria-controls="shop-sort-panel">
+      Filtrer <span aria-hidden="true">↕</span>
+    </button>
+    <div class="shop-sort-panel" id="shop-sort-panel" hidden>
+      <label for="shop-color-filter">Couleur</label>
+      <select id="shop-color-filter">
+        <option value="all">Toutes les couleurs</option>
+        <option value="blanc-creme">Blanc & crème</option>
+        <option value="beige-naturel">Beige & naturel</option>
+        <option value="marron">Marron</option>
+        <option value="gris-noir">Gris & noir</option>
+        <option value="bleu">Bleu</option>
+        <option value="vert">Vert</option>
+        <option value="jaune-dore">Jaune & doré</option>
+        <option value="rose-rouge">Rose, rouge & terracotta</option>
+        <option value="multicolore">Multicolore</option>
+      </select>
+
+      <label for="shop-price-sort">Trier par prix</label>
+      <select id="shop-price-sort">
+        <option value="default">Ordre de la sélection</option>
+        <option value="asc">Prix croissant</option>
+        <option value="desc">Prix décroissant</option>
+      </select>
+
+      <button class="shop-reset-filters" id="shop-reset-filters" type="button">Réinitialiser</button>
+    </div>
+  </div>
+</div>
+
 <div class="shop-search-box" id="shop-search-box" hidden>
   <label for="shop-search-input">Rechercher dans la boutique</label>
   <div class="shop-search-field">
@@ -100,7 +168,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid marpent loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid marpent loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme gris-noir" data-shop-color-label="crème/gris">
     <a class="compact-product-image" href="produit-plaid-marpent.html" aria-label="Voir Plaid Marpent">
       <img src="https://www.loberon.fr/media/1984x1984x2/69/67/bc/1735876674/225374_20694-4-25/225374_plaid_marpent_creme_grau.jpg?ts=1785894417" alt="Plaid Marpent — LOBERON" loading="lazy">
     </a>
@@ -111,7 +179,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid ensis loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid ensis loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme gris-noir" data-shop-color-label="noir/blanc">
     <a class="compact-product-image" href="produit-plaid-ensis.html" aria-label="Voir Plaid Ensis">
       <img src="https://www.loberon.fr/media/61/4d/bf/1717221698/89408_19238-3-1.jpg?ts=1785894111" alt="Plaid Ensis — LOBERON" loading="lazy">
     </a>
@@ -122,7 +190,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid linares loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid linares loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme" data-shop-color-label="crème">
     <a class="compact-product-image" href="produit-plaid-linares.html" aria-label="Voir Plaid Linares">
       <img src="https://www.loberon.fr/media/66/e4/ea/1717226956/118032_20714-22-25.jpg?ts=1785894419" alt="Plaid Linares — LOBERON" loading="lazy">
     </a>
@@ -133,7 +201,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid kerenza loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid kerenza loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme marron" data-shop-color-label="crème/marron">
     <a class="compact-product-image" href="produit-plaid-kerenza.html" aria-label="Voir Plaid Kerenza">
       <img src="https://www.loberon.fr/media/1a/4a/28/1779846463/270175_27331-22-25.jpg?ts=1785896669" alt="Plaid Kerenza — LOBERON" loading="lazy">
     </a>
@@ -144,7 +212,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid arsalan loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid arsalan loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme marron" data-shop-color-label="crème/marron">
     <a class="compact-product-image" href="produit-plaid-arsalan.html" aria-label="Voir Plaid Arsalan">
       <img src="https://www.loberon.fr/media/71/09/3b/1738308500/226899_24602-22-1.jpg?ts=1785895411" alt="Plaid Arsalan — LOBERON" loading="lazy">
     </a>
@@ -155,7 +223,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid ocevara loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid ocevara loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme bleu" data-shop-color-label="bleu/crème">
     <a class="compact-product-image" href="produit-plaid-ocevara.html" aria-label="Voir Plaid Ocevara">
       <img src="https://www.loberon.fr/media/eb/66/40/1769481751/256290_26680-6-25.jpg?ts=1785896337" alt="Plaid Ocevara — LOBERON" loading="lazy">
     </a>
@@ -166,7 +234,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid amberley loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid amberley loberon plaid couverture coton laine cocooning lecture" data-shop-color="vert" data-shop-color-label="vert">
     <a class="compact-product-image" href="produit-plaid-amberley.html" aria-label="Voir Plaid Amberley">
       <img src="https://www.loberon.fr/media/4a/59/5c/1771293175/92705_15209-8-1.jpg?ts=1785893585" alt="Plaid Amberley — LOBERON" loading="lazy">
     </a>
@@ -177,7 +245,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid belvienne loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid belvienne loberon plaid couverture coton laine cocooning lecture" data-shop-color="blanc-creme rose-rouge" data-shop-color-label="rose/crème">
     <a class="compact-product-image" href="produit-plaid-belvienne.html" aria-label="Voir Plaid Belvienne">
       <img src="https://www.loberon.fr/media/64/64/fd/1742452829/235176_24972-2-25.jpg?ts=1785895558" alt="Plaid Belvienne — LOBERON" loading="lazy">
     </a>
@@ -188,7 +256,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid ancy loberon plaid couverture coton laine cocooning lecture">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="plaid ancy loberon plaid couverture coton laine cocooning lecture" data-shop-color="bleu" data-shop-color-label="bleu">
     <a class="compact-product-image" href="produit-plaid-ancy.html" aria-label="Voir Plaid Ancy">
       <img src="https://www.loberon.fr/media/04/ca/82/1717230657/161285_21811-6-25.jpg?ts=1785894626" alt="Plaid Ancy — LOBERON" loading="lazy">
     </a>
@@ -199,7 +267,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin maerlinna loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin maerlinna loberon coussin housse textile décoration" data-shop-color="blanc-creme" data-shop-color-label="crème">
     <a class="compact-product-image" href="produit-maerlinna.html" aria-label="Voir Housse de coussin Maerlinna">
       <img src="https://www.loberon.fr/media/08/8a/dd/1780365829/268669_27368-22-36.jpg?ts=1785896691" alt="Housse de coussin Maerlinna — LOBERON" loading="lazy">
     </a>
@@ -210,7 +278,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins junniper loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins junniper loberon coussin housse textile décoration" data-shop-color="blanc-creme marron" data-shop-color-label="crème/marron">
     <a class="compact-product-image" href="produit-junniper.html" aria-label="Voir Lot de 2 housses de coussins Junniper">
       <img src="https://www.loberon.fr/media/2a/6b/ea/1779414580/269530_27223-22-12.jpg?ts=1785896616" alt="Lot de 2 housses de coussins Junniper — LOBERON" loading="lazy">
     </a>
@@ -221,7 +289,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="coussin de garnissage indra loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="coussin de garnissage indra loberon coussin housse textile décoration" data-shop-color="blanc-creme" data-shop-color-label="blanc">
     <a class="compact-product-image" href="produit-indra.html" aria-label="Voir Coussin de garnissage Indra">
       <img src="https://www.loberon.fr/media/d7/c9/fb/1717218155/70784_18180-5-12.jpg?ts=1785893950" alt="Coussin de garnissage Indra — LOBERON" loading="lazy">
     </a>
@@ -232,7 +300,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin élomiane loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin élomiane loberon coussin housse textile décoration" data-shop-color="blanc-creme" data-shop-color-label="blanc">
     <a class="compact-product-image" href="produit-elomiane.html" aria-label="Voir Housse de coussin Élomiane">
       <img src="https://www.loberon.fr/media/2d/f9/ed/1779846450/270536_27312-5-12.jpg?ts=1785896660" alt="Housse de coussin Élomiane — LOBERON" loading="lazy">
     </a>
@@ -243,7 +311,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin clemencies loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin clemencies loberon coussin housse textile décoration" data-shop-color="blanc-creme jaune-dore rose-rouge" data-shop-color-label="bordeaux/crème">
     <a class="compact-product-image" href="produit-clemencies.html" aria-label="Voir Housse de coussin Clemencies">
       <img src="https://www.loberon.fr/media/6a/14/2e/1779760198/270050_27432-2-1.jpg?ts=1785896730" alt="Housse de coussin Clemencies — LOBERON" loading="lazy">
     </a>
@@ -254,7 +322,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin garavine loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin garavine loberon coussin housse textile décoration" data-shop-color="beige-naturel rose-rouge" data-shop-color-label="lin/rouge">
     <a class="compact-product-image" href="produit-garavine.html" aria-label="Voir Housse de coussin Garavine">
       <img src="https://www.loberon.fr/media/9c/b4/d6/1779241936/268993_27217-26-12.jpg?ts=1785896614" alt="Housse de coussin Garavine — LOBERON" loading="lazy">
     </a>
@@ -265,7 +333,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin ulderina loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin ulderina loberon coussin housse textile décoration" data-shop-color="blanc-creme gris-noir" data-shop-color-label="crème/noir">
     <a class="compact-product-image" href="produit-ulderina.html" aria-label="Voir Housse de coussin Ulderina">
       <img src="https://www.loberon.fr/media/69/f6/8b/1770777143/261564_27139-1-1.jpg?ts=1785896567" alt="Housse de coussin Ulderina — LOBERON" loading="lazy">
     </a>
@@ -276,7 +344,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin florémont loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin florémont loberon coussin housse textile décoration" data-shop-color="blanc-creme jaune-dore multicolore" data-shop-color-label="crème/multicolore">
     <a class="compact-product-image" href="produit-floremont.html" aria-label="Voir Housse de coussin Florémont">
       <img src="https://www.loberon.fr/media/b6/8e/24/1765851626/252024_26401-22-12.jpg?ts=1785896200" alt="Housse de coussin Florémont — LOBERON" loading="lazy">
     </a>
@@ -287,7 +355,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin lunavine loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin lunavine loberon coussin housse textile décoration" data-shop-color="blanc-creme" data-shop-color-label="crème">
     <a class="compact-product-image" href="produit-lunavine.html" aria-label="Voir Housse de coussin Lunavine">
       <img src="https://www.loberon.fr/media/35/03/44/1766024280/254028_26165-22-3.jpg?ts=1785896077" alt="Housse de coussin Lunavine — LOBERON" loading="lazy">
     </a>
@@ -298,7 +366,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin dunlora loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin dunlora loberon coussin housse textile décoration" data-shop-color="beige-naturel" data-shop-color-label="beige">
     <a class="compact-product-image" href="produit-dunlora.html" aria-label="Voir Housse de coussin Dunlora">
       <img src="https://www.loberon.fr/media/cb/f5/26/1773887689/264076_27004-3-1.jpg?ts=1785896508" alt="Housse de coussin Dunlora — LOBERON" loading="lazy">
     </a>
@@ -309,7 +377,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins ysilda loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins ysilda loberon coussin housse textile décoration" data-shop-color="bleu" data-shop-color-label="bleu">
     <a class="compact-product-image" href="produit-ysilda.html" aria-label="Voir Lot de 2 housses de coussins Ysilda">
       <img src="https://www.loberon.fr/media/9f/45/5d/1770259274/259195_27038-6-12.jpg?ts=1785896524" alt="Lot de 2 housses de coussins Ysilda — LOBERON" loading="lazy">
     </a>
@@ -320,7 +388,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins solviana loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins solviana loberon coussin housse textile décoration" data-shop-color="blanc-creme gris-noir" data-shop-color-label="gris/crème">
     <a class="compact-product-image" href="produit-solviana.html" aria-label="Voir Lot de 2 housses de coussins Solviana">
       <img src="https://www.loberon.fr/media/8d/90/5d/1758682728/248553_26007-4-12.jpg?ts=1785895992" alt="Lot de 2 housses de coussins Solviana — LOBERON" loading="lazy">
     </a>
@@ -331,7 +399,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin cabinda loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin cabinda loberon coussin housse textile décoration" data-shop-color="blanc-creme jaune-dore multicolore" data-shop-color-label="crème/multicolore">
     <a class="compact-product-image" href="produit-cabinda.html" aria-label="Voir Housse de coussin Cabinda">
       <img src="https://www.loberon.fr/media/c4/bb/e3/1717236518/201826_23515-26-3.jpg?ts=1785894952" alt="Housse de coussin Cabinda — LOBERON" loading="lazy">
     </a>
@@ -342,7 +410,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussin armidale loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussin armidale loberon coussin housse textile décoration" data-shop-color="blanc-creme beige-naturel" data-shop-color-label="blanc/beige">
     <a class="compact-product-image" href="produit-armidale.html" aria-label="Voir Lot de 2 housses de coussin Armidale">
       <img src="https://www.loberon.fr/media/69/6f/ac/1738309820/227016_25011-5-12.jpg?ts=1785895573" alt="Lot de 2 housses de coussin Armidale — LOBERON" loading="lazy">
     </a>
@@ -353,7 +421,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins floraine loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins floraine loberon coussin housse textile décoration" data-shop-color="beige-naturel" data-shop-color-label="beige">
     <a class="compact-product-image" href="produit-floraine.html" aria-label="Voir Lot de 2 housses de coussins Floraine">
       <img src="https://www.loberon.fr/media/61/b8/2e/1770259176/259060_26832-3-12.jpg?ts=1785896428" alt="Lot de 2 housses de coussins Floraine — LOBERON" loading="lazy">
     </a>
@@ -364,7 +432,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins rousseline loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="lot de 2 housses de coussins rousseline loberon coussin housse textile décoration" data-shop-color="blanc-creme" data-shop-color-label="crème">
     <a class="compact-product-image" href="produit-rousseline.html" aria-label="Voir Lot de 2 housses de coussins Rousseline">
       <img src="https://www.loberon.fr/media/87/5d/52/1741662627/234435_24769-22-12.jpg?ts=1785895480" alt="Lot de 2 housses de coussins Rousseline — LOBERON" loading="lazy">
     </a>
@@ -375,7 +443,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin malencio loberon coussin housse textile décoration">
+  <article class="shop-card compact-product-card" data-shop-category="plaids" data-shop-search="housse de coussin malencio loberon coussin housse textile décoration" data-shop-color="blanc-creme" data-shop-color-label="crème/argenté">
     <a class="compact-product-image" href="produit-malencio.html" aria-label="Voir Housse de coussin Malencio">
       <img src="https://www.loberon.fr/media/a5/5d/37/1757559707/245200_25509-22-1.jpg?ts=1785895738" alt="Housse de coussin Malencio — LOBERON" loading="lazy">
     </a>
@@ -385,7 +453,7 @@
       <a class="compact-product-button" href="produit-malencio.html">Voir le produit</a>
     </div>
   </article>
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lot de 2 lanternes led à suspendre flavin loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lot de 2 lanternes led à suspendre flavin loberon lanterne led lampe éclairage lumière" data-shop-color="marron" data-shop-color-label="marron vieilli">
     <a class="compact-product-image" href="produit-flavin.html" aria-label="Voir Lot de 2 lanternes LED à suspendre Flavin">
       <img src="https://www.loberon.fr/media/5d/13/17/1717226124/126257_20466-2-1.jpg?ts=1785894372" alt="Lot de 2 lanternes LED à suspendre Flavin — LOBERON" loading="lazy">
     </a>
@@ -396,7 +464,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led rechargeable lagia loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led rechargeable lagia loberon lanterne led lampe éclairage lumière" data-shop-color="marron" data-shop-color-label="marron vieilli">
     <a class="compact-product-image" href="produit-lagia.html" aria-label="Voir Lanterne LED rechargeable Lagia">
       <img src="https://www.loberon.fr/media/82/19/a7/1774318281/264263_23387-2-1.jpg?ts=1786327613" alt="Lanterne LED rechargeable Lagia — LOBERON" loading="lazy">
     </a>
@@ -407,7 +475,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led lomera loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led lomera loberon lanterne led lampe éclairage lumière" data-shop-color="blanc-creme" data-shop-color-label="blanc vieilli">
     <a class="compact-product-image" href="produit-lomera.html" aria-label="Voir Lanterne LED Lomera">
       <img src="https://www.loberon.fr/media/ac/f5/a9/1766024492/251491_26469-5-1.jpg?ts=1786329056" alt="Lanterne LED Lomera — LOBERON" loading="lazy">
     </a>
@@ -418,7 +486,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led rechargeable chexbres loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led rechargeable chexbres loberon lanterne led lampe éclairage lumière" data-shop-color="blanc-creme" data-shop-color-label="blanc vieilli">
     <a class="compact-product-image" href="produit-chexbres.html" aria-label="Voir Lanterne LED rechargeable Chexbres">
       <img src="https://www.loberon.fr/media/eb/14/f0/1717235768/196566_23319-5-1.jpg?ts=1786327589" alt="Lanterne LED rechargeable Chexbres — LOBERON" loading="lazy">
     </a>
@@ -429,7 +497,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led oxcroft loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led oxcroft loberon lanterne led lampe éclairage lumière" data-shop-color="marron" data-shop-color-label="marron vieilli">
     <a class="compact-product-image" href="produit-oxcroft.html" aria-label="Voir Lanterne LED Oxcroft">
       <img src="https://www.loberon.fr/media/f3/63/8d/1717214125/168776_1695321.jpg?ts=1786326374" alt="Lanterne LED Oxcroft — LOBERON" loading="lazy">
     </a>
@@ -440,7 +508,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led volanaïs loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led volanaïs loberon lanterne led lampe éclairage lumière" data-shop-color="marron" data-shop-color-label="marron vieilli">
     <a class="compact-product-image" href="produit-volanais.html" aria-label="Voir Lanterne LED Volanaïs">
       <img src="https://www.loberon.fr/media/20/57/22/1769481878/256431_26920-2-1.jpg?ts=1786329333" alt="Lanterne LED Volanaïs — LOBERON" loading="lazy">
     </a>
@@ -451,7 +519,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led cornell loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led cornell loberon lanterne led lampe éclairage lumière" data-shop-color="blanc-creme" data-shop-color-label="blanc vieilli">
     <a class="compact-product-image" href="produit-cornell.html" aria-label="Voir Lanterne LED Cornell">
       <img src="https://www.loberon.fr/media/1a/97/2e/1717204374/157738_13907-5-1.jpg?ts=1786325969" alt="Lanterne LED Cornell — LOBERON" loading="lazy">
     </a>
@@ -462,7 +530,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led cortney loberon lanterne led lampe éclairage lumière">
+  <article class="shop-card compact-product-card" data-shop-category="lampes" data-shop-search="lanterne led cortney loberon lanterne led lampe éclairage lumière" data-shop-color="marron" data-shop-color-label="marron vieilli">
     <a class="compact-product-image" href="produit-cortney.html" aria-label="Voir Lanterne LED Cortney">
       <img src="https://www.loberon.fr/media/00/78/15/1717204385/60146_1390921.jpg?ts=1786325970" alt="Lanterne LED Cortney — LOBERON" loading="lazy">
     </a>
@@ -472,7 +540,7 @@
       <a class="compact-product-button" href="produit-cortney.html">Voir le produit</a>
     </div>
   </article>
-  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir ashwyn loberon miroir décoration cadre mural">
+  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir ashwyn loberon miroir décoration cadre mural" data-shop-color="gris-noir" data-shop-color-label="gris vieilli">
     <a class="compact-product-image" href="produit-ashwyn-26183.html" aria-label="Voir Miroir Ashwyn">
       <img src="https://www.loberon.fr/media/f7/07/41/1766024293/254980_26183-1-1.jpg?ts=1786328903" alt="Miroir Ashwyn — LOBERON" loading="lazy">
     </a>
@@ -483,7 +551,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir ashwyn loberon miroir décoration cadre mural">
+  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir ashwyn loberon miroir décoration cadre mural" data-shop-color="blanc-creme" data-shop-color-label="blanc vieilli">
     <a class="compact-product-image" href="produit-ashwyn-26150.html" aria-label="Voir Miroir Ashwyn">
       <img src="https://www.loberon.fr/media/31/5a/d6/1766024270/253388_26150-5-1.jpg?ts=1786328888" alt="Miroir Ashwyn — LOBERON" loading="lazy">
     </a>
@@ -494,7 +562,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir montcelin loberon miroir décoration cadre mural">
+  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir montcelin loberon miroir décoration cadre mural" data-shop-color="blanc-creme" data-shop-color-label="blanc vieilli">
     <a class="compact-product-image" href="produit-montcelin.html" aria-label="Voir Miroir Montcelin">
       <img src="https://www.loberon.fr/media/d8/32/7a/1747705769/237879_25317-5-1.jpg?ts=1786328451" alt="Miroir Montcelin — LOBERON" loading="lazy">
     </a>
@@ -505,7 +573,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir mural tavreen loberon miroir décoration cadre mural">
+  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir mural tavreen loberon miroir décoration cadre mural" data-shop-color="gris-noir" data-shop-color-label="noir vieilli">
     <a class="compact-product-image" href="produit-tavreen.html" aria-label="Voir Miroir mural Tavreen">
       <img src="https://www.loberon.fr/media/80/f5/fb/1781230606/271581_27413-1-1.jpg?ts=1786329622" alt="Miroir mural Tavreen — LOBERON" loading="lazy">
     </a>
@@ -516,7 +584,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir mural alenasse loberon miroir décoration cadre mural">
+  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir mural alenasse loberon miroir décoration cadre mural" data-shop-color="beige-naturel" data-shop-color-label="beige vieilli">
     <a class="compact-product-image" href="produit-alenasse.html" aria-label="Voir Miroir mural Alenasse">
       <img src="https://www.loberon.fr/media/99/22/96/1779241995/269163_27343-3-1.jpg?ts=1786329583" alt="Miroir mural Alenasse — LOBERON" loading="lazy">
     </a>
@@ -538,7 +606,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir zilvento loberon miroir décoration cadre mural">
+  <article class="shop-card compact-product-card" data-shop-category="decoration" data-shop-search="miroir zilvento loberon miroir décoration cadre mural" data-shop-color="blanc-creme marron" data-shop-color-label="blanc vieilli/marron">
     <a class="compact-product-image" href="produit-zilvento.html" aria-label="Voir Miroir Zilvento">
       <img src="https://www.loberon.fr/media/7e/8b/74/1738309965/227028_25058-5-1.jpg?ts=1786328339" alt="Miroir Zilvento — LOBERON" loading="lazy">
     </a>
@@ -548,7 +616,7 @@
       <a class="compact-product-button" href="produit-zilvento.html">Voir le produit</a>
     </div>
   </article>
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="coussin fuzzletop loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="coussin fuzzletop loberon enfant petit chambre textile coussin plaid" data-shop-color="beige-naturel" data-shop-color-label="beige">
     <a class="compact-product-image" href="produit-fuzzletop.html" aria-label="Voir Coussin Fuzzletop">
       <img src="https://www.loberon.fr/media/2c/63/5d/1765938176/254808_26468-3-1.jpg?ts=1785896239" alt="Coussin Fuzzletop — LOBERON" loading="lazy">
     </a>
@@ -559,7 +627,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="lot de 2 coussins jollymoon loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="lot de 2 coussins jollymoon loberon enfant petit chambre textile coussin plaid" data-shop-color="blanc-creme" data-shop-color-label="crème">
     <a class="compact-product-image" href="produit-jollymoon.html" aria-label="Voir Lot de 2 coussins Jollymoon">
       <img src="https://www.loberon.fr/media/81/42/12/1757645756/246758_25601-22-3.jpg?ts=1785895784" alt="Lot de 2 coussins Jollymoon — LOBERON" loading="lazy">
     </a>
@@ -570,7 +638,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="plaid sovilex loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="plaid sovilex loberon enfant petit chambre textile coussin plaid" data-shop-color="vert" data-shop-color-label="vert">
     <a class="compact-product-image" href="produit-sovilex.html" aria-label="Voir Plaid Sovilex">
       <img src="https://www.loberon.fr/media/4f/67/c1/1757646064/246905_25897-8-25.jpg?ts=1785895930" alt="Plaid Sovilex — LOBERON" loading="lazy">
     </a>
@@ -581,7 +649,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="parure de lit starwhisper loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="parure de lit starwhisper loberon enfant petit chambre textile coussin plaid" data-shop-color="bleu jaune-dore" data-shop-color-label="bleu/doré">
     <a class="compact-product-image" href="produit-starwhisper.html" aria-label="Voir Parure de lit Starwhisper">
       <img src="https://www.loberon.fr/media/d1/ef/f9/1757646101/246773_25932-6-11.jpg?ts=1785895946" alt="Parure de lit Starwhisper — LOBERON" loading="lazy">
     </a>
@@ -592,7 +660,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="plaid et coussin puddlebrook loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="plaid et coussin puddlebrook loberon enfant petit chambre textile coussin plaid" data-shop-color="vert" data-shop-color-label="vert">
     <a class="compact-product-image" href="produit-puddlebrook.html" aria-label="Voir Plaid et coussin Puddlebrook">
       <img src="https://www.loberon.fr/media/9f/20/43/1765938110/254763_26370-8-1.jpg?ts=1785896184" alt="Plaid et coussin Puddlebrook — LOBERON" loading="lazy">
     </a>
@@ -603,7 +671,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="plaid palerina loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="plaid palerina loberon enfant petit chambre textile coussin plaid" data-shop-color="blanc-creme vert jaune-dore" data-shop-color-label="jaune/vert/crème">
     <a class="compact-product-image" href="produit-palerina-plaid.html" aria-label="Voir Plaid Palerina">
       <img src="https://www.loberon.fr/media/3e/bb/45/1739174166/231547_24803-22-25.jpg?ts=1785895494" alt="Plaid Palerina — LOBERON" loading="lazy">
     </a>
@@ -614,7 +682,7 @@
     </div>
   </article>
 
-  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="lot de 2 polochons palerina loberon enfant petit chambre textile coussin plaid">
+  <article class="shop-card compact-product-card" data-shop-category="petits" data-shop-search="lot de 2 polochons palerina loberon enfant petit chambre textile coussin plaid" data-shop-color="blanc-creme jaune-dore" data-shop-color-label="crème/jaune">
     <a class="compact-product-image" href="produit-palerina-polochons.html" aria-label="Voir Lot de 2 polochons Palerina">
       <img src="https://www.loberon.fr/media/0a/2a/26/1739431968/232357_24895-22-1.jpg?ts=1785895532" alt="Lot de 2 polochons Palerina — LOBERON" loading="lazy">
     </a>
@@ -676,41 +744,72 @@
 <script>
 (() => {
   const filters = [...document.querySelectorAll('.shop-filter')];
+  const grid = document.getElementById('shop-products');
   const cards = [...document.querySelectorAll('.shop-card')];
+  const originalOrder = new Map(cards.map((card, i) => [card, i]));
   const emptyState = document.querySelector('.shop-empty-state');
-  const toggle = document.querySelector('.shop-search-toggle');
-  const box = document.getElementById('shop-search-box');
-  const input = document.getElementById('shop-search-input');
-  const clear = document.getElementById('shop-search-clear');
-  const count = document.getElementById('shop-search-count');
+
+  const searchToggle = document.querySelector('.shop-search-toggle');
+  const searchBox = document.getElementById('shop-search-box');
+  const searchInput = document.getElementById('shop-search-input');
+  const searchClear = document.getElementById('shop-search-clear');
+  const searchCount = document.getElementById('shop-search-count');
+
+  const visibleCount = document.getElementById('shop-visible-count');
+  const sortToggle = document.getElementById('shop-sort-toggle');
+  const sortPanel = document.getElementById('shop-sort-panel');
+  const colorFilter = document.getElementById('shop-color-filter');
+  const priceSort = document.getElementById('shop-price-sort');
+  const resetFilters = document.getElementById('shop-reset-filters');
+
   let activeFilter = 'all';
 
   const normalize = value => (value || '')
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\\u0300-\\u036f]/g, '');
+    .replace(/[\u0300-\u036f]/g, '');
+
+  const priceOf = card => {
+    const value = card.querySelector('.compact-product-price')?.textContent || '';
+    const match = value.replace(/\s/g, '').replace(',', '.').match(/[\d.]+/);
+    return match ? parseFloat(match[0]) : Number.POSITIVE_INFINITY;
+  };
 
   function applyShopFilters() {
-    const query = normalize(input ? input.value.trim() : '');
+    const query = normalize(searchInput ? searchInput.value.trim() : '');
+    const chosenColor = colorFilter?.value || 'all';
     let visible = 0;
 
     cards.forEach(card => {
-      const categories = (card.dataset.shopCategory || '').split(/\\s+/);
+      const categories = (card.dataset.shopCategory || '').split(/\s+/);
       const categoryMatch = activeFilter === 'all' || categories.includes(activeFilter);
       const searchable = normalize((card.dataset.shopSearch || '') + ' ' + card.textContent);
       const textMatch = !query || searchable.includes(query);
-      const show = categoryMatch && textMatch;
+      const colors = (card.dataset.shopColor || '').split(/\s+/).filter(Boolean);
+      const colorMatch = chosenColor === 'all' || colors.includes(chosenColor);
+      const show = categoryMatch && textMatch && colorMatch;
       card.hidden = !show;
       if (show) visible++;
     });
 
-    if (emptyState) emptyState.hidden = cards.length > 0 && visible > 0;
+    const sortMode = priceSort?.value || 'default';
+    const sorted = [...cards].sort((a, b) => {
+      if (sortMode === 'asc') return priceOf(a) - priceOf(b);
+      if (sortMode === 'desc') return priceOf(b) - priceOf(a);
+      return originalOrder.get(a) - originalOrder.get(b);
+    });
+    sorted.forEach(card => grid?.appendChild(card));
 
-    if (count) {
-      if (!query) count.textContent = '';
-      else count.textContent = visible === 0
-        ? 'Aucun résultat pour cette recherche.'
-        : `${visible} résultat${visible > 1 ? 's' : ''}`;
+    if (emptyState) emptyState.hidden = visible > 0;
+
+    if (visibleCount) {
+      visibleCount.textContent = `${visible} article${visible > 1 ? 's' : ''}`;
+    }
+
+    if (searchCount) {
+      searchCount.textContent = query
+        ? (visible === 0 ? 'Aucun résultat pour cette recherche.' : `${visible} résultat${visible > 1 ? 's' : ''}`)
+        : '';
     }
   }
 
@@ -722,26 +821,50 @@
     });
   });
 
-  if (toggle && box && input) {
-    toggle.addEventListener('click', () => {
-      const opening = box.hasAttribute('hidden');
+  if (searchToggle && searchBox && searchInput) {
+    searchToggle.addEventListener('click', () => {
+      const opening = searchBox.hasAttribute('hidden');
       if (opening) {
-        box.removeAttribute('hidden');
-        toggle.setAttribute('aria-expanded', 'true');
-        setTimeout(() => input.focus(), 0);
+        searchBox.removeAttribute('hidden');
+        searchToggle.setAttribute('aria-expanded', 'true');
+        setTimeout(() => searchInput.focus(), 0);
       } else {
-        box.setAttribute('hidden', '');
-        toggle.setAttribute('aria-expanded', 'false');
+        searchBox.setAttribute('hidden', '');
+        searchToggle.setAttribute('aria-expanded', 'false');
       }
     });
-
-    input.addEventListener('input', applyShopFilters);
-    clear?.addEventListener('click', () => {
-      input.value = '';
+    searchInput.addEventListener('input', applyShopFilters);
+    searchClear?.addEventListener('click', () => {
+      searchInput.value = '';
       applyShopFilters();
-      input.focus();
+      searchInput.focus();
     });
   }
+
+  sortToggle?.addEventListener('click', () => {
+    const opening = sortPanel?.hasAttribute('hidden');
+    if (!sortPanel) return;
+    if (opening) sortPanel.removeAttribute('hidden');
+    else sortPanel.setAttribute('hidden', '');
+    sortToggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', event => {
+    if (!sortPanel || !sortToggle) return;
+    if (!sortPanel.contains(event.target) && !sortToggle.contains(event.target)) {
+      sortPanel.setAttribute('hidden', '');
+      sortToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  colorFilter?.addEventListener('change', applyShopFilters);
+  priceSort?.addEventListener('change', applyShopFilters);
+
+  resetFilters?.addEventListener('click', () => {
+    if (colorFilter) colorFilter.value = 'all';
+    if (priceSort) priceSort.value = 'default';
+    applyShopFilters();
+  });
 
   applyShopFilters();
 })();
