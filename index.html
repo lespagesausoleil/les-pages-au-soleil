@@ -1,173 +1,41 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Les Pages au Soleil — magazine de lecture, décoration chaleureuse et slow living.">
-  <title>Les Pages au Soleil</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="editorial-topbar">
-  <span>☀</span>
-  <p>Magazine d’inspiration pour un quotidien plus doux et des intérieurs qui racontent une histoire.</p>
-  <a href="#newsletter">Newsletter</a>
-</div>
-<header class="site-header">
-  <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
-  <button class="menu-btn" aria-label="Ouvrir le menu">☰</button>
-  <nav class="main-nav">
-    <a href="rubrique-lecture.html">Lecture</a>
-    <a href="rubrique-coin-lecture.html">Coin lecture</a>
-    <a href="rubrique-decoration.html">Décoration</a>
-    <a href="rubrique-slow-living.html">Slow living</a>
-    <a href="coups-de-coeur.html">Coups de cœur</a>
-    <a href="articles.html">Tous les articles</a>
-    <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
-    <a href="#apropos">À propos</a>
-    <a class="social-nav" href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
-    <a class="social-nav" href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
-  </nav>
-</header>
-
-<div class="search-overlay" id="search-overlay" hidden>
-  <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
-    <button class="search-close" type="button" aria-label="Fermer">×</button>
-    <p class="kicker">Recherche</p>
-    <h2 id="search-title">Que souhaitez-vous découvrir ?</h2>
-    <input id="site-search" type="search" placeholder="Ex. coin lecture, lampe, cadeau…">
-    <div id="search-results" class="search-results"></div>
-  </div>
-</div>
-
-
-
-<main>
-  <section class="compact-hero">
-    <div class="compact-hero-copy">
-      <p class="kicker">Magazine d’inspiration</p>
-      <h1>Un intérieur doux.<br>Des lectures qui restent.</h1>
-      <p>Des idées, des conseils et des inspirations pour créer des espaces chaleureux, retrouver le plaisir de lire et ralentir sans culpabiliser.</p>
-      <div class="actions">
-        <a class="btn primary" href="articles.html">Découvrir les articles</a>
-        <a class="btn secondary" href="coups-de-coeur.html">Nos coups de cœur ♡</a>
-      </div>
-    </div>
-    <div class="compact-hero-photo">
-      <img src="assets/hero-accueil.jpg" alt="Coin lecture chaleureux avec fauteuil, bibliothèque et lumière dorée">
-      <span>☀ Un refuge pour lire, rêver et ralentir.</span>
-    </div>
-  </section>
-
-<section class="editorial-spotlight">
-  <div class="spotlight-copy">
-    <p class="kicker">Le choix de la rédaction</p>
-    <h2>Créer un coin lecture où l’on oublie naturellement l’heure.</h2>
-    <p>Une sélection de gestes simples, de belles matières et de lumières douces pour transformer un petit espace en véritable refuge.</p>
-    <a class="btn primary" href="articles/coin-lecture-cocooning.html">Lire le dossier</a>
-  </div>
-  <div class="spotlight-image">
-    <img src="assets/coin-lecture.jpg" alt="Fauteuil de lecture chaleureux avec plaid et lampe">
-    <span>8 min de lecture</span>
-  </div>
-</section>
-
-
-  <section class="homepage-section">
-    <div class="homepage-heading">
-      <h2>À la une</h2>
-      <a href="articles.html">Voir tous les articles →</a>
-    </div>
-    <div class="headline-grid">
-      <a class="headline-card" href="articles/coin-lecture-cocooning.html">
-        <img src="assets/coin-lecture.jpg" alt="">
-        <div><small>Coin lecture</small><h3>Comment créer un coin lecture cosy chez soi</h3><p>◷ 8 min de lecture</p></div>
-      </a>
-      <a class="headline-card" href="articles/rituel-dimanche.html">
-        <img src="assets/slow-living.jpg" alt="">
-        <div><small>Slow living</small><h3>Le rituel du dimanche qui change tout</h3><p>◷ 6 min de lecture</p></div>
-      </a>
-      <a class="headline-card" href="articles/decorer-bibliotheque.html">
-        <img src="assets/decoration.jpg" alt="">
-        <div><small>Décoration</small><h3>Décorer sa bibliothèque avec élégance</h3><p>◷ 7 min de lecture</p></div>
-      </a>
-      <a class="headline-card" href="coups-de-coeur.html">
-        <img src="assets/guides-achat.jpg" alt="">
-        <div><small>Coups de cœur</small><h3>Nos sélections préférées pour lire et ralentir</h3><p>◷ 5 min de lecture</p></div>
-      </a>
-      <a class="headline-card" href="articles/romans-automne.html">
-        <img src="assets/hero-accueil.jpg" alt="">
-        <div><small>Lecture</small><h3>15 romans parfaits pour l’automne</h3><p>◷ 9 min de lecture</p></div>
-      </a>
-    </div>
-  </section>
-
-  <section class="homepage-section">
-    <div class="homepage-heading">
-      <h2>Explorer par thématique</h2>
-      <a href="articles.html">Toutes les thématiques →</a>
-    </div>
-    <div class="theme-grid">
-      <a href="rubrique-lecture.html" class="theme-card"><img src="assets/hero-accueil.jpg" alt=""><span>📖<strong>Lecture</strong><small>Articles</small></span></a>
-      <a href="rubrique-coin-lecture.html" class="theme-card"><img src="assets/coin-lecture.jpg" alt=""><span>🪑<strong>Coin lecture</strong><small>Articles</small></span></a>
-      <a href="rubrique-decoration.html" class="theme-card"><img src="assets/decoration.jpg" alt=""><span>🌿<strong>Décoration</strong><small>Articles</small></span></a>
-      <a href="rubrique-slow-living.html" class="theme-card"><img src="assets/slow-living.jpg" alt=""><span>🍃<strong>Slow living</strong><small>Articles</small></span></a>
-      <a href="coups-de-coeur.html" class="theme-card"><img src="assets/guides-achat.jpg" alt=""><span>♡<strong>Coups de cœur</strong><small>Guides & sélections</small></span></a>
-    </div>
-  </section>
-
-  <section id="newsletter" class="mail-strip">
-    <div class="mail-icon">✉</div>
-    <div class="mail-copy">
-      <h2>Une pause inspirante dans votre boîte mail</h2>
-      <p>Recevez chaque semaine des idées, des lectures et des conseils pour un quotidien plus doux.</p>
-    </div>
-    <div class="brevo-newsletter">
-  <iframe
-    width="540"
-    height="410"
-    src="https://89b5b955.sibforms.com/v2/serve/MUIFAK397L3KyNOrK2d0EhH-vnCLs3fjp1UHEiQSvzAohqjuc8cmhhxNzs96j3-FOM25ohlyPLNkuCNeVPYZy3yd_IMANqgRqlPLp_m_BVijN3MkRyX6A-S9kx4w_B1f1Y7IJm9XuGqEZrz0NZuSnFdo0r5UpW4x4vhamlQ4Ha4TiWTz6z8HRk2aKCrhLwg9UZ7w5qfwnmIuQVZrTQ=="
-    frameborder="0"
-    scrolling="auto"
-    allowfullscreen
-    title="Inscription à la newsletter Les Pages au Soleil"
-    style="display:block;margin:0 auto;width:100%;max-width:540px;border:0;">
-  </iframe>
-</div> 
-  </section>
-</main>
-
-
-
-<footer class="premium-footer">
-  <div class="footer-brand">
-    <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
-    <p>Magazine indépendant autour de la lecture, de la décoration chaleureuse et du slow living.</p>
-  </div>
-  <div class="footer-column">
-    <h3>Explorer</h3>
-    <a href="rubrique-lecture.html">Lecture</a>
-    <a href="rubrique-decoration.html">Décoration</a>
-    <a href="rubrique-slow-living.html">Slow living</a>
-    <a href="articles.html">Tous les articles</a>
-  </div>
-  <div class="footer-column">
-    <h3>Suivre</h3>
-    <a href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
-    <a href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
-  </div>
-  <div class="footer-column">
-    <h3>Informations</h3>
-    <a href="contact.html">Contact</a>
-    <a href="mentions-legales.html">Mentions légales</a>
-    <a href="confidentialite.html">Confidentialité</a>
-  </div>
-  <p class="copyright">© 2026 Les Pages au Soleil</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La Boutique — Les Pages au Soleil</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="wrap"><header class="brand"><h1>☀️ Les Pages au Soleil</h1><p>La Boutique · Plaids & accessoires pour ralentir un peu.</p></header>
+<main class="grid"><article class="card">
+      <a href="produits/marpent.html"><div class="visual"><img src="https://www.loberon.fr/media/1984x1984x2/69/67/bc/1735876674/225374_20694-4-25/225374_plaid_marpent_creme_grau.jpg?ts=1785894417" alt="Plaid Marpent" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Marpent</h2>
+      <div class="price">34,95 €</div><p class="desc">Un plaid en coton aux tons crème et gris, parfait pour réchauffer un coin lecture.</p>
+      <a class="btn" href="produits/marpent.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/ensis.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Ensis-19238-3-1.html" alt="Plaid Ensis" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Ensis</h2>
+      <div class="price">39,95 €</div><p class="desc">Un plaid en pur coton au motif ornemental élégant, doux et intemporel.</p>
+      <a class="btn" href="produits/ensis.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/linares.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Linares-20714-22-25.html" alt="Plaid Linares" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Linares</h2>
+      <div class="price">54,95 €</div><p class="desc">Coton naturel, relief tufté et pompons décoratifs pour une ambiance douce et bohème.</p>
+      <a class="btn" href="produits/linares.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/kerenza.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Kerenza-27331-22-25.html" alt="Plaid Kerenza" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Kerenza</h2>
+      <div class="price">54,95 €</div><p class="desc">Une pièce textile chaleureuse choisie pour son esprit naturel et décoratif.</p>
+      <a class="btn" href="produits/kerenza.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/arsalan.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Arsalan-24602-22-1.html" alt="Plaid Arsalan" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Arsalan</h2>
+      <div class="price">39,95 €</div><p class="desc">Un plaid en coton texturé aux détails tuftés, chaleureux et plein de caractère.</p>
+      <a class="btn" href="produits/arsalan.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/ocevara.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Ocevara-26680-6-25.html" alt="Plaid Ocevara" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Ocevara</h2>
+      <div class="price">59,95 €</div><p class="desc">Un plaid décoratif aux nuances douces, idéal pour une atmosphère de maison de vacances.</p>
+      <a class="btn" href="produits/ocevara.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/amberley.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Amberley-15209-8-1.html" alt="Plaid Amberley" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Amberley</h2>
+      <div class="price">68,95 €</div><p class="desc">Un plaid chaleureux et élégant pour apporter une note cosy au salon ou à la chambre.</p>
+      <a class="btn" href="produits/amberley.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/belvienne.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Belvienne-24972-2-25.html" alt="Plaid Belvienne" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Belvienne</h2>
+      <div class="price">59,95 €</div><p class="desc">Pur coton, toucher doux et motif de roses : une touche romantique sans en faire trop.</p>
+      <a class="btn" href="produits/belvienne.html">Voir le produit</a></div></article><article class="card">
+      <a href="produits/ancy.html"><div class="visual"><img src="https://image.thum.io/get/width/900/crop/900/noanimate/https://www.loberon.fr/Textiles/Plaids-et-couvertures/Plaid-Ancy-21811-6-25.html" alt="Plaid Ancy" loading="lazy"></div></a>
+      <div class="cardbody"><div class="eyebrow">PLAIDS & ACCESSOIRES</div><h2>Plaid Ancy</h2>
+      <div class="price">59,95 €</div><p class="desc">Un plaid tricoté en pur coton, doux et moelleux, fait pour les longues pauses lecture.</p>
+      <a class="btn" href="produits/ancy.html">Voir le produit</a></div></article></main>
+<footer>Les Pages au Soleil · Sélection éditoriale de produits affiliés</footer></div></body></html>
