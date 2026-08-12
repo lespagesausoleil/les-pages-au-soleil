@@ -16,8 +16,9 @@ async function synchroniserPrixBoutique() {
       const doc = new DOMParser().parseFromString(html, "text/html");
       const prixFiche = doc.querySelector(".product-detail-price");
 
-      if (prixFiche && prixFiche.textContent.trim()) {
-        prixCarte.textContent = prixFiche.textContent.trim();
+      if (prixFiche) {
+  prixCarte.innerHTML = prixFiche.innerHTML;
+}
       }
     } catch (error) {
       console.error("Erreur synchronisation prix :", error);
