@@ -10,7 +10,7 @@ async function chargerProduitsAwin() {
 
     const csv = await response.text();
 
-    console.log("Flux Awin chargé :", csv.slice(0, 500));
+    console.log(csv);
 
   } catch (error) {
     console.error("Erreur chargement Awin :", error);
