@@ -1719,3 +1719,9 @@ body{
 @media(max-width:760px){
   .compact-product-name{font-size:.98rem}
 }
+.compact-product-price del,
+.compact-product-price s {
+  text-decoration: line-through;
+  opacity: 0.65;
+  margin-left: 0.35rem;
+}
