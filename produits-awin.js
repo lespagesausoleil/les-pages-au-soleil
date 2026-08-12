@@ -1,20 +1,28 @@
-async function chargerProduitsAwin() {
-  try {
-    const response = await fetch(
-      "https://misty-paper-79b5.lespagesausoleil.workers.dev/produits"
-    );
+async function synchroniserPrixBoutique() {
+  const cartes = document.querySelectorAll(".shop-card");
 
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP ${response.status}`);
+  for (const carte of cartes) {
+    try {
+      const lienFiche = carte.querySelector('a[href^="produit-"]');
+      const prixCarte = carte.querySelector(".compact-product-price");
+
+      if (!lienFiche || !prixCarte) continue;
+
+      const response = await fetch(lienFiche.getAttribute("href"));
+
+      if (!response.ok) continue;
+
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const prixFiche = doc.querySelector(".product-detail-price");
+
+      if (prixFiche && prixFiche.textContent.trim()) {
+        prixCarte.textContent = prixFiche.textContent.trim();
+      }
+    } catch (error) {
+      console.error("Erreur synchronisation prix :", error);
     }
-
-    const csv = await response.text();
-
-    console.log(csv);
-
-  } catch (error) {
-    console.error("Erreur chargement Awin :", error);
   }
 }
 
-chargerProduitsAwin();
+document.addEventListener("DOMContentLoaded", synchroniserPrixBoutique);
