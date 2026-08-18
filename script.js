@@ -180,3 +180,236 @@ document.querySelectorAll('.shop-filter').forEach(button => {
     });
   });
 });
+
+// Synchronisation globale Awin — Boutique + fiches produit
+(() => {
+  const WORKER_URL = "https://awin-sync.lespagesausoleil.workers.dev/";
+
+  const PRODUCT_IDS = {
+    "produit-bande-beige.html": "56050559385974",
+    "produit-ligne-etoiles.html": "55389605790070",
+
+    "produit-tapis-amara.html": "0fdca1798ca6424fa7784702b0ee7f40",
+    "produit-tapis-warella.html": "1283a88dcc6a485698fe22b59ad47032",
+    "produit-tapis-solina.html": "019a5d1f9318716eb76eb99bb36c96dd",
+    "produit-tapis-ostenza.html": "1d229e89660f4fbc8f1a823753c00c35",
+
+    "produit-plaid-marpent.html": "20694-22-25",
+    "produit-plaid-ensis.html": "19238-3-1",
+    "produit-plaid-linares.html": "20714-22-25",
+    "produit-plaid-kerenza.html": "27331-22-25",
+    "produit-plaid-arsalan.html": "24602-22-1",
+    "produit-plaid-ocevara.html": "26680-6-25",
+    "produit-plaid-amberley.html": "15209-8-1",
+    "produit-plaid-belvienne.html": "24972-2-25",
+    "produit-plaid-ancy.html": "21811-6-25",
+
+    "produit-maerlinna.html": "27368-22-36",
+    "produit-junniper.html": "27223-22-12",
+    "produit-indra.html": "18180-5-1",
+    "produit-elomiane.html": "27312-5-12",
+    "produit-clemencies.html": "27432-2-1",
+    "produit-garavine.html": "27217-26-12",
+    "produit-ulderina.html": "27139-1-1",
+    "produit-floremont.html": "26401-22-12",
+    "produit-lunavine.html": "26165-22-3",
+    "produit-dunlora.html": "25718-22-1",
+    "produit-ysilda.html": "27038-6-12",
+    "produit-solviana.html": "26007-4-12",
+    "produit-cabinda.html": "23515-26-3",
+    "produit-armidale.html": "25011-5-12",
+    "produit-floraine.html": "26832-3-12",
+    "produit-rousseline.html": "24769-22-12",
+    "produit-malencio.html": "25509-22-1",
+
+    "produit-flavin.html": "20466-2-1",
+    "produit-lagia.html": "23387-2-1",
+    "produit-lomera.html": "26469-5-1",
+    "produit-chexbres.html": "23319-2-1",
+    "produit-oxcroft.html": "1695321",
+    "produit-volanais.html": "26920-2-1",
+    "produit-cornell.html": "13907-5-1",
+    "produit-cortney.html": "1390921",
+
+    "produit-ashwyn-26183.html": "26183-1-1",
+    "produit-ashwyn-26150.html": "26150-5-1",
+    "produit-montcelin.html": "25317-5-1",
+    "produit-tavreen.html": "27413-1-1",
+    "produit-alenasse.html": "27343-3-1",
+    "produit-anthe.html": "23691-18-1",
+    "produit-zilvento.html": "25058-5-1",
+
+    "produit-fuzzletop.html": "26468-3-1",
+    "produit-jollymoon.html": "25601-22-3",
+    "produit-sovilex.html": "25897-8-25",
+    "produit-starwhisper.html": "25932-6-11",
+    "produit-puddlebrook.html": "26370-8-1",
+    "produit-palerina-plaid.html": "24803-22-25",
+    "produit-palerina-polochons.html": "24895-22-1"
+  };
+
+  const currentFile = () => {
+    const file = window.location.pathname.split('/').pop();
+    return file || 'index.html';
+  };
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(
+      String(value || '').replace(',', '.')
+    );
+
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  async function fetchProducts(ids) {
+    const uniqueIds = [
+      ...new Set(ids.filter(Boolean))
+    ];
+
+    if (!uniqueIds.length) return {};
+
+    const response = await fetch(
+      `${WORKER_URL}?ids=${encodeURIComponent(
+        uniqueIds.join(',')
+      )}`
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Awin HTTP ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+
+    if (!data.ok) {
+      throw new Error(
+        data.error || 'Réponse Awin invalide'
+      );
+    }
+
+    return data.products || {};
+  }
+
+  function updateRoot(root, product) {
+    if (!root || !product) return;
+
+    const price = formatPrice(
+      product.price,
+      product.currency
+    );
+
+    if (price) {
+      root.querySelectorAll(
+        '.compact-product-price, .product-detail-price, [data-awin-price]'
+      ).forEach(el => {
+        el.textContent = price;
+      });
+    }
+
+    if (product.affiliateUrl) {
+      root.querySelectorAll(
+        '.product-affiliate-button, [data-awin-affiliate]'
+      ).forEach(link => {
+        if (link.tagName === 'A') {
+          link.href = product.affiliateUrl;
+        }
+      });
+    }
+  }
+
+  async function syncAwinEverywhere() {
+    try {
+      const cards = [
+        ...document.querySelectorAll('.shop-card')
+      ];
+
+      const cardEntries = [];
+
+      cards.forEach(card => {
+        const link = card.querySelector(
+          'a[href*="produit-"][href$=".html"]'
+        );
+
+        if (!link) return;
+
+        const file = link
+          .getAttribute('href')
+          .split('/')
+          .pop();
+
+        const id = PRODUCT_IDS[file];
+
+        if (!id) return;
+
+        cardEntries.push({
+          card,
+          id
+        });
+      });
+
+      const pageFile = currentFile();
+      const pageId = PRODUCT_IDS[pageFile];
+
+      const ids = cardEntries.map(
+        entry => entry.id
+      );
+
+      if (pageId) {
+        ids.push(pageId);
+      }
+
+      const products =
+        await fetchProducts(ids);
+
+      cardEntries.forEach(
+        ({ card, id }) => {
+          if (products[id]) {
+            updateRoot(
+              card,
+              products[id]
+            );
+          }
+        }
+      );
+
+      if (
+        pageId &&
+        products[pageId]
+      ) {
+        const detail =
+          document.querySelector(
+            '.product-detail'
+          ) ||
+          document.body;
+
+        updateRoot(
+          detail,
+          products[pageId]
+        );
+      }
+
+    } catch (error) {
+      console.error(
+        'Synchronisation globale Awin :',
+        error
+      );
+    }
+  }
+
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      syncAwinEverywhere
+    );
+  } else {
+    syncAwinEverywhere();
+  }
+})();
