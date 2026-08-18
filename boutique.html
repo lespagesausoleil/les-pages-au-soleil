@@ -956,5 +956,48 @@
   applyShopFilters();
 })();
 </script>
+  <script>
+(async () => {
+  const WORKER_URL = "https://awin-sync.lespagesausoleil.workers.dev/";
+
+  const cards = document.querySelectorAll("[data-awin-product-id]");
+
+  for (const card of cards) {
+    try {
+      const productId = card.dataset.awinProductId;
+      const priceElement =
+        card.querySelector("[data-awin-price]") ||
+        card.querySelector(".compact-product-price");
+
+      if (!productId || !priceElement) continue;
+
+      const response = await fetch(
+        `${WORKER_URL}?id=${encodeURIComponent(productId)}`
+      );
+
+      if (!response.ok) continue;
+
+      const product = await response.json();
+
+      if (!product.ok || !product.price) continue;
+
+      const price = Number(
+        String(product.price).replace(",", ".")
+      );
+
+      if (!Number.isFinite(price)) continue;
+
+      priceElement.textContent =
+        new Intl.NumberFormat("fr-FR", {
+          style: "currency",
+          currency: product.currency || "EUR"
+        }).format(price);
+
+    } catch (error) {
+      console.error("Erreur synchronisation Awin :", error);
+    }
+  }
+})();
+</script>
 </body>
 </html>
