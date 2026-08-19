@@ -188,6 +188,7 @@ document.querySelectorAll('.shop-filter').forEach(button => {
   const PRODUCT_IDS = {
     "produit-bande-beige.html": "56050559385974",
     "produit-ligne-etoiles.html": "55389605790070",
+    "produit-fauteuil-tago.html": "100036673",
 
     "produit-tapis-amara.html": "0fdca1798ca6424fa7784702b0ee7f40",
     "produit-tapis-warella.html": "1283a88dcc6a485698fe22b59ad47032",
