@@ -195,6 +195,7 @@ document.querySelectorAll('.shop-filter').forEach(button => {
     "produit-tapis-ostenza.html": "1d229e89660f4fbc8f1a823753c00c35",
 
     "produit-fauteuil-seraluna.html": "26295-22-1",
+    "produit-fauteuil-ducan-malmo.html": "0093054",
 
     "produit-plaid-marpent.html": "20694-22-25",
     "produit-plaid-ensis.html": "19238-3-1",
