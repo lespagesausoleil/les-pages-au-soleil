@@ -1725,3 +1725,16 @@ body{
   opacity: 0.65;
   margin-left: 0.35rem;
 }
+
+/* Carte produit article — label au-dessus de l'image */
+.product-image-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.product-image-wrap .article-product-image {
+  display: block;
+  margin: 0 auto;
+}
