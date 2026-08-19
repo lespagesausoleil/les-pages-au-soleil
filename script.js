@@ -194,6 +194,8 @@ document.querySelectorAll('.shop-filter').forEach(button => {
     "produit-tapis-solina.html": "019a5d1f9318716eb76eb99bb36c96dd",
     "produit-tapis-ostenza.html": "1d229e89660f4fbc8f1a823753c00c35",
 
+    "produit-fauteuil-seraluna.html": "26295-22-1",
+
     "produit-plaid-marpent.html": "20694-22-25",
     "produit-plaid-ensis.html": "19238-3-1",
     "produit-plaid-linares.html": "20714-22-25",
