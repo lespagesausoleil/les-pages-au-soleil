@@ -235,6 +235,8 @@ document.querySelectorAll('.shop-filter').forEach(button => {
     "produit-volanais.html": "26920-2-1",
     "produit-cornell.html": "13907-5-1",
     "produit-cortney.html": "1390921",
+    "produit-lampe-elegance.html": "48838639517924",
+    "produit-lampe-nomade-3-ambiances.html": "48846264369380",
 
     "produit-ashwyn-26183.html": "26183-1-1",
     "produit-ashwyn-26150.html": "26150-5-1",
