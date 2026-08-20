@@ -1035,8 +1035,23 @@
   const priceSort = document.getElementById('shop-price-sort');
   const resetFilters = document.getElementById('shop-reset-filters');
 
-  let activeFilter = 'all';
+const params = new URLSearchParams(window.location.search);
+const requestedFilter = params.get('categorie');
 
+const availableFilters = filters.map(
+  button => button.dataset.shopFilter
+);
+
+let activeFilter = availableFilters.includes(requestedFilter)
+  ? requestedFilter
+  : 'all';
+
+filters.forEach(button => {
+  button.classList.toggle(
+    'is-active',
+    button.dataset.shopFilter === activeFilter
+  );
+});
   const normalize = value => (value || '')
     .toLowerCase()
     .normalize('NFD')
