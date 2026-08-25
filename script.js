@@ -61,21 +61,61 @@ if (searchOpen && searchOverlay) {
   });
 }
 
-const articleFilter = document.querySelector('#article-filter');
-if (articleFilter) {
+// Page Articles — sous-menu catégories + recherche combinée
+(() => {
+  const articleFilter = document.querySelector('#article-filter');
   const cards = [...document.querySelectorAll('.listing-card')];
+  const categoryButtons = [...document.querySelectorAll('[data-category-filter]')];
   const emptyState = document.querySelector('#empty-state');
-  articleFilter.addEventListener('input', () => {
-    const q = articleFilter.value.trim().toLowerCase();
+
+  if (!cards.length || (!articleFilter && !categoryButtons.length)) return;
+
+  let activeCategory = '';
+
+  function applyArticleFilters() {
+    const q = (articleFilter?.value || '').trim().toLowerCase();
     let visible = 0;
+
     cards.forEach(card => {
-      const match = `${card.dataset.title} ${card.dataset.category}`.includes(q);
-      card.hidden = !match;
-      if (match) visible++;
+      const title = (card.dataset.title || '').toLowerCase();
+      const category = (card.dataset.category || '').toLowerCase();
+
+      const matchesSearch = !q || `${title} ${category}`.includes(q);
+      const matchesCategory = !activeCategory || category === activeCategory;
+
+      const show = matchesSearch && matchesCategory;
+      card.hidden = !show;
+
+      if (show) visible++;
     });
-    if (emptyState) emptyState.hidden = visible !== 0;
+
+    if (emptyState) {
+      emptyState.hidden = visible !== 0;
+    }
+  }
+
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const requestedCategory = (button.dataset.categoryFilter || '').toLowerCase();
+
+      // Un second clic sur l'onglet actif revient à l'affichage de tous les articles.
+      activeCategory = activeCategory === requestedCategory ? '' : requestedCategory;
+
+      categoryButtons.forEach(btn => {
+        btn.classList.toggle(
+          'is-active',
+          (btn.dataset.categoryFilter || '').toLowerCase() === activeCategory
+        );
+      });
+
+      applyArticleFilters();
+    });
   });
-}
+
+  articleFilter?.addEventListener('input', applyArticleFilters);
+
+  applyArticleFilters();
+})();
 
 
 // Version 8 — animations douces au défilement
