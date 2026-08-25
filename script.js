@@ -170,7 +170,7 @@ if ('IntersectionObserver' in window) {
 // Boutique — filtres de catégories + URL partageable
 (() => {
   const buttons = [...document.querySelectorAll('.shop-filter')];
-  const cards = [...document.querySelectorAll('.shop-card')];
+  const cards = [...document.querySelectorAll('.shop-card, .home-product-card')];
 
   if (!buttons.length || !cards.length) return;
 
@@ -366,7 +366,7 @@ if ('IntersectionObserver' in window) {
 
     if (price) {
       root.querySelectorAll(
-        '.compact-product-price, .product-detail-price, [data-awin-price]'
+        '.compact-product-price, .product-detail-price, .home-product-price, [data-awin-price]'
       ).forEach(el => {
         el.textContent = price;
       });
@@ -386,7 +386,7 @@ if ('IntersectionObserver' in window) {
   async function syncAwinEverywhere() {
     try {
       const cards = [
-        ...document.querySelectorAll('.shop-card')
+        ...document.querySelectorAll('.shop-card, .home-product-card')
       ];
 
       const cardEntries = [];
@@ -472,4 +472,50 @@ if ('IntersectionObserver' in window) {
   } else {
     syncAwinEverywhere();
   }
+})();
+
+// Accueil V12 — charge les vraies infos de 4 fiches produits existantes
+(() => {
+  const cards = [...document.querySelectorAll('[data-home-product]')];
+  if (!cards.length) return;
+
+  async function hydrateHomeCard(card) {
+    const page = card.dataset.homeProduct;
+    if (!page) return;
+
+    try {
+      const response = await fetch(page);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+
+      const name = doc.querySelector('.product-detail-copy h1, .product-detail h1, h1')?.textContent?.trim();
+      const sourceImage = doc.querySelector('.product-detail-image img, .product-detail img')?.getAttribute('src');
+
+      const title = card.querySelector('h3');
+      const image = card.querySelector('.home-product-image img');
+      const loader = card.querySelector('.home-product-loader');
+
+      if (name && title) title.textContent = name;
+      if (sourceImage && image) {
+        image.src = sourceImage;
+        image.alt = name || 'Produit sélectionné par Les Pages au Soleil';
+        image.hidden = false;
+        if (loader) loader.hidden = true;
+      }
+    } catch (error) {
+      console.warn('Accueil : fiche produit non chargée', page, error);
+    }
+  }
+
+  cards.forEach(hydrateHomeCard);
+
+  document.querySelectorAll('.home-favorite').forEach(button => {
+    button.addEventListener('click', () => {
+      const active = button.classList.toggle('is-active');
+      button.textContent = active ? '♥' : '♡';
+      button.setAttribute('aria-label', active ? 'Retirer des favoris' : 'Ajouter aux favoris');
+    });
+  });
 })();
