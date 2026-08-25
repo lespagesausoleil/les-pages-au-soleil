@@ -167,19 +167,72 @@ if ('IntersectionObserver' in window) {
   });
 })();
 
-// Boutique — filtres de catégories
-document.querySelectorAll('.shop-filter').forEach(button => {
-  button.addEventListener('click', () => {
-    const filter = button.dataset.shopFilter;
-    document.querySelectorAll('.shop-filter').forEach(btn => btn.classList.remove('is-active'));
-    button.classList.add('is-active');
+// Boutique — filtres de catégories + URL partageable
+(() => {
+  const buttons = [...document.querySelectorAll('.shop-filter')];
+  const cards = [...document.querySelectorAll('.shop-card')];
 
-    document.querySelectorAll('.shop-card').forEach(card => {
-      const categories = (card.dataset.shopCategory || '').split(/\s+/);
-      card.hidden = filter !== 'all' && !categories.includes(filter);
+  if (!buttons.length || !cards.length) return;
+
+  function applyShopFilter(filter, updateUrl = true) {
+    const validFilters = buttons.map(btn => btn.dataset.shopFilter);
+
+    if (!validFilters.includes(filter)) {
+      filter = 'all';
+    }
+
+    buttons.forEach(button => {
+      button.classList.toggle(
+        'is-active',
+        button.dataset.shopFilter === filter
+      );
+    });
+
+    cards.forEach(card => {
+      const categories = (card.dataset.shopCategory || '')
+        .split(/\s+/)
+        .filter(Boolean);
+
+      card.hidden =
+        filter !== 'all' &&
+        !categories.includes(filter);
+    });
+
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+
+      if (filter === 'all') {
+        url.hash = '';
+      } else {
+        url.hash = filter;
+      }
+
+      history.pushState(
+        { shopFilter: filter },
+        '',
+        url
+      );
+    }
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      applyShopFilter(button.dataset.shopFilter);
     });
   });
-});
+
+  const initialFilter =
+    window.location.hash.replace('#', '') || 'all';
+
+  applyShopFilter(initialFilter, false);
+
+  window.addEventListener('popstate', () => {
+    const filter =
+      window.location.hash.replace('#', '') || 'all';
+
+    applyShopFilter(filter, false);
+  });
+})();
 
 // Synchronisation globale Awin — Boutique + fiches produit
 (() => {
