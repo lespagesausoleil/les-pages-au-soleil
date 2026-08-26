@@ -532,12 +532,26 @@ if ('IntersectionObserver' in window) {
 
       const name = doc.querySelector('.product-detail-copy h1, .product-detail h1, h1')?.textContent?.trim();
       const sourceImage = doc.querySelector('.product-detail-image img, .product-detail img')?.getAttribute('src');
+      const sourcePrice = doc.querySelector('.product-detail-price, [data-awin-price]')?.textContent?.trim();
 
       const title = card.querySelector('h3');
       const image = card.querySelector('.home-product-image img');
       const loader = card.querySelector('.home-product-loader');
+      const price = card.querySelector('.home-product-price');
 
       if (name && title) title.textContent = name;
+
+      // Awin reste prioritaire. Si aucun prix ne revient du Worker,
+      // on reprend automatiquement le prix de la fiche produit locale.
+      if (
+        sourcePrice &&
+        price &&
+        /\d/.test(sourcePrice) &&
+        /voir le prix/i.test(price.textContent || '')
+      ) {
+        price.textContent = sourcePrice;
+      }
+
       if (sourceImage && image) {
         image.src = sourceImage;
         image.alt = name || 'Produit sélectionné par Les Pages au Soleil';
