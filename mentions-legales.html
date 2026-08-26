@@ -1,1 +1,322 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mentions légales — Les Pages au Soleil</title><link rel="stylesheet" href="style.css"></head><body><header class="site-header"><a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a></header><main class="simple-page"><h1>Mentions légales</h1><p>Cette page doit être complétée avec l’identité de l’éditeur du site, l’adresse de contact et les informations relatives à l’hébergement.</p><p>Ne publiez pas cette page comme version définitive avant d’avoir ajouté vos informations réelles.</p><p><a href="index.html">← Retour à l’accueil</a></p></main></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mentions légales du site Les Pages au Soleil.">
+  <title>Mentions légales — Les Pages au Soleil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=202608260940">
+
+  <!-- Cloudflare Web Analytics -->
+  <script type="module"
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token":"353971b319ce45b68cc90be1936fd8fc"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+
+  <style>
+    .legal-main{
+      max-width:1040px;
+      margin:0 auto;
+      padding:76px 7vw 100px;
+    }
+    .legal-hero{
+      max-width:820px;
+      margin-bottom:54px;
+    }
+    .legal-kicker{
+      margin:0 0 16px;
+      color:var(--brown);
+      font-size:.76rem;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .legal-hero h1{
+      margin:0 0 18px;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(2.8rem,6vw,5rem);
+      line-height:1;
+      color:var(--ink);
+    }
+    .legal-intro{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.75;
+    }
+    .legal-card{
+      padding:34px 38px;
+      margin:0 0 22px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:#fff;
+    }
+    .legal-card h2{
+      margin:0 0 18px;
+      font-family:"Playfair Display",serif;
+      font-size:1.75rem;
+      line-height:1.2;
+    }
+    .legal-card h3{
+      margin:24px 0 9px;
+      font-family:"Playfair Display",serif;
+      font-size:1.15rem;
+    }
+    .legal-card p,
+    .legal-card li{
+      color:var(--muted);
+      line-height:1.75;
+    }
+    .legal-card p:last-child{
+      margin-bottom:0;
+    }
+    .legal-card ul{
+      margin:12px 0 0;
+      padding-left:20px;
+    }
+    .legal-card a{
+      color:var(--brown);
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    .legal-host{
+      margin:15px 0 0;
+      padding:20px 22px;
+      border-radius:16px;
+      background:var(--cream);
+      color:var(--ink);
+      line-height:1.7;
+    }
+    .legal-note{
+      margin-top:30px;
+      padding:22px 26px;
+      border-radius:18px;
+      background:var(--cream);
+      border:1px solid var(--line);
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .legal-updated{
+      margin-top:36px;
+      color:#7c736b;
+      font-size:.9rem;
+    }
+    @media(max-width:700px){
+      .legal-main{padding:52px 5vw 76px}
+      .legal-card{padding:26px 22px;border-radius:20px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header home-header">
+    <a class="logo logo-image" href="index.html" aria-label="Les Pages au Soleil — Accueil">
+      <img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil">
+    </a>
+
+    <button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="articles.html">Articles</a>
+      <a class="shop-nav-link" href="boutique.html">Boutique</a>
+      <a href="index.html#apropos">À propos</a>
+      <a href="contact.html">Contact</a>
+      <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
+      <a class="home-shop-icon" href="boutique.html" aria-label="Ouvrir la boutique">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8h14l-1 12H6L5 8Z"></path>
+          <path d="M9 9V6a3 3 0 0 1 6 0v3"></path>
+        </svg>
+      </a>
+    </nav>
+  </header>
+
+  <div class="search-overlay" id="search-overlay" hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <button class="search-close" type="button" aria-label="Fermer">×</button>
+      <p class="kicker">Recherche</p>
+      <h2 id="search-title">Rechercher dans la boutique</h2>
+      <input id="site-search" type="search" placeholder="Ex. lampe, fauteuil, plaid, tapis…">
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </div>
+
+  <main class="legal-main">
+    <header class="legal-hero">
+      <p class="legal-kicker">Informations légales</p>
+      <h1>Mentions légales</h1>
+      <p class="legal-intro">
+        Les présentes mentions légales concernent le site
+        <strong>Les Pages au Soleil</strong>, accessible à l’adresse
+        <strong>lespagesausoleil.fr</strong>.
+      </p>
+    </header>
+
+    <section class="legal-card">
+      <h2>1. Édition du site</h2>
+      <p>
+        <strong>Les Pages au Soleil</strong> est, à la date de mise à jour des présentes
+        mentions, un site édité à titre non professionnel.
+      </p>
+      <p>
+        Conformément à l’article 1-1, II de la loi n° 2004-575 du 21 juin 2004
+        pour la confiance dans l’économie numérique, l’éditrice non professionnelle
+        a choisi de préserver son anonymat. Les éléments permettant son identification
+        ont vocation à être détenus par le fournisseur de services d’hébergement
+        dans les conditions prévues par la loi.
+      </p>
+      <p>
+        Pour toute demande relative au site, vous pouvez utiliser la
+        <a href="contact.html">page Contact</a>.
+      </p>
+    </section>
+
+    <section class="legal-card">
+      <h2>2. Hébergement</h2>
+      <p>Le site est hébergé et diffusé techniquement par :</p>
+
+      <div class="legal-host">
+        <strong>Cloudflare, Inc.</strong><br>
+        101 Townsend St.<br>
+        San Francisco, CA 94107<br>
+        États-Unis<br>
+        Téléphone : +1 (650) 319-8930
+      </div>
+
+      <p>
+        Les fichiers sources du site peuvent être gérés au moyen d’outils tiers,
+        notamment un dépôt de code, sans que ces services constituent nécessairement
+        l’hébergeur public du site.
+      </p>
+    </section>
+
+    <section class="legal-card">
+      <h2>3. Nature du site et affiliation</h2>
+      <p>
+        Les Pages au Soleil est un site éditorial consacré notamment à la lecture,
+        à la décoration, à l’art de vivre et à des sélections de produits.
+      </p>
+      <p>
+        Certains liens présents sur le site sont des <strong>liens affiliés</strong>.
+        Lorsqu’un visiteur clique sur l’un de ces liens puis effectue un achat auprès
+        du marchand partenaire, Les Pages au Soleil peut percevoir une commission,
+        sans surcoût pour l’acheteur.
+      </p>
+      <p>
+        Les Pages au Soleil ne vend pas directement les produits présentés dans la
+        boutique. Les prix, disponibilités, conditions de vente, livraison,
+        paiement, retours, garanties et service après-vente relèvent du marchand
+        partenaire auprès duquel la commande est effectivement passée.
+      </p>
+      <p>
+        Les informations relatives aux produits sont fournies à titre indicatif et
+        peuvent évoluer. Le prix et les conditions affichés sur le site du marchand
+        au moment de l’achat font foi.
+      </p>
+    </section>
+
+    <section class="legal-card">
+      <h2>4. Propriété intellectuelle</h2>
+      <p>
+        Sauf mention contraire, les textes, la structure éditoriale, le nom
+        « Les Pages au Soleil », les éléments graphiques originaux et les contenus
+        créés spécifiquement pour le site sont protégés par les règles applicables
+        à la propriété intellectuelle.
+      </p>
+      <p>
+        Toute reproduction, représentation, adaptation ou exploitation substantielle
+        de ces contenus sans autorisation préalable est interdite, sauf exceptions
+        prévues par la loi.
+      </p>
+      <p>
+        Les marques, noms commerciaux, photographies, visuels et contenus appartenant
+        à des partenaires ou à des tiers demeurent la propriété de leurs titulaires
+        respectifs et sont utilisés dans le respect des droits et autorisations
+        applicables.
+      </p>
+    </section>
+
+    <section class="legal-card">
+      <h2>5. Responsabilité</h2>
+      <p>
+        Les Pages au Soleil s’efforce de publier des informations aussi exactes et
+        actualisées que possible. Toutefois, aucune garantie ne peut être donnée
+        quant à l’exactitude, l’exhaustivité ou l’actualité permanente des
+        informations mises à disposition.
+      </p>
+      <p>
+        Les liens externes conduisent vers des sites exploités sous la responsabilité
+        de tiers. Les Pages au Soleil ne contrôle pas leurs contenus, leurs pratiques,
+        leur disponibilité ni leurs conditions commerciales.
+      </p>
+    </section>
+
+    <section class="legal-card">
+      <h2>6. Données personnelles et confidentialité</h2>
+      <p>
+        Les informations relatives aux données personnelles, aux services techniques,
+        à la newsletter et aux éventuels traceurs sont détaillées dans la
+        <a href="confidentialite.html">Politique de confidentialité</a>.
+      </p>
+    </section>
+
+    <section class="legal-card">
+      <h2>7. Évolution du statut du site</h2>
+      <p>
+        Les présentes mentions correspondent à la situation du site à leur date de
+        mise à jour. Si Les Pages au Soleil devient une activité exercée à titre
+        professionnel ou fait l’objet d’une immatriculation, les mentions légales
+        seront mises à jour afin d’intégrer les informations légalement requises
+        correspondant au nouveau statut.
+      </p>
+    </section>
+
+    <p class="legal-note">
+      Pour signaler une erreur, demander la modification d’un contenu ou exercer un
+      droit relatif à une publication, utilisez la <a href="contact.html">page Contact</a>.
+    </p>
+
+    <p class="legal-updated">Dernière mise à jour : 26 août 2026.</p>
+  </main>
+
+  <footer class="premium-footer">
+    <div class="footer-brand" id="apropos">
+      <a class="logo logo-image" href="index.html">
+        <img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil">
+      </a>
+      <p>Magazine indépendant autour de la lecture, de la décoration chaleureuse et du slow living.</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Explorer</h3>
+      <a href="rubrique-lecture.html">Lecture</a>
+      <a href="rubrique-decoration.html">Décoration</a>
+      <a href="rubrique-slow-living.html">Slow living</a>
+      <a href="articles.html">Tous les articles</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Suivre</h3>
+      <a href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Informations</h3>
+      <a href="contact.html">Contact</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+
+    <p class="copyright">© 2026 Les Pages au Soleil</p>
+  </footer>
+
+  <script src="script.js?v=202608260930"></script>
+</body>
+</html>
