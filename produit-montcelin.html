@@ -167,21 +167,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-tavreen.html">
+      <a class="related-product-card" href="produit-tavreen.html" data-awin-id="27413-1-1">
         <img src="https://www.loberon.fr/media/80/f5/fb/1781230606/271581_27413-1-1.jpg?ts=1786329622" alt="Miroir mural Tavreen — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Miroir mural Tavreen</h3>
           <p class="related-product-price">74,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-zilvento.html">
+      <a class="related-product-card" href="produit-zilvento.html" data-awin-id="25058-5-1">
         <img src="https://www.loberon.fr/media/7e/8b/74/1738309965/227028_25058-5-1.jpg?ts=1786328339" alt="Miroir Zilvento — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Miroir Zilvento</h3>
           <p class="related-product-price">44,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-alenasse.html">
+      <a class="related-product-card" href="produit-alenasse.html" data-awin-id="27343-3-1">
         <img src="https://www.loberon.fr/media/99/22/96/1779241995/269163_27343-3-1.jpg?ts=1786329583" alt="Miroir mural Alenasse — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Miroir mural Alenasse</h3>
@@ -220,5 +220,54 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>

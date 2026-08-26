@@ -165,21 +165,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-garavine.html">
+      <a class="related-product-card" href="produit-garavine.html" data-awin-id="27217-26-12">
         <img src="https://www.loberon.fr/media/9c/b4/d6/1779241936/268993_27217-26-12.jpg?ts=1785896614" alt="Housse de coussin Garavine — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Housse de coussin Garavine</h3>
           <p class="related-product-price">24,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-indra.html">
+      <a class="related-product-card" href="produit-indra.html" data-awin-id="18180-5-1">
         <img src="https://www.loberon.fr/media/d7/c9/fb/1717218155/70784_18180-5-12.jpg?ts=1785893950" alt="Coussin de garnissage Indra — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Coussin de garnissage Indra</h3>
           <p class="related-product-price">6,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-junniper.html">
+      <a class="related-product-card" href="produit-junniper.html" data-awin-id="27223-22-12">
         <img src="https://www.loberon.fr/media/2a/6b/ea/1779414580/269530_27223-22-12.jpg?ts=1785896616" alt="Lot de 2 housses de coussins Junniper — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Lot de 2 housses de coussins Junniper</h3>
@@ -218,5 +218,54 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>

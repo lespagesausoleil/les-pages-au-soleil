@@ -179,21 +179,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-tapis-warella.html">
+      <a class="related-product-card" href="produit-tapis-warella.html" data-awin-id="1283a88dcc6a485698fe22b59ad47032">
         <img src="https://www.tapis.fr/thumbnail/04/8e/7d/1785474231/019fb68e79a57313b943690404f10a8d_1500x1500.jpg" alt="Tapis Warella beige 80 x 150 cm" loading="lazy">
         <div class="related-product-copy">
           <h3>Tapis Warella — beige</h3>
           <p class="related-product-price">36,86 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-tapis-amara.html">
+      <a class="related-product-card" href="produit-tapis-amara.html" data-awin-id="0fdca1798ca6424fa7784702b0ee7f40">
         <img src="https://www.tapis.fr/thumbnail/97/aa/8f/1725433311/in-outdoor-teppich-amara-beige-bf1eb9fd808c72242d5ae98493c0ac2f_1500.webp" alt="Tapis Amara beige 80 x 150 cm" loading="lazy">
         <div class="related-product-copy">
           <h3>Tapis Amara — beige</h3>
           <p class="related-product-price">32,47 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-tapis-ostenza.html">
+      <a class="related-product-card" href="produit-tapis-ostenza.html" data-awin-id="1d229e89660f4fbc8f1a823753c00c35">
         <img src="https://www.tapis.fr/thumbnail/93/46/21/1738396919/3cc605f7fdfa482482ff7c87b8af2070_1500.webp" alt="Tapis Ostenza vert rond 120 cm" loading="lazy">
         <div class="related-product-copy">
           <h3>Tapis Ostenza — vert rond</h3>
@@ -216,5 +216,54 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>

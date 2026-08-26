@@ -162,21 +162,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-lomera.html">
+      <a class="related-product-card" href="produit-lomera.html" data-awin-id="26469-5-1">
         <img src="https://www.loberon.fr/media/ac/f5/a9/1766024492/251491_26469-5-1.jpg?ts=1786329056" alt="Lanterne LED Lomera — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Lanterne LED Lomera</h3>
           <p class="related-product-price">29,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-oxcroft.html">
+      <a class="related-product-card" href="produit-oxcroft.html" data-awin-id="1695321">
         <img src="https://www.loberon.fr/media/f3/63/8d/1717214125/168776_1695321.jpg?ts=1786326374" alt="Lanterne LED Oxcroft — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Lanterne LED Oxcroft</h3>
           <p class="related-product-price">24,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-volanais.html">
+      <a class="related-product-card" href="produit-volanais.html" data-awin-id="26920-2-1">
         <img src="https://www.loberon.fr/media/20/57/22/1769481878/256431_26920-2-1.jpg?ts=1786329333" alt="Lanterne LED Volanaïs — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Lanterne LED Volanaïs</h3>
@@ -197,5 +197,54 @@
   <p class="copyright">© 2026 Les Pages au Soleil</p>
 </footer>
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>

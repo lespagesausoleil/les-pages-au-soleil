@@ -167,21 +167,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-lagia.html">
+      <a class="related-product-card" href="produit-lagia.html" data-awin-id="23387-2-1">
         <img src="https://www.loberon.fr/media/82/19/a7/1774318281/264263_23387-2-1.jpg?ts=1786327613" alt="Lanterne LED rechargeable Lagia — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Lanterne LED rechargeable Lagia</h3>
           <p class="related-product-price">34,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-lampe-elegance.html">
+      <a class="related-product-card" href="produit-lampe-elegance.html" data-awin-id="48838639517924">
         <img src="https://eclairagedeco.com/cdn/shop/files/lampe-rechargeable-couleur-or-rose-fiche-produit-elegance.jpg?v=1777423382&amp;width=1946" alt="Lampe rechargeable Élégance — Éclairage Déco" loading="lazy">
         <div class="related-product-copy">
           <h3>Lampe rechargeable Élégance</h3>
           <p class="related-product-price">59,99 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-lampe-lecture-rechargeable.html">
+      <a class="related-product-card" href="produit-lampe-lecture-rechargeable.html" data-awin-id="48865647624420">
         <img src="assets/lampe-lecture-cuivre.png" alt="Lampe de lecture rechargeable couleur cuivre" loading="lazy">
         <div class="related-product-copy">
           <h3>Lampe de lecture rechargeable — cuivre</h3>
@@ -220,5 +220,54 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>

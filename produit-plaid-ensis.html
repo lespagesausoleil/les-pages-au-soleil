@@ -162,21 +162,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-plaid-kerenza.html">
+      <a class="related-product-card" href="produit-plaid-kerenza.html" data-awin-id="27331-22-25">
         <img src="https://www.loberon.fr/media/1a/4a/28/1779846463/270175_27331-22-25.jpg?ts=1785896669" alt="Plaid Kerenza" loading="lazy">
         <div class="related-product-copy">
           <h3>Plaid Kerenza</h3>
           <p class="related-product-price">54,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-plaid-linares.html">
+      <a class="related-product-card" href="produit-plaid-linares.html" data-awin-id="20714-22-25">
         <img src="https://www.loberon.fr/media/66/e4/ea/1717226956/118032_20714-22-25.jpg?ts=1785894419" alt="Plaid Linares" loading="lazy">
         <div class="related-product-copy">
           <h3>Plaid Linares</h3>
           <p class="related-product-price">54,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-plaid-marpent.html">
+      <a class="related-product-card" href="produit-plaid-marpent.html" data-awin-id="20694-22-25">
         <img src="https://www.loberon.fr/media/1984x1984x2/69/67/bc/1735876674/225374_20694-4-25/225374_plaid_marpent_creme_grau.jpg?ts=1785894417" alt="Plaid Marpent" loading="lazy">
         <div class="related-product-copy">
           <h3>Plaid Marpent</h3>
@@ -197,5 +197,54 @@
   <p class="copyright">© 2026 Les Pages au Soleil</p>
 </footer>
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>

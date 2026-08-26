@@ -213,21 +213,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-fauteuil-seraluna.html">
+      <a class="related-product-card" href="produit-fauteuil-seraluna.html" data-awin-id="26295-22-1">
         <img src="https://www.loberon.at/media/9c/04/06/1786328954/253721_26295-22-1.jpg?ts=1787018574" alt="Fauteuil Seraluna — LOBERON" loading="lazy">
         <div class="related-product-copy">
           <h3>Fauteuil Seraluna</h3>
           <p class="related-product-price">298,00 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-fauteuil-tago.html">
+      <a class="related-product-card" href="produit-fauteuil-tago.html" data-awin-id="100036673">
         <img src="https://d19no44j7vdmut.cloudfront.net/media/catalog/product/t/a/tagof-baku-15-1_2wvqxjvquqpziuhw.jpg" alt="Fauteuil Tago crème — SLF24" loading="lazy">
         <div class="related-product-copy">
           <h3>Fauteuil Tago</h3>
           <p class="related-product-price">319,00 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-fauteuil-ducan-malmo.html">
+      <a class="related-product-card" href="produit-fauteuil-ducan-malmo.html" data-awin-id="0093054">
         <img src="https://d19no44j7vdmut.cloudfront.net/media/catalog/product/d/u/ducon_malmo_8_4__1.jpg" alt="Fauteuil à oreilles Ducan Malmo beige — SLF24" loading="lazy">
         <div class="related-product-copy">
           <h3>Fauteuil à oreilles Ducan Malmo</h3>
@@ -272,6 +272,55 @@
 </footer>
 
 <script src="script.js"></script>
+
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
 
 </body>
 </html>

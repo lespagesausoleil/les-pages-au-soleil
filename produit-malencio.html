@@ -165,21 +165,21 @@
   </div>
   <div class="related-products-grid">
 
-      <a class="related-product-card" href="produit-plaid-amberley.html">
+      <a class="related-product-card" href="produit-plaid-amberley.html" data-awin-id="15209-8-1">
         <img src="https://www.loberon.fr/media/4a/59/5c/1771293175/92705_15209-8-1.jpg?ts=1785893585" alt="Plaid Amberley" loading="lazy">
         <div class="related-product-copy">
           <h3>Plaid Amberley</h3>
           <p class="related-product-price">68,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-plaid-ancy.html">
+      <a class="related-product-card" href="produit-plaid-ancy.html" data-awin-id="21811-6-25">
         <img src="https://www.loberon.fr/media/04/ca/82/1717230657/161285_21811-6-25.jpg?ts=1785894626" alt="Plaid Ancy" loading="lazy">
         <div class="related-product-copy">
           <h3>Plaid Ancy</h3>
           <p class="related-product-price">59,95 €</p>
         </div>
       </a>
-      <a class="related-product-card" href="produit-plaid-arsalan.html">
+      <a class="related-product-card" href="produit-plaid-arsalan.html" data-awin-id="24602-22-1">
         <img src="https://www.loberon.fr/media/71/09/3b/1738308500/226899_24602-22-1.jpg?ts=1785895411" alt="Plaid Arsalan" loading="lazy">
         <div class="related-product-copy">
           <h3>Plaid Arsalan</h3>
@@ -218,5 +218,54 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script id="related-awin-sync">
+(() => {
+  const cards = [...document.querySelectorAll('.related-product-card[data-awin-id]')];
+  if (!cards.length) return;
+
+  const ids = [...new Set(cards.map(card => card.dataset.awinId).filter(Boolean))];
+  if (!ids.length) return;
+
+  const worker = 'https://awin-sync.lespagesausoleil.workers.dev/';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    const number = Number(String(value ?? '').replace(',', '.'));
+    if (!Number.isFinite(number)) return null;
+
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: currency || 'EUR'
+    }).format(number);
+  };
+
+  fetch(`${worker}?ids=${encodeURIComponent(ids.join(','))}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Awin HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const products = data?.products || {};
+
+      cards.forEach(card => {
+        const product = products[card.dataset.awinId];
+        if (!product) return;
+
+        const freshPrice = formatPrice(product.price, product.currency);
+        const priceEl = card.querySelector('.related-product-price');
+
+        if (freshPrice && priceEl) {
+          priceEl.textContent = freshPrice;
+          priceEl.dataset.awinSynced = 'true';
+        }
+      });
+    })
+    .catch(error => {
+      console.warn('Prix recommandations Awin :', error);
+      // En cas d'indisponibilité, le prix HTML existant reste affiché.
+    });
+})();
+</script>
+
 </body>
 </html>
