@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tous les articles — Les Pages au Soleil</title>
+<meta name="description" content="Tous les articles des Pages au Soleil : lecture, décoration, coin lecture et slow living.">
+<link rel="canonical" href="https://magazine.lespagesausoleil.workers.dev/articles.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tous les articles">
+<meta property="og:description" content="Tous les articles des Pages au Soleil : lecture, décoration, coin lecture et slow living.">
+<meta property="og:url" content="https://magazine.lespagesausoleil.workers.dev/articles.html">
+<meta property="og:site_name" content="Les Pages au Soleil">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo logo-image" href="index.html">
+    <img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil">
+  </a>
+
+  <button class="menu-btn" aria-label="Ouvrir le menu">☰</button>
+
+  <nav class="main-nav">
+    <a href="index.html">Accueil</a>
+    <a href="articles.html">Articles</a>
+    <a class="shop-nav-link" href="boutique.html">Boutique</a>
+    <a href="index.html#apropos">À propos</a>
+    <a href="contact.html">Contact</a>
+    <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
+  </nav>
+</header>
+
+<div class="search-overlay" id="search-overlay" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <button class="search-close" type="button" aria-label="Fermer">×</button>
+    <p class="kicker">Recherche</p>
+    <h2 id="search-title">Que souhaitez-vous découvrir ?</h2>
+    <input id="site-search" type="search" placeholder="Ex. coin lecture, lampe, cadeau…">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<main class="articles-index">
+  <div class="articles-hero">
+    <p class="kicker">Le magazine</p>
+    <h1>Tous les articles</h1>
+    <p>Explorez nos idées autour de la lecture, de la maison et d’un quotidien plus doux.</p>
+    <input id="article-filter" type="search" placeholder="Rechercher dans les articles…">
+  </div>
+
+  <nav class="article-category-tabs" aria-label="Catégories d'articles">
+    <button type="button" class="article-category-tab" data-category-filter="coin lecture">Coin lecture</button>
+    <button type="button" class="article-category-tab" data-category-filter="décoration">Décoration</button>
+    <button type="button" class="article-category-tab" data-category-filter="slow living">Slow living</button>
+    <button type="button" class="article-category-tab" data-category-filter="guides">Guides</button>
+    <button type="button" class="article-category-tab" data-category-filter="lecture">Lecture</button>
+  </nav>
+
+  <div id="articles-list" class="articles-list">
+    <article class="article-card listing-card" data-title="comment créer un coin lecture cocooning chez soi" data-category="coin lecture">
+      <div class="thumb photo-thumb"><img src="assets/coin-lecture.jpg" alt=""><span>Coin lecture</span></div>
+      <div class="content"><p class="tag">Coin lecture</p><h2>Comment créer un coin lecture cocooning chez soi</h2><p>Fauteuil, lumière, plaid et détails : aménagez un refuge confortable, même dans un petit espace.</p><a href="articles/coin-lecture-cocooning.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="comment choisir un fauteuil vraiment agréable pour lire" data-category="coin lecture">
+      <div class="thumb photo-thumb"><img src="assets/coin-lecture.jpg" alt=""><span>Coin lecture</span></div>
+      <div class="content"><p class="tag">Coin lecture</p><h2>Comment choisir un fauteuil vraiment agréable pour lire</h2><p>Soutien du dos, profondeur, accoudoirs et matière : les critères qui comptent vraiment.</p><a href="articles/fauteuils-lecture.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="les lampes qui rendent une pièce instantanément chaleureuse" data-category="décoration">
+      <div class="thumb photo-thumb"><img src="assets/decoration.jpg" alt=""><span>Décoration</span></div>
+      <div class="content"><p class="tag">Décoration</p><h2>Les lampes qui rendent une pièce instantanément chaleureuse</h2><p>Température, hauteur et emplacement : les principes simples d’une lumière douce.</p><a href="articles/lampes-chaleureuses.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="comment décorer une bibliothèque sans la surcharger" data-category="décoration">
+      <div class="thumb photo-thumb"><img src="assets/decoration.jpg" alt=""><span>Décoration</span></div>
+      <div class="content"><p class="tag">Décoration</p><h2>Comment décorer une bibliothèque sans la surcharger</h2><p>Livres, objets et espaces libres : composez une bibliothèque équilibrée.</p><a href="articles/decorer-bibliotheque.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="le rituel du dimanche pour commencer la semaine en douceur" data-category="slow living">
+      <div class="thumb photo-thumb"><img src="assets/slow-living.jpg" alt=""><span>Slow living</span></div>
+      <div class="content"><p class="tag">Slow living</p><h2>Le rituel du dimanche pour commencer la semaine en douceur</h2><p>Une parenthèse simple avec thé, lecture et rangement léger.</p><a href="articles/rituel-dimanche.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="des idées cadeaux utiles pour les amoureux des livres" data-category="guides">
+      <div class="thumb photo-thumb"><img src="assets/guides-achat.jpg" alt=""><span>Guides</span></div>
+      <div class="content"><p class="tag">Guides</p><h2>Des idées cadeaux utiles pour les amoureux des livres</h2><p>Des cadeaux doux et pratiques pour enrichir le rituel de lecture.</p><a href="articles/cadeaux-lecteurs.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="15 romans parfaits pour accompagner les soirées d’automne" data-category="lecture">
+      <div class="thumb photo-thumb"><img src="assets/hero-accueil.jpg" alt=""><span>Lecture</span></div>
+      <div class="content"><p class="tag">Lecture</p><h2>15 romans parfaits pour accompagner les soirées d’automne</h2><p>Une sélection d’ambiances romanesques pour les journées plus fraîches.</p><a href="articles/romans-automne.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="7 erreurs qui empêchent un salon de paraître chaleureux" data-category="décoration">
+      <div class="thumb photo-thumb"><img src="assets/hero-accueil.jpg" alt=""><span>Décoration</span></div>
+      <div class="content"><p class="tag">Décoration</p><h2>7 erreurs qui empêchent un salon de paraître chaleureux</h2><p>Lumière, proportions et matières : les erreurs les plus fréquentes.</p><a href="articles/salon-chaleureux-erreurs.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="comment choisir un plaid vraiment cocooning" data-category="guides">
+      <div class="thumb photo-thumb"><img src="assets/coin-lecture.jpg" alt=""><span>Guides</span></div>
+      <div class="content"><p class="tag">Guides</p><h2>Comment choisir un plaid vraiment cocooning</h2><p>Matière, poids, taille et entretien : choisir un plaid beau et agréable.</p><a href="articles/plaids-cocooning.html">Lire l’article →</a></div>
+    </article>
+
+    <article class="article-card listing-card" data-title="une journée slow living à la maison, sans programme compliqué" data-category="slow living">
+      <div class="thumb photo-thumb"><img src="assets/slow-living.jpg" alt=""><span>Slow living</span></div>
+      <div class="content"><p class="tag">Slow living</p><h2>Une journée slow living à la maison, sans programme compliqué</h2><p>Une journée apaisante construite autour de gestes simples et accessibles.</p><a href="articles/journee-slow-living.html">Lire l’article →</a></div>
+    </article>
+  </div>
+
+  <p id="empty-state" class="empty-state" hidden>Aucun article ne correspond à cette recherche.</p>
+</main>
+
+<footer class="premium-footer">
+  <div class="footer-brand">
+    <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
+    <p>Magazine indépendant autour de la lecture, de la décoration chaleureuse et du slow living.</p>
+  </div>
+  <div class="footer-column"><h3>Explorer</h3>
+    <a href="rubrique-lecture.html">Lecture</a>
+    <a href="rubrique-coin-lecture.html">Coin lecture</a>
+    <a href="rubrique-decoration.html">Décoration</a>
+    <a href="rubrique-slow-living.html">Slow living</a>
+  </div>
+  <div class="footer-column"><h3>Suivre</h3>
+    <a href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
+    <a href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <div class="footer-column"><h3>Informations</h3>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="confidentialite.html">Confidentialité</a>
+  </div>
+  <p class="copyright">© 2026 Les Pages au Soleil</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
