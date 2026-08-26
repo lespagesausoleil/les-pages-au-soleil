@@ -38,6 +38,75 @@
   }
 </style>
 
+
+<style id="related-products-style">
+  .related-products{
+    padding:54px 7vw 64px;
+    border-top:1px solid #eadfd2;
+    background:#fffdf9;
+  }
+  .related-products-head{
+    max-width:1180px;
+    margin:0 auto 26px;
+    text-align:center;
+  }
+  .related-products-head .kicker{
+    margin-bottom:8px;
+  }
+  .related-products-head h2{
+    margin:0;
+    font-size:clamp(2rem,3.5vw,3.2rem);
+  }
+  .related-products-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+  }
+  .related-product-card{
+    display:block;
+    border:1px solid #eadfd2;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .related-product-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(77,55,36,.10);
+  }
+  .related-product-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:#f6efe5;
+  }
+  .related-product-copy{
+    padding:16px 17px 18px;
+  }
+  .related-product-copy h3{
+    margin:0 0 8px;
+    font-size:1.18rem;
+  }
+  .related-product-price{
+    margin:0;
+    color:#a76117;
+    font-weight:700;
+    font-size:.95rem;
+  }
+  @media (max-width:760px){
+    .related-products{
+      padding:42px 5vw 52px;
+    }
+    .related-products-grid{
+      grid-template-columns:1fr;
+      max-width:520px;
+    }
+  }
+</style>
+
 </head>
 <body>
 <header class="site-header">
@@ -88,6 +157,38 @@
       <p class="product-price-note">Prix et disponibilité susceptibles d’évoluer chez LOBERON.</p>
     </div>
   </section>
+
+<section class="related-products" aria-labelledby="related-title">
+  <div class="related-products-head">
+    <p class="kicker">Dans le même univers</p>
+    <h2 id="related-title">Vous aimerez aussi</h2>
+  </div>
+  <div class="related-products-grid">
+
+      <a class="related-product-card" href="produit-floremont.html">
+        <img src="https://www.loberon.fr/media/b6/8e/24/1765851626/252024_26401-22-12.jpg?ts=1785896200" alt="Housse de coussin Florémont — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Housse de coussin Florémont</h3>
+          <p class="related-product-price">24,95 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-garavine.html">
+        <img src="https://www.loberon.fr/media/9c/b4/d6/1779241936/268993_27217-26-12.jpg?ts=1785896614" alt="Housse de coussin Garavine — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Housse de coussin Garavine</h3>
+          <p class="related-product-price">24,95 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-indra.html">
+        <img src="https://www.loberon.fr/media/d7/c9/fb/1717218155/70784_18180-5-12.jpg?ts=1785893950" alt="Coussin de garnissage Indra — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Coussin de garnissage Indra</h3>
+          <p class="related-product-price">6,95 €</p>
+        </div>
+      </a>
+  </div>
+</section>
+
 </main>
 <footer class="premium-footer">
   <div class="footer-brand">

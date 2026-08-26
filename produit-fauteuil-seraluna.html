@@ -42,6 +42,75 @@
   }
 </style>
 
+
+<style id="related-products-style">
+  .related-products{
+    padding:54px 7vw 64px;
+    border-top:1px solid #eadfd2;
+    background:#fffdf9;
+  }
+  .related-products-head{
+    max-width:1180px;
+    margin:0 auto 26px;
+    text-align:center;
+  }
+  .related-products-head .kicker{
+    margin-bottom:8px;
+  }
+  .related-products-head h2{
+    margin:0;
+    font-size:clamp(2rem,3.5vw,3.2rem);
+  }
+  .related-products-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+  }
+  .related-product-card{
+    display:block;
+    border:1px solid #eadfd2;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .related-product-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(77,55,36,.10);
+  }
+  .related-product-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:#f6efe5;
+  }
+  .related-product-copy{
+    padding:16px 17px 18px;
+  }
+  .related-product-copy h3{
+    margin:0 0 8px;
+    font-size:1.18rem;
+  }
+  .related-product-price{
+    margin:0;
+    color:#a76117;
+    font-weight:700;
+    font-size:.95rem;
+  }
+  @media (max-width:760px){
+    .related-products{
+      padding:42px 5vw 52px;
+    }
+    .related-products-grid{
+      grid-template-columns:1fr;
+      max-width:520px;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -138,6 +207,38 @@
 
     </div>
   </section>
+
+<section class="related-products" aria-labelledby="related-title">
+  <div class="related-products-head">
+    <p class="kicker">Dans le même univers</p>
+    <h2 id="related-title">Vous aimerez aussi</h2>
+  </div>
+  <div class="related-products-grid">
+
+      <a class="related-product-card" href="produit-fauteuil-tago.html">
+        <img src="https://d19no44j7vdmut.cloudfront.net/media/catalog/product/t/a/tagof-baku-15-1_2wvqxjvquqpziuhw.jpg" alt="Fauteuil Tago crème — SLF24" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Fauteuil Tago</h3>
+          <p class="related-product-price">319,00 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-fauteuil-ducan-malmo.html">
+        <img src="https://d19no44j7vdmut.cloudfront.net/media/catalog/product/d/u/ducon_malmo_8_4__1.jpg" alt="Fauteuil à oreilles Ducan Malmo beige — SLF24" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Fauteuil à oreilles Ducan Malmo</h3>
+          <p class="related-product-price">329,00 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-fauteuil-pliant-locmelar.html">
+        <img src="https://www.loberon.fr/media/1984x1984x2/75/8c/31/1717233035/184459_22535-2-1/184459_klappsessel_locm_lar_braun_grau.jpg?ts=1787104308" alt="Fauteuil pliant Locmélar — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Fauteuil pliant Locmélar</h3>
+          <p class="related-product-price">248,00 €</p>
+        </div>
+      </a>
+  </div>
+</section>
+
 </main>
 
 <footer class="premium-footer">

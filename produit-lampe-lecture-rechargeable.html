@@ -42,6 +42,75 @@
   }
 </style>
 
+
+<style id="related-products-style">
+  .related-products{
+    padding:54px 7vw 64px;
+    border-top:1px solid #eadfd2;
+    background:#fffdf9;
+  }
+  .related-products-head{
+    max-width:1180px;
+    margin:0 auto 26px;
+    text-align:center;
+  }
+  .related-products-head .kicker{
+    margin-bottom:8px;
+  }
+  .related-products-head h2{
+    margin:0;
+    font-size:clamp(2rem,3.5vw,3.2rem);
+  }
+  .related-products-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+  }
+  .related-product-card{
+    display:block;
+    border:1px solid #eadfd2;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .related-product-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(77,55,36,.10);
+  }
+  .related-product-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:#f6efe5;
+  }
+  .related-product-copy{
+    padding:16px 17px 18px;
+  }
+  .related-product-copy h3{
+    margin:0 0 8px;
+    font-size:1.18rem;
+  }
+  .related-product-price{
+    margin:0;
+    color:#a76117;
+    font-weight:700;
+    font-size:.95rem;
+  }
+  @media (max-width:760px){
+    .related-products{
+      padding:42px 5vw 52px;
+    }
+    .related-products-grid{
+      grid-template-columns:1fr;
+      max-width:520px;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -154,6 +223,38 @@
     </div>
 
   </section>
+
+
+<section class="related-products" aria-labelledby="related-title">
+  <div class="related-products-head">
+    <p class="kicker">Dans le même univers</p>
+    <h2 id="related-title">Vous aimerez aussi</h2>
+  </div>
+  <div class="related-products-grid">
+
+      <a class="related-product-card" href="produit-lampe-nomade-3-ambiances.html">
+        <img src="https://eclairagedeco.com/cdn/shop/files/lampe-rechargeable-argent-fiche-produit-nomade-3-ambiances.jpg?v=1777471511&amp;width=1946" alt="Lampe rechargeable Nomade 3 Ambiances — Éclairage Déco" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Lampe rechargeable Nomade 3 Ambiances</h3>
+          <p class="related-product-price">24,99 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-ligne-etoiles.html">
+        <img src="https://deluxehomeartshop.fr/cdn/shop/files/IMG_7777.jpg?v=1742213325&amp;width=1946" alt="Ligne déco avec les étoiles — 1 m" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Ligne déco avec les étoiles — 1 m</h3>
+          <p class="related-product-price">3,95 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-lomera.html">
+        <img src="https://www.loberon.fr/media/ac/f5/a9/1766024492/251491_26469-5-1.jpg?ts=1786329056" alt="Lanterne LED Lomera — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Lanterne LED Lomera</h3>
+          <p class="related-product-price">29,95 €</p>
+        </div>
+      </a>
+  </div>
+</section>
 
 </main>
 

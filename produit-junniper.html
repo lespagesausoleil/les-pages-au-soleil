@@ -38,6 +38,75 @@
   }
 </style>
 
+
+<style id="related-products-style">
+  .related-products{
+    padding:54px 7vw 64px;
+    border-top:1px solid #eadfd2;
+    background:#fffdf9;
+  }
+  .related-products-head{
+    max-width:1180px;
+    margin:0 auto 26px;
+    text-align:center;
+  }
+  .related-products-head .kicker{
+    margin-bottom:8px;
+  }
+  .related-products-head h2{
+    margin:0;
+    font-size:clamp(2rem,3.5vw,3.2rem);
+  }
+  .related-products-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+  }
+  .related-product-card{
+    display:block;
+    border:1px solid #eadfd2;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .related-product-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(77,55,36,.10);
+  }
+  .related-product-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:#f6efe5;
+  }
+  .related-product-copy{
+    padding:16px 17px 18px;
+  }
+  .related-product-copy h3{
+    margin:0 0 8px;
+    font-size:1.18rem;
+  }
+  .related-product-price{
+    margin:0;
+    color:#a76117;
+    font-weight:700;
+    font-size:.95rem;
+  }
+  @media (max-width:760px){
+    .related-products{
+      padding:42px 5vw 52px;
+    }
+    .related-products-grid{
+      grid-template-columns:1fr;
+      max-width:520px;
+    }
+  }
+</style>
+
 </head>
 <body>
 <header class="site-header">
@@ -88,6 +157,38 @@
       <p class="product-price-note">Prix et disponibilité susceptibles d’évoluer chez LOBERON.</p>
     </div>
   </section>
+
+<section class="related-products" aria-labelledby="related-title">
+  <div class="related-products-head">
+    <p class="kicker">Dans le même univers</p>
+    <h2 id="related-title">Vous aimerez aussi</h2>
+  </div>
+  <div class="related-products-grid">
+
+      <a class="related-product-card" href="produit-lunavine.html">
+        <img src="https://www.loberon.fr/media/35/03/44/1766024280/254028_26165-22-3.jpg?ts=1785896077" alt="Housse de coussin Lunavine — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Housse de coussin Lunavine</h3>
+          <p class="related-product-price">24,95 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-maerlinna.html">
+        <img src="https://www.loberon.fr/media/08/8a/dd/1780365829/268669_27368-22-36.jpg?ts=1785896691" alt="Housse de coussin Maerlinna — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Housse de coussin Maerlinna</h3>
+          <p class="related-product-price">24,95 €</p>
+        </div>
+      </a>
+      <a class="related-product-card" href="produit-malencio.html">
+        <img src="https://www.loberon.fr/media/a5/5d/37/1757559707/245200_25509-22-1.jpg?ts=1785895738" alt="Housse de coussin Malencio — LOBERON" loading="lazy">
+        <div class="related-product-copy">
+          <h3>Housse de coussin Malencio</h3>
+          <p class="related-product-price">13,46 € 24,95 €</p>
+        </div>
+      </a>
+  </div>
+</section>
+
 </main>
 <footer class="premium-footer">
   <div class="footer-brand">
