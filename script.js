@@ -15,49 +15,149 @@ if (form) {
 }
 
 
-// Version 6 — recherche globale et filtre d'articles
+// Recherche globale — uniquement les produits de la Boutique
 const searchOpen = document.querySelector('.search-open');
 const searchOverlay = document.querySelector('#search-overlay');
 const searchClose = document.querySelector('.search-close');
 const siteSearch = document.querySelector('#site-search');
 const searchResults = document.querySelector('#search-results');
 
-async function loadArticles() {
-  const response = await fetch('articles.json');
-  if (!response.ok) throw new Error('Impossible de charger les articles.');
-  return response.json();
+const SEARCH_BASE = window.location.pathname.includes('/articles/') ? '../' : '';
+
+function normalizeSearchText(value = '') {
+  return String(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+function escapeSearchHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function resolveSearchUrl(url = '') {
+  if (!url) return '#';
+  if (/^(?:https?:|mailto:|tel:|#)/i.test(url)) return url;
+  return `${SEARCH_BASE}${url.replace(/^\.?\//, '')}`;
+}
+
+async function loadSearchProducts() {
+  const response = await fetch(`${SEARCH_BASE}boutique.html`, { cache: 'no-store' });
+  if (!response.ok) throw new Error('Impossible de charger la boutique.');
+
+  const html = await response.text();
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+
+  return [...doc.querySelectorAll('.shop-card')].map(card => {
+    const title =
+      card.querySelector('.compact-product-name')?.textContent?.trim() ||
+      card.querySelector('h3')?.textContent?.trim() ||
+      '';
+
+    const price =
+      card.querySelector('.compact-product-price')?.textContent?.replace(/\s+/g, ' ').trim() ||
+      '';
+
+    const link =
+      card.querySelector('a.compact-product-button')?.getAttribute('href') ||
+      card.querySelector('a[href*="produit-"]')?.getAttribute('href') ||
+      '';
+
+    const category =
+      card.dataset.shopCategory ||
+      'Boutique';
+
+    const keywords =
+      card.dataset.shopSearch ||
+      '';
+
+    return {
+      title,
+      category,
+      price,
+      url: resolveSearchUrl(link),
+      searchText: normalizeSearchText(
+        `${title} ${price} ${category} ${keywords}`
+      )
+    };
+  }).filter(product => product.title && product.url !== '#');
 }
 
 if (searchOpen && searchOverlay) {
+  let productIndex = [];
+  let productIndexPromise = null;
+
+  async function ensureProductIndex() {
+    if (productIndex.length) return productIndex;
+    if (productIndexPromise) return productIndexPromise;
+
+    productIndexPromise = loadSearchProducts()
+      .then(products => {
+        productIndex = products;
+        return productIndex;
+      });
+
+    return productIndexPromise;
+  }
+
   searchOpen.addEventListener('click', () => {
     searchOverlay.hidden = false;
     document.body.classList.add('no-scroll');
+
+    if (searchResults) {
+      searchResults.innerHTML =
+        '<p>Recherchez un produit dans la boutique.</p>';
+    }
+
+    ensureProductIndex().catch(() => {});
+
     setTimeout(() => siteSearch?.focus(), 50);
   });
+
   searchClose?.addEventListener('click', () => {
     searchOverlay.hidden = true;
     document.body.classList.remove('no-scroll');
   });
-  searchOverlay.addEventListener('click', (event) => {
+
+  searchOverlay.addEventListener('click', event => {
     if (event.target === searchOverlay) {
       searchOverlay.hidden = true;
       document.body.classList.remove('no-scroll');
     }
   });
-  let cachedArticles = [];
-  loadArticles().then(data => cachedArticles = data).catch(() => {});
-  siteSearch?.addEventListener('input', () => {
-    const q = siteSearch.value.trim().toLowerCase();
+
+  siteSearch?.addEventListener('input', async () => {
+    const q = normalizeSearchText(siteSearch.value);
+
     if (!q) {
-      searchResults.innerHTML = '<p>Commencez à écrire pour rechercher un article.</p>';
+      searchResults.innerHTML =
+        '<p>Recherchez un produit dans la boutique.</p>';
       return;
     }
-    const matches = cachedArticles.filter(a =>
-      `${a.title} ${a.category} ${a.description}`.toLowerCase().includes(q)
-    );
+
+    searchResults.innerHTML = '<p>Recherche…</p>';
+
+    const products = await ensureProductIndex();
+
+    const matches = products
+      .filter(product => product.searchText.includes(q))
+      .slice(0, 20);
+
     searchResults.innerHTML = matches.length
-      ? matches.map(a => `<a class="search-result" href="${a.url}"><small>${a.category}</small><strong>${a.title}</strong><span>${a.description}</span></a>`).join('')
-      : '<p>Aucun résultat trouvé.</p>';
+      ? matches.map(product => `
+          <a class="search-result" href="${escapeSearchHtml(product.url)}">
+            <small>Boutique · ${escapeSearchHtml(product.category)}</small>
+            <strong>${escapeSearchHtml(product.title)}</strong>
+            <span>${escapeSearchHtml(product.price || 'Voir le produit')}</span>
+          </a>
+        `).join('')
+      : '<p>Aucun produit trouvé dans la boutique.</p>';
   });
 }
 
