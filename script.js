@@ -145,19 +145,112 @@ if (searchOpen && searchOverlay) {
 
     const products = await ensureProductIndex();
 
-    const matches = products
-      .filter(product => product.searchText.includes(q))
-      .slice(0, 20);
+    const allMatches = products
+      .filter(product => product.searchText.includes(q));
 
-    searchResults.innerHTML = matches.length
-      ? matches.map(product => `
-          <a class="search-result" href="${escapeSearchHtml(product.url)}">
-            <small>Boutique · ${escapeSearchHtml(product.category)}</small>
-            <strong>${escapeSearchHtml(product.title)}</strong>
-            <span>${escapeSearchHtml(product.price || 'Voir le produit')}</span>
-          </a>
-        `).join('')
-      : '<p>Aucun produit trouvé dans la boutique.</p>';
+    const matches = allMatches.slice(0, 4);
+
+    if (!matches.length) {
+      searchResults.innerHTML = '<p>Aucun produit trouvé dans la boutique.</p>';
+      return;
+    }
+
+    const productResults = matches.map(product => `
+      <a class="search-result" href="${escapeSearchHtml(product.url)}">
+        <small>Boutique · ${escapeSearchHtml(product.category)}</small>
+        <strong>${escapeSearchHtml(product.title)}</strong>
+        <span>${escapeSearchHtml(product.price || 'Voir le produit')}</span>
+      </a>
+    `).join('');
+
+    const categoryRules = [
+      {
+        words: ['plaid', 'couverture'],
+        categoryTerms: ['plaid'],
+        hash: 'plaids',
+        label: 'Voir tous les plaids'
+      },
+      {
+        words: ['fauteuil', 'chaise', 'mobilier'],
+        categoryTerms: ['fauteuil', 'mobilier'],
+        hash: 'mobilier',
+        label: 'Voir tous les fauteuils'
+      },
+      {
+        words: ['lampe', 'lanterne', 'eclairage', 'éclairage', 'lumiere', 'lumière'],
+        categoryTerms: ['lampe'],
+        hash: 'lampes',
+        label: 'Voir toutes les lampes'
+      },
+      {
+        words: ['tapis'],
+        categoryTerms: ['tapis'],
+        hash: 'tapis',
+        label: 'Voir tous les tapis'
+      },
+      {
+        words: ['miroir', 'decoration', 'décoration', 'deco', 'déco'],
+        categoryTerms: ['decoration', 'décoration'],
+        hash: 'decoration',
+        label: 'Voir toute la décoration'
+      },
+      {
+        words: ['livre', 'lecture', 'roman'],
+        categoryTerms: ['livre', 'lecture'],
+        hash: 'livres',
+        label: 'Voir tous les livres'
+      },
+      {
+        words: ['papeterie', 'carnet', 'stylo'],
+        categoryTerms: ['papeterie'],
+        hash: 'papeterie',
+        label: 'Voir toute la papeterie'
+      },
+      {
+        words: ['enfant', 'petit', 'petits'],
+        categoryTerms: ['petit'],
+        hash: 'petits',
+        label: 'Voir le coin des petits'
+      }
+    ];
+
+    const normalizedCategories = matches.map(product =>
+      normalizeSearchText(product.category)
+    );
+
+    const activeRule = categoryRules.find(rule =>
+      rule.words.some(word => q.includes(normalizeSearchText(word))) ||
+      rule.categoryTerms.some(term =>
+        normalizedCategories.some(category =>
+          category.includes(normalizeSearchText(term))
+        )
+      )
+    );
+
+    const viewAllLink = activeRule
+      ? `
+        <a
+          class="search-view-all"
+          href="${escapeSearchHtml(resolveSearchUrl(`boutique.html#${activeRule.hash}`))}"
+          style="
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin-top:14px;
+            padding:13px 18px;
+            border-radius:999px;
+            background:var(--brown);
+            color:#fff;
+            font-weight:600;
+            text-align:center;
+          "
+        >
+          ${escapeSearchHtml(activeRule.label)} →
+        </a>
+      `
+      : '';
+
+    searchResults.innerHTML = productResults + viewAllLink;
   });
 }
 
