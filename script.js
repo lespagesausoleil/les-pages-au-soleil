@@ -1511,3 +1511,159 @@ if ('IntersectionObserver' in window) {
     installArticleProductSelection();
   }
 })();
+
+
+/* =========================================================
+   SEO ARTICLES — Les Pages au Soleil
+   Canonical + meta + Open Graph + Article + BreadcrumbList
+   ========================================================= */
+(() => {
+  const ARTICLE_SEO = {"cadeaux-lecteurs.html":{"title":"Des idées cadeaux utiles pour les amoureux des livres","description":"Des cadeaux doux et pratiques pour enrichir le rituel de lecture."},"coin-lecture-cocooning.html":{"title":"Comment créer un coin lecture cocooning chez soi","description":"Fauteuil, lumière, plaid et détails : aménagez un refuge confortable, même dans un petit espace."},"decorer-bibliotheque.html":{"title":"Comment décorer une bibliothèque sans la surcharger","description":"Livres, objets et espaces libres : composez une bibliothèque équilibrée."},"fauteuils-lecture.html":{"title":"Quel fauteuil choisir pour un coin lecture ? 4 modèles confortables à découvrir","description":"Soutien du dos, profondeur, accoudoirs et matière : les critères qui comptent vraiment pour choisir un fauteuil de lecture."},"journee-slow-living.html":{"title":"Une journée slow living à la maison, sans programme compliqué","description":"Une journée apaisante construite autour de gestes simples et accessibles."},"lampes-chaleureuses.html":{"title":"Les lampes qui rendent une pièce instantanément chaleureuse","description":"Température, hauteur et emplacement : les principes simples d’une lumière douce."},"plaids-cocooning.html":{"title":"Comment choisir un plaid vraiment cocooning","description":"Matière, poids, taille et entretien : choisir un plaid beau et agréable."},"rituel-dimanche.html":{"title":"Le rituel du dimanche pour commencer la semaine en douceur","description":"Une parenthèse simple avec thé, lecture et rangement léger."},"romans-automne.html":{"title":"15 romans parfaits pour accompagner les soirées d’automne","description":"Une sélection d’ambiances romanesques pour les journées plus fraîches."},"salon-chaleureux-erreurs.html":{"title":"7 erreurs qui empêchent un salon de paraître chaleureux","description":"Lumière, proportions et matières : les erreurs les plus fréquentes."}};
+
+  function setMeta(selector, attributes) {
+    let el = document.head.querySelector(selector);
+    if (!el) {
+      el = document.createElement('meta');
+      document.head.appendChild(el);
+    }
+    Object.entries(attributes).forEach(([key, value]) => el.setAttribute(key, value));
+    return el;
+  }
+
+  function setCanonical(url) {
+    let link = document.head.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
+    }
+    link.href = url;
+  }
+
+  function setJsonLd(id, data) {
+    document.getElementById(id)?.remove();
+    const script = document.createElement('script');
+    script.id = id;
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+
+  function installArticleSeo() {
+    const path = window.location.pathname || '';
+    if (!path.includes('/articles/')) return;
+
+    const rawFilename = (path.split('/').pop() || '').replace(/\/$/, '');
+    const filename = rawFilename.endsWith('.html') ? rawFilename : `${rawFilename}.html`;
+    const data = ARTICLE_SEO[filename];
+    if (!data) return;
+
+    const canonical = `https://lespagesausoleil.fr/articles/${filename}`;
+    const fullTitle = `${data.title} | Les Pages au Soleil`;
+
+    document.title = fullTitle;
+    setCanonical(canonical);
+
+    setMeta('meta[name="description"]', {
+      name: 'description',
+      content: data.description
+    });
+
+    setMeta('meta[property="og:type"]', {
+      property: 'og:type',
+      content: 'article'
+    });
+    setMeta('meta[property="og:site_name"]', {
+      property: 'og:site_name',
+      content: 'Les Pages au Soleil'
+    });
+    setMeta('meta[property="og:title"]', {
+      property: 'og:title',
+      content: fullTitle
+    });
+    setMeta('meta[property="og:description"]', {
+      property: 'og:description',
+      content: data.description
+    });
+    setMeta('meta[property="og:url"]', {
+      property: 'og:url',
+      content: canonical
+    });
+    setMeta('meta[name="twitter:card"]', {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    });
+
+    const imageEl =
+      document.querySelector('.article-hero img') ||
+      document.querySelector('article img') ||
+      document.querySelector('main img');
+
+    let imageUrl = '';
+    if (imageEl?.src) {
+      imageUrl = new URL(imageEl.src, window.location.href).href;
+      setMeta('meta[property="og:image"]', {
+        property: 'og:image',
+        content: imageUrl
+      });
+      setMeta('meta[property="og:image:alt"]', {
+        property: 'og:image:alt',
+        content: imageEl.alt || data.title
+      });
+    }
+
+    const articleSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: data.title,
+      description: data.description,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonical
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'Les Pages au Soleil'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Les Pages au Soleil',
+        url: 'https://lespagesausoleil.fr/'
+      }
+    };
+    if (imageUrl) articleSchema.image = [imageUrl];
+
+    setJsonLd('lps-seo-article-schema', articleSchema);
+
+    setJsonLd('lps-seo-breadcrumb-schema', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Accueil',
+          item: 'https://lespagesausoleil.fr/'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Articles',
+          item: 'https://lespagesausoleil.fr/articles.html'
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: data.title,
+          item: canonical
+        }
+      ]
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', installArticleSeo, { once: true });
+  } else {
+    installArticleSeo();
+  }
+})();
