@@ -2223,35 +2223,159 @@ body{
   }
 }
 
-/* Correctif — bouton Boutique toujours en bas de l'image */
-.hero-content{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:28px;
-  top:auto;
-  z-index:2;
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  padding:0 24px;
+/* =========================================================
+   CORRECTIF FINAL — bouton Boutique en bas de la bannière
+   ========================================================= */
+.home-hero-action{
+  position:absolute !important;
+  top:auto !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:24px !important;
+  inset:auto 0 24px 0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 24px !important;
   pointer-events:none;
 }
 
-.hero-content .primary-button{
+.home-hero-action .home-boutique-button{
   pointer-events:auto;
 }
 
-@media (max-width:900px){
-  .hero-content{
-    bottom:22px;
-    padding:0 20px;
+@media(max-width:700px){
+  .home-hero-action{
+    bottom:16px !important;
+    inset:auto 0 16px 0 !important;
+    padding:0 18px !important;
   }
 }
 
-@media (max-width:600px){
-  .hero-content{
-    bottom:16px;
-    padding:0 16px;
+@media(max-width:480px){
+  .home-hero-action{
+    bottom:12px !important;
+    inset:auto 0 12px 0 !important;
+  }
+}
+
+/* =========================================================
+   HEADER UNIFORME — même hauteur que la page d'accueil
+   ========================================================= */
+.site-header{
+  min-height:92px !important;
+  padding:0 4.2vw !important;
+  align-items:center !important;
+}
+
+.site-header .logo-image img{
+  width:180px !important;
+}
+
+.site-header .main-nav{
+  align-items:center !important;
+  gap:34px !important;
+  font-size:.92rem !important;
+}
+
+.site-header .main-nav > a{
+  padding:34px 0 27px !important;
+}
+
+.site-header .search-open{
+  width:34px !important;
+  height:34px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+}
+
+@media(max-width:1050px){
+  .site-header .main-nav{
+    gap:20px !important;
+    font-size:.84rem !important;
+  }
+}
+
+@media(max-width:950px){
+  .site-header{
+    min-height:76px !important;
+    padding:10px 5vw !important;
+  }
+
+  .site-header .logo-image img{
+    width:165px !important;
+  }
+
+  .site-header .main-nav{
+    top:76px !important;
+    padding:18px 5vw 24px !important;
+    gap:0 !important;
+  }
+
+  .site-header .main-nav > a{
+    width:100% !important;
+    padding:11px 0 !important;
+  }
+
+  .site-header .search-open{
+    margin-top:10px !important;
+  }
+}
+
+/* =========================================================
+   HEADER FINAL — dimensions exactes de l'accueil validé
+   ========================================================= */
+.site-header{
+  min-height:0 !important;
+  height:auto !important;
+  padding:12px 5vw !important;
+  align-items:center !important;
+}
+
+.site-header .logo-image img,
+.logo-image img{
+  width:170px !important;
+  height:auto !important;
+}
+
+.site-header .main-nav,
+.main-nav{
+  gap:18px !important;
+  font-size:.88rem !important;
+  align-items:center !important;
+}
+
+.site-header .main-nav > a{
+  padding:0 !important;
+  margin:0 !important;
+}
+
+.site-header .search-open{
+  width:auto !important;
+  height:auto !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+@media(max-width:950px){
+  .site-header{
+    min-height:0 !important;
+    height:auto !important;
+    padding:16px 5vw !important;
+  }
+
+  .site-header .logo-image img,
+  .logo-image img{
+    width:165px !important;
+  }
+
+  .site-header .main-nav > a{
+    padding:11px 0 !important;
   }
 }
