@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta name="google-site-verification" content="v1gjxyqYB11j7G3UXP_Ff0LoPu9PX9H15lcfcCkGWDg" />
+  <meta name="p:domain_verify" content="8b00e47c34378394f5da3c296197c563"/>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Les Pages au Soleil — inspiration, lectures et art de vivre pour des moments qui comptent.">
+  <title>Les Pages au Soleil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=202608260940">
+
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "353971b319ce45b68cc90be1936fd8fc"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+
+<style id="hero-button-bottom-fix">
+  /* Correctif prioritaire : bouton Boutique en bas de la bannière */
+  .home-hero{
+    position:relative !important;
+  }
+
+  .home-hero-action{
+    position:absolute !important;
+    inset:auto 0 24px 0 !important;
+    top:auto !important;
+    right:0 !important;
+    bottom:24px !important;
+    left:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 24px !important;
+    pointer-events:none !important;
+    transform:none !important;
+  }
+
+  .home-hero-action .home-boutique-button{
+    pointer-events:auto !important;
+    margin:0 !important;
+  }
+
+  @media (max-width:700px){
+    .home-hero-action{
+      inset:auto 0 16px 0 !important;
+      bottom:16px !important;
+      padding:0 18px !important;
+    }
+  }
+
+  @media (max-width:480px){
+    .home-hero-action{
+      inset:auto 0 12px 0 !important;
+      bottom:12px !important;
+    }
+  }
+</style>
+
+</head>
+
+<body class="home-v2">
+  <header class="site-header home-header">
+    <a class="logo logo-image" href="index.html" aria-label="Les Pages au Soleil — Accueil">
+      <img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil">
+    </a>
+
+    <button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a class="home-nav-active is-active" href="index.html">Accueil</a>
+      <a href="articles.html">Articles</a>
+      <a class="shop-nav-link" href="boutique.html">Boutique</a>
+      <a href="index.html#apropos">À propos</a>
+      <a href="contact.html">Contact</a>
+      <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
+    </nav>
+  </header>
+
+  <div class="search-overlay" id="search-overlay" hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <button class="search-close" type="button" aria-label="Fermer">×</button>
+      <p class="kicker">Recherche</p>
+      <h2 id="search-title">Rechercher dans la boutique</h2>
+      <input id="site-search" type="search" placeholder="Ex. lampe, fauteuil, plaid, tapis…">
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </div>
+
+  <main>
+    <!-- GRANDE BANNIÈRE -->
+    <section class="home-hero" aria-label="Les Pages au Soleil">
+      <img
+        src="assets/hero-les-pages-au-soleil.webp"
+        alt="Les Pages au Soleil — coin lecture chaleureux baigné de lumière dorée"
+        fetchpriority="high"
+      >
+      <div class="home-hero-action">
+        <a class="home-boutique-button" href="boutique.html">Boutique <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <!-- 4 PILIERS -->
+    <section class="home-pillars" aria-label="Explorer Les Pages au Soleil">
+      <a class="home-pillar" href="articles.html">
+        <span class="home-pillar-icon" aria-hidden="true">⌑</span>
+        <h2>Inspiration</h2>
+        <p>Des idées et conseils pour sublimer votre quotidien.</p>
+      </a>
+
+      <a class="home-pillar" href="rubrique-lecture.html">
+        <span class="home-pillar-icon" aria-hidden="true">◒</span>
+        <h2>Lectures</h2>
+        <p>Sélections de livres et coups de cœur pour nourrir l'esprit.</p>
+      </a>
+
+      <a class="home-pillar" href="rubrique-slow-living.html">
+        <span class="home-pillar-icon" aria-hidden="true">⌂</span>
+        <h2>Art de vivre</h2>
+        <p>Déco, slow living et bien-être pour créer un intérieur qui vous ressemble.</p>
+      </a>
+
+      <a class="home-pillar" href="boutique.html">
+        <span class="home-pillar-icon" aria-hidden="true">♡</span>
+        <h2>Sélections</h2>
+        <p>Une boutique choisie avec soin pour vous et vos proches.</p>
+      </a>
+    </section>
+
+    <!-- SÉLECTION PRODUITS -->
+    <section class="home-selection" aria-labelledby="selection-title">
+      <div class="home-section-heading">
+        <p>Nos coups de cœur</p>
+        <h2 id="selection-title">Notre sélection du moment</h2>
+        <span aria-hidden="true"></span>
+      </div>
+
+      <div class="home-product-grid">
+        <article class="home-product-card" data-home-product="produit-lampe-elegance.html">
+          <a class="home-product-image" href="produit-lampe-elegance.html">
+            <img src="https://eclairagedeco.com/cdn/shop/files/lampe-rechargeable-couleur-or-rose-fiche-produit-elegance.jpg?v=1777423382&width=1946" alt="Lampe rechargeable Élégance — Éclairage Déco" loading="lazy">
+          </a>
+          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
+          <div class="home-product-copy">
+            <h3>Lampe rechargeable Élégance</h3>
+            <p class="home-product-price">59,99 €</p>
+            <a class="home-product-button" href="produit-lampe-elegance.html">Découvrir</a>
+          </div>
+        </article>
+
+        <article class="home-product-card" data-home-product="produit-fauteuil-seraluna.html">
+          <a class="home-product-image" href="produit-fauteuil-seraluna.html">
+            <img src="https://www.loberon.at/media/9c/04/06/1786328954/253721_26295-22-1.jpg?ts=1787018574" alt="Fauteuil Seraluna — LOBERON" loading="lazy">
+          </a>
+          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
+          <div class="home-product-copy">
+            <h3>Fauteuil Seraluna</h3>
+            <p class="home-product-price">298,00 €</p>
+            <a class="home-product-button" href="produit-fauteuil-seraluna.html">Découvrir</a>
+          </div>
+        </article>
+
+        <article class="home-product-card" data-home-product="produit-plaid-marpent.html">
+          <a class="home-product-image" href="produit-plaid-marpent.html">
+            <img src="https://www.loberon.fr/media/1984x1984x2/69/67/bc/1735876674/225374_20694-4-25/225374_plaid_marpent_creme_grau.jpg?ts=1785894417" alt="Plaid Marpent" loading="lazy">
+          </a>
+          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
+          <div class="home-product-copy">
+            <h3>Plaid Marpent</h3>
+            <p class="home-product-price">34,95 €</p>
+            <a class="home-product-button" href="produit-plaid-marpent.html">Découvrir</a>
+          </div>
+        </article>
+
+        <article class="home-product-card" data-home-product="produit-tapis-amara.html">
+          <a class="home-product-image" href="produit-tapis-amara.html">
+            <img src="https://www.tapis.fr/thumbnail/97/aa/8f/1725433311/in-outdoor-teppich-amara-beige-bf1eb9fd808c72242d5ae98493c0ac2f_1500.webp" alt="Tapis Amara beige 80 x 150 cm" loading="lazy">
+          </a>
+          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
+          <div class="home-product-copy">
+            <h3>Tapis Amara — beige</h3>
+            <p class="home-product-price">32,47 €</p>
+            <a class="home-product-button" href="produit-tapis-amara.html">Découvrir</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="home-shop-more">
+        <a href="boutique.html">Voir toute la boutique →</a>
+      </div>
+    </section>
+
+    <!-- RÉASSURANCE ADAPTÉE À UN SITE D'AFFILIATION -->
+    <section class="home-reassurance" aria-label="À propos de nos sélections">
+      <div class="home-reassurance-item">
+        <span class="home-reassurance-icon" aria-hidden="true">♡</span>
+        <div>
+          <strong>Sélections choisies avec soin</strong>
+          <small>Des objets retenus pour leur style et leur univers.</small>
+        </div>
+      </div>
+
+      <span class="home-reassurance-divider" aria-hidden="true"></span>
+
+      <div class="home-reassurance-item">
+        <span class="home-reassurance-icon" aria-hidden="true">↗</span>
+        <div>
+          <strong>Achat chez nos partenaires</strong>
+          <small>Les commandes sont finalisées directement chez le marchand.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER EXISTANTE CONSERVÉE -->
+    <section id="newsletter" class="mail-strip home-newsletter">
+      <div class="mail-icon">✉</div>
+      <div class="mail-copy">
+        <h2>Une pause inspirante dans votre boîte mail</h2>
+        <p>Recevez des idées, des lectures et des conseils pour un quotidien plus doux.</p>
+      </div>
+      <div class="brevo-newsletter">
+        <iframe
+          width="540"
+          height="410"
+          src="https://89b5b955.sibforms.com/v2/serve/MUIFAK397L3KyNOrK2d0EhH-vnCLs3fjp1UHEiQSvzAohqjuc8cmhhxNzs96j3-FOM25ohlyPLNkuCNeVPYZy3yd_IMANqgRqlPLp_m_BVijN3MkRyX6A-S9kx4w_B1f1Y7IJm9XuGqEZrz0NZuSnFdo0r5UpW4x4vhamlQ4Ha4TiWTz6z8HRk2aKCrhLwg9UZ7w5qfwnmIuQVZrTQ=="
+          frameborder="0"
+          scrolling="auto"
+          allowfullscreen
+          title="Inscription à la newsletter Les Pages au Soleil"
+          style="display:block;margin:0 auto;width:100%;max-width:540px;border:0;">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="premium-footer">
+    <div class="footer-brand" id="apropos">
+      <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
+      <p>Magazine indépendant autour de la lecture, de la décoration chaleureuse et du slow living.</p>
+    </div>
+    <div class="footer-column">
+      <h3>Explorer</h3>
+      <a href="rubrique-lecture.html">Lecture</a>
+      <a href="rubrique-decoration.html">Décoration</a>
+      <a href="rubrique-slow-living.html">Slow living</a>
+      <a href="articles.html">Tous les articles</a>
+    </div>
+    <div class="footer-column">
+      <h3>Suivre</h3>
+      <a href="https://fr.pinterest.com/lespagesausoleil" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.instagram.com/lespagesausoleil/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="footer-column">
+      <h3>Informations</h3>
+      <a href="contact.html">Contact</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+    <p class="copyright">© 2026 Les Pages au Soleil</p>
+  </footer>
+
+  <script src="script.js?v=202608261015"></script>
+  <script src="produits-awin.js"></script>
+<!-- SEARCH-SCRIPT-VERSION: 202608260920 -->
+<!-- SEARCH-CATEGORY-VERSION:202608260930 -->
+<!-- HEADER-CSS-VERSION:202608260940 -->
+<!-- CONSENT-VERSION:202608261015 -->
+<!-- HOME-PRODUCTS-PREFILLED:20260826 -->
+</body>
+</html>
