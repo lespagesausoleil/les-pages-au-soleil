@@ -14,16 +14,25 @@
 <header class="site-header">
   <a class="logo logo-image" href="index.html"><img src="assets/logo-les-pages-au-soleil.svg" alt="Les Pages au Soleil"></a>
   <button class="menu-btn" aria-label="Ouvrir le menu">☰</button>
-  <nav class="main-nav">
-    <a href="rubrique-lecture.html">Lecture</a>
-    <a href="rubrique-coin-lecture.html">Coin lecture</a>
-    <a href="rubrique-decoration.html">Décoration</a>
-    <a href="rubrique-slow-living.html">Slow living</a>
-    <a href="coups-de-coeur.html">Coups de cœur</a>
-    <a href="articles.html">Tous les articles</a>
-    <a class="shop-nav-link is-active" href="boutique.html">Boutique</a>
-  </nav>
+  <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="articles.html">Articles</a>
+      <a class="shop-nav-link is-active" href="boutique.html">Boutique</a>
+      <a href="index.html#apropos">À propos</a>
+      <a href="contact.html">Contact</a>
+      <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
+    </nav>
 </header>
+
+<div class="search-overlay" id="search-overlay" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <button class="search-close" type="button" aria-label="Fermer">×</button>
+    <p class="kicker">Recherche</p>
+    <h2 id="search-title">Rechercher dans la boutique</h2>
+    <input id="site-search" type="search" placeholder="Ex. lampe, fauteuil, plaid, tapis…">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
 
 <main class="product-detail-page">
   <a class="product-back" href="boutique.html">← Retour à la boutique</a>
