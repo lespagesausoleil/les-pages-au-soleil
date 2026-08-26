@@ -537,7 +537,21 @@ if ('IntersectionObserver' in window) {
     "produit-starwhisper.html": "25932-6-11",
     "produit-puddlebrook.html": "26370-8-1",
     "produit-palerina-plaid.html": "24803-22-25",
-    "produit-palerina-polochons.html": "24895-22-1"
+    "produit-palerina-polochons.html": "24895-22-1",
+
+    // Livres Ammareal
+    "produit-livre-david-copperfield.html": "C-835-922",
+    "produit-livre-du-contrat-social.html": "C-835-952",
+    "produit-livre-cafe-noisette.html": "C-836-047",
+    "produit-livre-en-avant-toutes.html": "C-836-058",
+    "produit-livre-vie-et-mort-dun-cochon.html": "C-836-042",
+    "produit-livre-barbelune.html": "C-835-944",
+    "produit-livre-les-bleuets.html": "C-835-959",
+    "produit-livre-merveilleux-decors.html": "C-835-889",
+    "produit-livre-cuisine-provencale.html": "C-835-893",
+    "produit-livre-cuisine-sud-ouest.html": "C-835-892",
+    "produit-livre-cuisine-orientale.html": "C-835-891",
+    "produit-livre-midi-pyreneen.html": "C-836-033"
   };
 
   const currentFile = () => {
