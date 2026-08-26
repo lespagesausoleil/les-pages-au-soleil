@@ -766,3 +766,302 @@ if ('IntersectionObserver' in window) {
     });
   });
 })();
+
+// Consentement Awin — Les Pages au Soleil
+(() => {
+  const STORAGE_KEY = 'lps_awin_consent_v1';
+  const STORAGE_DATE_KEY = 'lps_awin_consent_date_v1';
+  const SIX_MONTHS = 1000 * 60 * 60 * 24 * 183;
+
+  const AWIN_HOSTS = [
+    'awin1.com',
+    'www.awin1.com',
+    'tidd.ly'
+  ];
+
+  function safeStorageGet(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function safeStorageSet(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (_) {}
+  }
+
+  function safeStorageRemove(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch (_) {}
+  }
+
+  function storedChoice() {
+    const choice = safeStorageGet(STORAGE_KEY);
+    const savedAt = Number(safeStorageGet(STORAGE_DATE_KEY) || 0);
+
+    if (!choice || !savedAt || Date.now() - savedAt > SIX_MONTHS) {
+      safeStorageRemove(STORAGE_KEY);
+      safeStorageRemove(STORAGE_DATE_KEY);
+      return null;
+    }
+
+    return choice === 'accepted' || choice === 'refused'
+      ? choice
+      : null;
+  }
+
+  function consentValue() {
+    return storedChoice() === 'accepted' ? '1' : '0';
+  }
+
+  function saveChoice(choice) {
+    safeStorageSet(STORAGE_KEY, choice);
+    safeStorageSet(STORAGE_DATE_KEY, String(Date.now()));
+    updateConsentState();
+  }
+
+  function isAwinUrl(rawUrl) {
+    if (!rawUrl) return false;
+
+    try {
+      const url = new URL(rawUrl, window.location.href);
+      const host = url.hostname.toLowerCase();
+
+      return AWIN_HOSTS.includes(host) ||
+        host.endsWith('.awin1.com') ||
+        host.endsWith('.tidd.ly');
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function withAwinConsent(rawUrl) {
+    if (!isAwinUrl(rawUrl)) return rawUrl;
+
+    try {
+      const url = new URL(rawUrl, window.location.href);
+      url.searchParams.set('cons', consentValue());
+      return url.toString();
+    } catch (_) {
+      return rawUrl;
+    }
+  }
+
+  // IMPORTANT :
+  // le paramètre est ajouté au dernier moment, y compris aux URLs
+  // mises à jour dynamiquement par le Worker Awin.
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('a[href]');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!isAwinUrl(href)) return;
+
+    link.href = withAwinConsent(href);
+  }, true);
+
+  // Clavier / ouverture via Enter : même protection.
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Enter') return;
+
+    const link = document.activeElement?.closest?.('a[href]');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!isAwinUrl(href)) return;
+
+    link.href = withAwinConsent(href);
+  }, true);
+
+  function injectStyles() {
+    if (document.getElementById('lps-consent-styles')) return;
+
+    const style = document.createElement('style');
+    style.id = 'lps-consent-styles';
+    style.textContent = `
+      .lps-consent-banner{
+        position:fixed;
+        left:20px;
+        right:20px;
+        bottom:20px;
+        z-index:100000;
+        max-width:760px;
+        margin:0 auto;
+        padding:22px 24px;
+        border:1px solid rgba(76,58,43,.18);
+        border-radius:22px;
+        background:#fffdf9;
+        box-shadow:0 18px 55px rgba(49,38,29,.18);
+        color:#2d2824;
+        font-family:"DM Sans",system-ui,sans-serif;
+      }
+      .lps-consent-banner[hidden]{display:none !important}
+      .lps-consent-title{
+        margin:0 0 8px;
+        font-family:"Playfair Display",Georgia,serif;
+        font-size:1.28rem;
+        line-height:1.2;
+      }
+      .lps-consent-text{
+        margin:0;
+        color:#655c55;
+        font-size:.92rem;
+        line-height:1.55;
+      }
+      .lps-consent-text a{
+        color:#6f5038;
+        text-decoration:underline;
+        text-underline-offset:3px;
+      }
+      .lps-consent-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin-top:17px;
+      }
+      .lps-consent-button{
+        min-height:44px;
+        border:1px solid #6f5038;
+        border-radius:999px;
+        padding:10px 18px;
+        font:600 .9rem/1 "DM Sans",system-ui,sans-serif;
+        cursor:pointer;
+      }
+      .lps-consent-refuse{
+        background:#fffdf9;
+        color:#4c3a2b;
+      }
+      .lps-consent-accept{
+        background:#4c3a2b;
+        color:#fff;
+      }
+      .lps-consent-manage{
+        position:fixed;
+        left:16px;
+        bottom:16px;
+        z-index:99990;
+        border:1px solid rgba(76,58,43,.28);
+        border-radius:999px;
+        padding:8px 12px;
+        background:#fffdf9;
+        color:#4c3a2b;
+        box-shadow:0 6px 22px rgba(49,38,29,.12);
+        font:500 .76rem/1 "DM Sans",system-ui,sans-serif;
+        cursor:pointer;
+      }
+      .lps-consent-manage[hidden]{display:none !important}
+      @media(max-width:600px){
+        .lps-consent-banner{
+          left:12px;
+          right:12px;
+          bottom:12px;
+          padding:20px 18px;
+          border-radius:18px;
+        }
+        .lps-consent-actions{
+          grid-template-columns:1fr;
+        }
+        .lps-consent-button{
+          width:100%;
+        }
+        .lps-consent-manage{
+          left:10px;
+          bottom:10px;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function buildUI() {
+    if (document.getElementById('lps-consent-banner')) return;
+
+    injectStyles();
+
+    const banner = document.createElement('section');
+    banner.id = 'lps-consent-banner';
+    banner.className = 'lps-consent-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-modal', 'false');
+    banner.setAttribute('aria-labelledby', 'lps-consent-title');
+
+    banner.innerHTML = `
+      <h2 class="lps-consent-title" id="lps-consent-title">
+        Cookies d’affiliation
+      </h2>
+      <p class="lps-consent-text">
+        Les Pages au Soleil utilise les traceurs d’affiliation Awin pour attribuer
+        les achats réalisés après un clic sur certains liens. Ils ne sont pas
+        nécessaires au fonctionnement du site. Vous pouvez accepter ou refuser,
+        puis modifier votre choix à tout moment.
+        <a href="confidentialite.html">En savoir plus</a>.
+      </p>
+      <div class="lps-consent-actions">
+        <button class="lps-consent-button lps-consent-refuse"
+                type="button"
+                data-lps-consent="refused">
+          Refuser
+        </button>
+        <button class="lps-consent-button lps-consent-accept"
+                type="button"
+                data-lps-consent="accepted">
+          Accepter
+        </button>
+      </div>
+    `;
+
+    const manage = document.createElement('button');
+    manage.id = 'lps-consent-manage';
+    manage.className = 'lps-consent-manage';
+    manage.type = 'button';
+    manage.textContent = 'Gérer mes cookies';
+    manage.setAttribute('aria-controls', 'lps-consent-banner');
+
+    document.body.appendChild(banner);
+    document.body.appendChild(manage);
+
+    banner.querySelectorAll('[data-lps-consent]').forEach(button => {
+      button.addEventListener('click', () => {
+        saveChoice(button.dataset.lpsConsent);
+        banner.hidden = true;
+        manage.hidden = false;
+      });
+    });
+
+    manage.addEventListener('click', () => {
+      banner.hidden = false;
+      manage.hidden = true;
+
+      const firstButton = banner.querySelector('[data-lps-consent="refused"]');
+      setTimeout(() => firstButton?.focus(), 0);
+    });
+
+    updateConsentState();
+  }
+
+  function updateConsentState() {
+    const banner = document.getElementById('lps-consent-banner');
+    const manage = document.getElementById('lps-consent-manage');
+    if (!banner || !manage) return;
+
+    const choice = storedChoice();
+
+    if (choice) {
+      banner.hidden = true;
+      manage.hidden = false;
+    } else {
+      banner.hidden = false;
+      manage.hidden = true;
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildUI, { once:true });
+  } else {
+    buildUI();
+  }
+})();
