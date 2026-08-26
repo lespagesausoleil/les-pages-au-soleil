@@ -42,6 +42,30 @@
   .shop-toolbar{padding:0 .75rem}
   .shop-sort-panel{right:0}
 }
+
+.shop-load-more-wrap{
+  display:flex;
+  justify-content:center;
+  padding:10px 1rem 42px;
+}
+.shop-load-more{
+  min-width:230px;
+  border:1px solid var(--brown);
+  border-radius:999px;
+  padding:14px 24px;
+  background:var(--brown);
+  color:#fff;
+  font:600 .9rem "DM Sans",sans-serif;
+  cursor:pointer;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.shop-load-more:hover{transform:translateY(-1px)}
+.shop-load-more[hidden]{display:none!important}
+@media(max-width:640px){
+  .shop-load-more-wrap{padding:8px .75rem 34px}
+  .shop-load-more{width:100%;max-width:360px}
+}
+
 </style>
 
 </head>
@@ -962,6 +986,12 @@
   </article>
 </section>
 
+  <div class="shop-load-more-wrap">
+    <button class="shop-load-more" id="shop-load-more" type="button" hidden>
+      Afficher plus de produits
+    </button>
+  </div>
+
   <section class="shop-note">
     <div>
       <p class="kicker">Notre ligne</p>
@@ -1029,6 +1059,9 @@
   const colorFilter = document.getElementById('shop-color-filter');
   const priceSort = document.getElementById('shop-price-sort');
   const resetFilters = document.getElementById('shop-reset-filters');
+  const loadMoreButton = document.getElementById('shop-load-more');
+  const PAGE_SIZE = 12;
+  let visibleLimit = PAGE_SIZE;
 
 const params = new URLSearchParams(window.location.search);
 const requestedFilter = params.get('categorie');
@@ -1061,18 +1094,15 @@ filters.forEach(button => {
   function applyShopFilters() {
     const query = normalize(searchInput ? searchInput.value.trim() : '');
     const chosenColor = colorFilter?.value || 'all';
-    let visible = 0;
 
-    cards.forEach(card => {
+    const matchingCards = cards.filter(card => {
       const categories = (card.dataset.shopCategory || '').split(/\s+/);
       const categoryMatch = activeFilter === 'all' || categories.includes(activeFilter);
       const searchable = normalize((card.dataset.shopSearch || '') + ' ' + card.textContent);
       const textMatch = !query || searchable.includes(query);
       const colors = (card.dataset.shopColor || '').split(/\s+/).filter(Boolean);
       const colorMatch = chosenColor === 'all' || colors.includes(chosenColor);
-      const show = categoryMatch && textMatch && colorMatch;
-      card.hidden = !show;
-      if (show) visible++;
+      return categoryMatch && textMatch && colorMatch;
     });
 
     const sortMode = priceSort?.value || 'default';
@@ -1083,22 +1113,49 @@ filters.forEach(button => {
     });
     sorted.forEach(card => grid?.appendChild(card));
 
-    if (emptyState) emptyState.hidden = visible > 0;
+    const matchingSet = new Set(matchingCards);
+    let matchingPosition = 0;
+
+    sorted.forEach(card => {
+      if (!matchingSet.has(card)) {
+        card.hidden = true;
+        return;
+      }
+
+      card.hidden = matchingPosition >= visibleLimit;
+      matchingPosition++;
+    });
+
+    const total = matchingCards.length;
+    const actuallyShown = Math.min(visibleLimit, total);
+
+    if (emptyState) emptyState.hidden = total > 0;
 
     if (visibleCount) {
-      visibleCount.textContent = `${visible} article${visible > 1 ? 's' : ''}`;
+      visibleCount.textContent = total === 0
+        ? '0 article'
+        : `${actuallyShown} sur ${total} article${total > 1 ? 's' : ''}`;
     }
 
     if (searchCount) {
       searchCount.textContent = query
-        ? (visible === 0 ? 'Aucun résultat pour cette recherche.' : `${visible} résultat${visible > 1 ? 's' : ''}`)
+        ? (total === 0 ? 'Aucun résultat pour cette recherche.' : `${total} résultat${total > 1 ? 's' : ''}`)
         : '';
+    }
+
+    if (loadMoreButton) {
+      const remaining = Math.max(0, total - actuallyShown);
+      loadMoreButton.hidden = remaining === 0;
+      loadMoreButton.textContent = remaining > 0
+        ? `Afficher plus de produits (${remaining})`
+        : 'Afficher plus de produits';
     }
   }
 
   filters.forEach(button => {
     button.addEventListener('click', () => {
       activeFilter = button.dataset.shopFilter || 'all';
+      visibleLimit = PAGE_SIZE;
       filters.forEach(btn => btn.classList.toggle('is-active', btn === button));
       applyShopFilters();
     });
@@ -1116,9 +1173,13 @@ filters.forEach(button => {
         searchToggle.setAttribute('aria-expanded', 'false');
       }
     });
-    searchInput.addEventListener('input', applyShopFilters);
+    searchInput.addEventListener('input', () => {
+      visibleLimit = PAGE_SIZE;
+      applyShopFilters();
+    });
     searchClear?.addEventListener('click', () => {
       searchInput.value = '';
+      visibleLimit = PAGE_SIZE;
       applyShopFilters();
       searchInput.focus();
     });
@@ -1140,12 +1201,25 @@ filters.forEach(button => {
     }
   });
 
-  colorFilter?.addEventListener('change', applyShopFilters);
-  priceSort?.addEventListener('change', applyShopFilters);
+  colorFilter?.addEventListener('change', () => {
+    visibleLimit = PAGE_SIZE;
+    applyShopFilters();
+  });
+  priceSort?.addEventListener('change', () => {
+    visibleLimit = PAGE_SIZE;
+    applyShopFilters();
+  });
 
   resetFilters?.addEventListener('click', () => {
     if (colorFilter) colorFilter.value = 'all';
     if (priceSort) priceSort.value = 'default';
+    visibleLimit = PAGE_SIZE;
+    applyShopFilters();
+  });
+
+
+  loadMoreButton?.addEventListener('click', () => {
+    visibleLimit += PAGE_SIZE;
     applyShopFilters();
   });
 
