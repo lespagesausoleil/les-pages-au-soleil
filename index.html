@@ -12,11 +12,54 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=202608260840">
 
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "353971b319ce45b68cc90be1936fd8fc"}'></script>
   <!-- End Cloudflare Web Analytics -->
+
+<style id="hero-button-bottom-fix">
+  /* Correctif prioritaire : bouton Boutique en bas de la bannière */
+  .home-hero{
+    position:relative !important;
+  }
+
+  .home-hero-action{
+    position:absolute !important;
+    inset:auto 0 24px 0 !important;
+    top:auto !important;
+    right:0 !important;
+    bottom:24px !important;
+    left:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 24px !important;
+    pointer-events:none !important;
+    transform:none !important;
+  }
+
+  .home-hero-action .home-boutique-button{
+    pointer-events:auto !important;
+    margin:0 !important;
+  }
+
+  @media (max-width:700px){
+    .home-hero-action{
+      inset:auto 0 16px 0 !important;
+      bottom:16px !important;
+      padding:0 18px !important;
+    }
+  }
+
+  @media (max-width:480px){
+    .home-hero-action{
+      inset:auto 0 12px 0 !important;
+      bottom:12px !important;
+    }
+  }
+</style>
+
 </head>
 
 <body class="home-v2">
