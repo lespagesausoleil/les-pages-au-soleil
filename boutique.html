@@ -1007,7 +1007,7 @@
   <p class="copyright">© 2026 Les Pages au Soleil</p>
 </footer>
 
-<script src="script.js?v=202608260920"></script>
+<script src="script.js?v=202608260930"></script>
 
 <script>
 (() => {
@@ -1196,5 +1196,40 @@ filters.forEach(button => {
 })();
 </script>
 <!-- SEARCH-SCRIPT-VERSION: 202608260920 -->
+
+<script id="force-boutique-category">
+(() => {
+  const requested = new URLSearchParams(window.location.search).get('categorie');
+  if (!requested) return;
+
+  const activateRequestedCategory = () => {
+    const buttons = [...document.querySelectorAll('.shop-filter[data-shop-filter]')];
+    const target = buttons.find(btn => btn.dataset.shopFilter === requested);
+    if (!target) return;
+
+    // If the boutique's own script has not activated the requested category,
+    // trigger the same click handler the user would use manually.
+    if (!target.classList.contains('is-active')) {
+      target.click();
+    }
+
+    // Keep the selected category visible near the top of the page.
+    const tabs = document.querySelector('.shop-tabs');
+    if (tabs) {
+      tabs.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(activateRequestedCategory, 0);
+    }, { once: true });
+  } else {
+    setTimeout(activateRequestedCategory, 0);
+  }
+})();
+</script>
+
+<!-- SEARCH-CATEGORY-VERSION:202608260930 -->
 </body>
 </html>

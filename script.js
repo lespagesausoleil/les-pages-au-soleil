@@ -231,7 +231,7 @@ if (searchOpen && searchOverlay) {
       ? `
         <a
           class="search-view-all"
-          href="${escapeSearchHtml(resolveSearchUrl(`boutique.html#${activeRule.hash}`))}"
+          href="${escapeSearchHtml(resolveSearchUrl(`boutique.html?categorie=${activeRule.hash}`))}"
           style="
             display:flex;
             align-items:center;
