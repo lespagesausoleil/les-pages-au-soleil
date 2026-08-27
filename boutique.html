@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -68,7 +69,12 @@
 }
 
 </style>
-</head>
+<style id="bookmark-shop-thumbnails-style">
+.bookmark-shop-thumbnails{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:7px 7px 0;background:#fffdf9}
+.bookmark-shop-thumbnails a{display:block;border-radius:8px;overflow:hidden;border:1px solid #eadfd2;background:#f8f1e7}
+.bookmark-shop-thumbnails img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top center}
+@media(max-width:760px){.bookmark-shop-thumbnails{gap:4px;padding:5px 5px 0}.bookmark-shop-thumbnails a{border-radius:6px}}
+</style></head>
 <body>
 <div class="editorial-topbar">
 <span>☀</span>
@@ -175,7 +181,7 @@
 </article><article class="shop-card compact-product-card" data-shop-category="papeterie" data-shop-color="beige-naturel multicolore" data-shop-color-label="beige/multicolore" data-shop-search="marque pages marque-pages imprimables les pages au soleil pdf papeterie lecture cadeau lecteur vintage fleuri cocooning evasion ensoleillee numérique digital">
 <a aria-label="Voir les marque-pages imprimables – Les Pages au Soleil" class="compact-product-image" href="produit-marque-pages-imprimables.html">
 <img alt="Marque-pages imprimables – trois collections au choix – Les Pages au Soleil" loading="eager" src="marque-pages-imprimables-les-pages-au-soleil.png"/>
-</a>
+</a><div aria-label="Aperçu des trois collections de marque-pages" class="bookmark-shop-thumbnails"><a aria-label="Voir la collection Vintage fleuri" href="produit-marque-pages-imprimables.html"><img alt="Aperçu exact – Vintage fleuri" loading="lazy" src="marque-pages-vintage-fleuri-exact.png"/></a><a aria-label="Voir la collection Coin lecture cocooning" href="produit-marque-pages-imprimables.html"><img alt="Aperçu exact – Coin lecture cocooning" loading="lazy" src="marque-pages-coin-lecture-cocooning-exact.png"/></a><a aria-label="Voir la collection Évasion ensoleillée" href="produit-marque-pages-imprimables.html"><img alt="Aperçu exact – Évasion ensoleillée" loading="lazy" src="marque-pages-evasion-ensoleillee-exact.png"/></a></div>
 <div class="compact-product-meta">
 <p class="compact-product-name">Marque-pages imprimables – Collection au choix</p>
 <p class="compact-product-price">3,90 €</p>
