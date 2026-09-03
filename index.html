@@ -28,7 +28,7 @@
   <!-- End Cloudflare Web Analytics -->
 
 <style id="hero-button-bottom-fix">
-  /* Correctif prioritaire : bouton Boutique en bas de la bannière */
+  /* Positionnement des accès éditoriaux en bas de la bannière */
   .home-hero{
     position:relative !important;
   }
@@ -212,22 +212,10 @@
     <nav class="main-nav" aria-label="Navigation principale">
       <a class="home-nav-active is-active" href="index.html">Accueil</a>
       <a href="articles.html">Articles</a>
-      <a class="shop-nav-link" href="boutique.html">Boutique</a>
       <a href="index.html#apropos">À propos</a>
       <a href="contact.html">Contact</a>
-      <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
     </nav>
   </header>
-
-  <div class="search-overlay" id="search-overlay" hidden>
-    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
-      <button class="search-close" type="button" aria-label="Fermer">×</button>
-      <p class="kicker">Recherche</p>
-      <h2 id="search-title">Rechercher dans la boutique</h2>
-      <input id="site-search" type="search" placeholder="Ex. lampe, fauteuil, plaid, tapis…">
-      <div id="search-results" class="search-results"></div>
-    </div>
-  </div>
 
   <main>
     <!-- GRANDE BANNIÈRE -->
@@ -238,8 +226,8 @@
         fetchpriority="high"
       >
       <div class="home-hero-action">
-        <a class="home-boutique-button" href="boutique.html">Boutique <span aria-hidden="true">→</span></a>
-        <a class="home-articles-link" href="articles.html">Découvrir les articles <span aria-hidden="true">→</span></a>
+        <a class="home-boutique-button" href="articles.html">Explorer les articles <span aria-hidden="true">→</span></a>
+        <a class="home-articles-link" href="rubrique-coin-lecture.html">Créer un coin lecture <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
@@ -263,10 +251,10 @@
         <p>Déco, slow living et bien-être pour créer un intérieur qui vous ressemble.</p>
       </a>
 
-      <a class="home-pillar" href="boutique.html">
+      <a class="home-pillar" href="rubrique-coin-lecture.html">
         <span class="home-pillar-icon" aria-hidden="true">♡</span>
-        <h2>Sélections</h2>
-        <p>Une boutique choisie avec soin pour vous et vos proches.</p>
+        <h2>Coin lecture</h2>
+        <p>Des inspirations pour créer un espace chaleureux où lire, souffler et ralentir.</p>
       </a>
     </section>
 
@@ -340,90 +328,6 @@
       </div>
     </section>
 
-    <!-- SÉLECTION PRODUITS -->
-    <section class="home-selection" aria-labelledby="selection-title">
-      <div class="home-section-heading">
-        <p>Nos coups de cœur</p>
-        <h2 id="selection-title">Notre sélection du moment</h2>
-        <span aria-hidden="true"></span>
-      </div>
-
-      <div class="home-product-grid">
-        <article class="home-product-card" data-home-product="produit-lampe-elegance.html">
-          <a class="home-product-image" href="produit-lampe-elegance.html">
-            <img src="https://eclairagedeco.com/cdn/shop/files/lampe-rechargeable-couleur-or-rose-fiche-produit-elegance.jpg?v=1777423382&width=1946" alt="Lampe rechargeable Élégance — Éclairage Déco" loading="lazy">
-          </a>
-          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
-          <div class="home-product-copy">
-            <h3>Lampe rechargeable Élégance</h3>
-            <p class="home-product-price">59,99 €</p>
-            <a class="home-product-button" href="produit-lampe-elegance.html">Découvrir</a>
-          </div>
-        </article>
-
-        <article class="home-product-card" data-home-product="produit-fauteuil-seraluna.html">
-          <a class="home-product-image" href="produit-fauteuil-seraluna.html">
-            <img src="https://www.loberon.at/media/9c/04/06/1786328954/253721_26295-22-1.jpg?ts=1787018574" alt="Fauteuil Seraluna — LOBERON" loading="lazy">
-          </a>
-          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
-          <div class="home-product-copy">
-            <h3>Fauteuil Seraluna</h3>
-            <p class="home-product-price">298,00 €</p>
-            <a class="home-product-button" href="produit-fauteuil-seraluna.html">Découvrir</a>
-          </div>
-        </article>
-
-        <article class="home-product-card" data-home-product="produit-plaid-marpent.html">
-          <a class="home-product-image" href="produit-plaid-marpent.html">
-            <img src="https://www.loberon.fr/media/1984x1984x2/69/67/bc/1735876674/225374_20694-4-25/225374_plaid_marpent_creme_grau.jpg?ts=1785894417" alt="Plaid Marpent" loading="lazy">
-          </a>
-          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
-          <div class="home-product-copy">
-            <h3>Plaid Marpent</h3>
-            <p class="home-product-price">34,95 €</p>
-            <a class="home-product-button" href="produit-plaid-marpent.html">Découvrir</a>
-          </div>
-        </article>
-
-        <article class="home-product-card" data-home-product="produit-tapis-amara.html">
-          <a class="home-product-image" href="produit-tapis-amara.html">
-            <img src="https://www.tapis.fr/thumbnail/97/aa/8f/1725433311/in-outdoor-teppich-amara-beige-bf1eb9fd808c72242d5ae98493c0ac2f_1500.webp" alt="Tapis Amara beige 80 x 150 cm" loading="lazy">
-          </a>
-          <button class="home-favorite" type="button" aria-label="Ajouter aux favoris">♡</button>
-          <div class="home-product-copy">
-            <h3>Tapis Amara — beige</h3>
-            <p class="home-product-price">32,47 €</p>
-            <a class="home-product-button" href="produit-tapis-amara.html">Découvrir</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="home-shop-more">
-        <a href="boutique.html">Voir toute la boutique →</a>
-      </div>
-    </section>
-
-    <!-- RÉASSURANCE ADAPTÉE À UN SITE D'AFFILIATION -->
-    <section class="home-reassurance" aria-label="À propos de nos sélections">
-      <div class="home-reassurance-item">
-        <span class="home-reassurance-icon" aria-hidden="true">♡</span>
-        <div>
-          <strong>Sélections choisies avec soin</strong>
-          <small>Des objets retenus pour leur style et leur univers.</small>
-        </div>
-      </div>
-
-      <span class="home-reassurance-divider" aria-hidden="true"></span>
-
-      <div class="home-reassurance-item">
-        <span class="home-reassurance-icon" aria-hidden="true">↗</span>
-        <div>
-          <strong>Achat chez nos partenaires</strong>
-          <small>Les commandes sont finalisées directement chez le marchand.</small>
-        </div>
-      </div>
-    </section>
-
     <!-- NEWSLETTER EXISTANTE CONSERVÉE -->
     <section id="newsletter" class="mail-strip home-newsletter">
       <div class="mail-icon">✉</div>
@@ -473,7 +377,6 @@
   </footer>
 
   <script src="script.js?v=202608261015"></script>
-  <script src="produits-awin.js"></script>
 <!-- SEARCH-SCRIPT-VERSION: 202608260920 -->
 <!-- SEARCH-CATEGORY-VERSION:202608260930 -->
 <!-- HEADER-CSS-VERSION:202608260940 -->
