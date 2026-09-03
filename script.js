@@ -1112,20 +1112,27 @@ if ('IntersectionObserver' in window) {
 
     const isContact = pathname.includes('contact');
 
-    // Uniquement les 5 liens demandés + la loupe.
+    // L’accueil privilégie les entrées éditoriales. La boutique et sa recherche
+    // restent accessibles sur les pages historiques afin de préserver leur parcours.
+    const shopNavigation = isHome ? '' : `
+      <a href="${base}boutique.html"${isBoutique ? ' class="shop-nav-link is-active"' : ' class="shop-nav-link"'}>Boutique</a>`;
+    const shopSearch = isHome ? '' : `
+      <button class="search-open" type="button" aria-label="Rechercher">⌕</button>`;
+
     mainNav.innerHTML = `
       <a href="${base}index.html"${isHome ? ' class="is-active"' : ''}>Accueil</a>
-      <a href="${base}articles.html"${isArticles ? ' class="is-active"' : ''}>Articles</a>
-      <a href="${base}boutique.html"${isBoutique ? ' class="shop-nav-link is-active"' : ' class="shop-nav-link"'}>Boutique</a>
+      <a href="${base}articles.html"${isArticles ? ' class="is-active"' : ''}>Articles</a>${shopNavigation}
       <a href="${base}index.html#apropos">À propos</a>
-      <a href="${base}contact.html"${isContact ? ' class="is-active"' : ''}>Contact</a>
-      <button class="search-open" type="button" aria-label="Rechercher">⌕</button>
+      <a href="${base}contact.html"${isContact ? ' class="is-active"' : ''}>Contact</a>${shopSearch}
     `;
 
     // Le menu mobile doit aussi se refermer avec les nouveaux liens.
     mainNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => mainNav.classList.remove('open'));
     });
+
+    const newSearchOpen = mainNav.querySelector('.search-open');
+    if (!newSearchOpen) return;
 
     // S'assurer que la loupe possède un panneau de recherche.
     let overlay = document.getElementById('search-overlay');
@@ -1152,7 +1159,6 @@ if ('IntersectionObserver' in window) {
       else document.body.prepend(overlay);
     }
 
-    const newSearchOpen = mainNav.querySelector('.search-open');
     const close = overlay.querySelector('.search-close');
     const input = overlay.querySelector('#site-search');
     const results = overlay.querySelector('#search-results');
