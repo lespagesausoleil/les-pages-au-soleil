@@ -380,8 +380,14 @@ if ('IntersectionObserver' in window) {
 }
 
 
-// Boutique — ajoute l’onglet à la navigation sur toutes les pages
+// Boutique — ajoute l’onglet à la navigation hors accueil et page Boutique
 (() => {
+  const pathname = (window.location.pathname || '/').toLowerCase();
+  const isBoutiquePage =
+    pathname.endsWith('/boutique') ||
+    pathname.endsWith('/boutique.html');
+  if (isBoutiquePage) return;
+
   const navs = document.querySelectorAll('.main-nav');
   navs.forEach(nav => {
     if (nav.querySelector('.shop-nav-link')) return;
@@ -1106,15 +1112,19 @@ if ('IntersectionObserver' in window) {
         pathname.includes('rubrique-')
       );
 
+    const isBoutiquePage =
+      pathname.endsWith('/boutique') ||
+      pathname.endsWith('/boutique.html');
+
     const isBoutique =
-      pathname.includes('boutique') ||
+      isBoutiquePage ||
       pathname.includes('produit-');
 
     const isContact = pathname.includes('contact');
 
     // L’accueil privilégie les entrées éditoriales. La boutique et sa recherche
     // restent accessibles sur les pages historiques afin de préserver leur parcours.
-    const shopNavigation = isHome ? '' : `
+    const shopNavigation = isHome || isBoutiquePage ? '' : `
       <a href="${base}boutique.html"${isBoutique ? ' class="shop-nav-link is-active"' : ' class="shop-nav-link"'}>Boutique</a>`;
     const shopSearch = isHome ? '' : `
       <button class="search-open" type="button" aria-label="Rechercher">⌕</button>`;
